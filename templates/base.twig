@@ -1,44 +1,111 @@
-{% block html_head_container %}
+<!DOCTYPE html>
+<html class="no-js" {{ site.language_attributes }}>
+	<head>
 
-{% include 'html-header.twig' %}
-	{% block head %}
-	{% endblock %}
-	</head>
-{% endblock %}
+		{# Web Google Tag Manager #}
+		{#
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-ID');</script>
+		#}
 
-	<body class="{{body_class}}" data-template="base.twig">
-		<header class="header" >
-			{% block header %}
-				<div class="wrapper">
-					<h1 class="hdr-logo" role="banner">
-						<a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
-					</h1>
-					<nav id="nav-main" class="nav-main" role="navigation">
-						{% include "menu.twig" with {'menu': menu.get_items} %}
-					</nav><!-- #nav -->
-				</div>
-			{% endblock %}
-		</header>
+	  <meta charset="{{ site.charset }}">
+	  <title>
+	    {% if wp_title %}
+	      {{ wp_title }} – {{ site.name }}
+	    {% else %}
+	      {{ site.name }} – {{ site.description }}
+	    {% endif %}
+	  </title>
+	  <meta name="description" content="{{ meta_description|striptags }}">
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<section id="content" role="main" class="content-wrapper">
-			{% if title %}<h1>{{title}}</h1>{% endif %}
-			<div class="wrapper {{sidebar_class}}">
-				{% block content %}
-					Sorry, no content
-				{% endblock %}
-			</div>
-			{% if sidebar %}
-				<aside class="layout-sidebar">
-					{{sidebar}}
-				</aside>
-			{% endif %}
-		</section>
+	  {# include "favicon.twig" #}
 
-		{% block footer %}
-			<footer id="footer">
-				{% include 'footer.twig' %}
-			</footer>
-			{{ function('wp_footer') }}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+		{% block head %}
+			<link rel="canonical" href="{{ site.url }}">
+
+			<meta property="og:url" content="{{ site.url }}">
+			<meta property="og:type" content="website">
 		{% endblock %}
+
+		{% if options.themeOpenGraphImage %}
+			<meta property="og:image" content="{{ options.themeOpenGraphImage.url }}">
+		{% endif %}
+
+		<meta property="og:title" content="{% if wp_title %}{{ wp_title }} – {{ site.name }}{% else %}{{ site.name }} – {{ site.description }}{% endif %}">
+		<meta property="og:description" content="{{ meta_description|striptags }}">
+		<meta property="og:locale" content="cs_CZ">
+
+	  {{ function('wp_head') }}
+
+	  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	  <!--[if lt IE 9]>
+	    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	  <![endif]-->
+
+	</head>
+
+	<body class="py-5 {{ body_class }}">
+
+		{# Web Google Tag Manager (noscript) #}
+		{#
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ID"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		#}
+
+		{# Web Font Loader #}
+		{#
+	  <script type="text/javascript">
+	  	WebFontConfig = {
+	      google: { families: ['Source+Sans+Pro:300,400,600&amp;subset=latin-ext'] },
+	  	};
+	  	(function() {
+	  		var wf = document.createElement('script');
+	  		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+	  		wf.type = 'text/javascript';
+	  		wf.async = 'true';
+	  		var s = document.getElementsByTagName('script')[0];
+	  		s.parentNode.insertBefore(wf, s);
+	  	})();
+	  </script>
+		#}
+
+		{# Load Facebook SDK for JavaScript #}
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = 'https://connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v2.10';
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		{% include 'partial/header.twig' %}
+
+		{% block breadcrumb %}
+		{% endblock %}
+
+		<main role="main">
+			{% block content %}
+				Žádný obsah
+			{% endblock %}
+		</main>
+
+		{% include 'partial/footer.twig' %}
+
+		{{ function('wp_footer') }}
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
 	</body>
 </html>

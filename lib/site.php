@@ -1,5 +1,7 @@
 <?php
 
+use Eshopiste\Helpers;
+
 if ( ! class_exists( 'Timber' ) ) {
 	add_action( 'admin_notices', function() {
 		echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php') ) . '</a></p></div>';
@@ -40,16 +42,34 @@ class EshopisteSite extends TimberSite {
 		return $context;
 	}
 
-	function myfoo( $text ) {
-		$text .= ' bar!';
-		return $text;
-	}
-
 	function add_to_twig( $twig ) {
 		/* this is where you can add your own functions to twig */
 		$twig->addExtension( new Twig_Extension_StringLoader() );
-		$twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
+		$twig->addFilter('display_url', new Twig_SimpleFilter('display_url', [$this, 'display_url']));
 		return $twig;
+	}
+
+	function display_url( $url ) {
+		// Romove protocol
+	  if (substr( $url, 0, 7 ) === 'http://') {
+			$url = substr( $url, 7 );
+	  } else if (substr( $url, 0, 8 ) === 'https://') {
+			$url = substr( $url, 8 );
+		} else if (substr( $url, 0, 2 ) === '//') {
+		 	$url = substr( $url, 2 );
+	 	}
+		// Remove www subdomain
+		/*
+		if (substr( $url, 0, 4 ) === 'www.') {
+			$url = substr( $url, 4 );
+		}
+		*/
+		// Remove last slash
+		if (substr( $url, -1 ) === '/') {
+			$url = substr( $url, 0, -1 );
+		}
+
+	  return $url;
 	}
 
 }

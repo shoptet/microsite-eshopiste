@@ -1,0 +1,99 @@
+{% extends "base.twig" %}
+
+{% block breadcrumb %}
+	<div class="container">
+
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<article>
+
+			<div class="card">
+			  <div class="card-body">
+
+					<h1 class="card-title font-weight-bold mb-1">{{ post.title }}</h1>
+
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb py-0 px-0 mb-4 bg-white">
+					    <li class="breadcrumb-item"><a href="#">Domů</a></li>
+					    <li class="breadcrumb-item"><a href="#">Library</a></li>
+					    <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+					  </ol>
+					</nav>
+
+					{% if post.get_field('bid_type') == 'sale' %}
+
+						{% if post.get_field('selling_price') %}
+							<div class="mb-3" style="font-size: 133.333333333%">
+								<span class="font-weight-bold mr-1">Prodej e-shopu</span>
+								<span class="badge badge-pill badge-secondary font-weight-normal">
+									{{ post.get_field('selling_price') }} Kč bez DPH
+								</span>
+							</div>
+						{% endif %}
+
+					{% elseif post.get_field('bid_type') == 'investment' %}
+
+						{% if post.get_field('loan') %}
+							<div class="mb-3">
+								<div style="font-size: 133.333333333%">
+									<span class="font-weight-bold mr-1">Půjčka</span>
+									<span class="badge badge-pill badge-secondary font-weight-normal">
+										{{ post.get_field('loan') }} Kč bez DPH
+									</span>
+								</div>
+								<p class="mt-1">
+									Se splatností {{ post.get_field('repayment_period') }} roky
+									a úrokem {{ post.get_field('interest_rate') }} %
+								</p>
+							</div>
+						{% endif %}
+
+						{% elseif post.get_field('bid_type') == 'companion_investor' %}
+
+							{% if post.get_field('input') %}
+								<div class="mb-3">
+									<div style="font-size: 133.333333333%">
+										<span class="font-weight-bold mr-1">Společník/Investor</span>
+										<span class="badge badge-pill badge-secondary font-weight-normal">
+											{{ post.get_field('input') }} Kč bez DPH
+										</span>
+									</div>
+									<p class="mt-1">
+										Nabízený podíl {{ post.get_field('share') }} %
+									</p>
+								</div>
+							{% endif %}
+
+					{% endif %}
+
+						<div>
+							{% if post.get_field('eshop_url') %}
+								<a
+									href="{{ post.get_field('eshop_url') }}"
+									class="font-weight-bold mr-2"
+									target="_blank"
+									style="font-size: 133.333333333%"
+								>
+									{{ post.get_field('eshop_url')|display_url }}
+								</a>
+							{% endif %}
+							{% if post.get_field('eshop_owner') %}
+								<a
+									class="text-muted"
+									href="http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_res.cgi?odp=html&ICO={{ post.get_field('eshop_owner_cin') }}"
+									target="_blank"
+								>
+									{{ post.get_field('eshop_owner') }}
+								</a>
+							{% endif %}
+						</div>
+
+			  </div>
+			</div>
+
+		</article>
+	</div>
+{% endblock %}
