@@ -2,6 +2,9 @@
 
 namespace Eshopiste\Setup;
 
+use Urlbox\Screenshots\Urlbox;
+
+
 /**
  * Remove update nag in admin
  */
@@ -48,4 +51,44 @@ add_action( 'admin_menu', function (){
 		remove_menu_page( 'index.php' );
 	  remove_menu_page( 'tools.php' );
   }
+});
+
+/**
+ * Generate e-shop thumbnail based on its url
+ */
+add_action( 'save_post', function ( $post_id ){
+	// Not the correct post type, bail out
+	if ( 'eshop' !== get_post_type( $post_id ) ) {
+		return;
+	}
+	// Empty url, bail out
+	$eshop_url = get_field( 'eshop_url', $post_id );
+	if ( $eshop_url === '' ) {
+		return;
+	}
+
+	$urlbox = Urlbox::fromCredentials( URLBOX_API_KEY, URLBOX_API_SECRET );
+	$thumbnail_sizes = [
+		'large' => [
+			'width' => '1280',
+			'height' => '1024',
+		],
+		'medium' => [
+			'width' => '1024',
+			'height' => '768',
+		],
+		'small' => [
+			'width' => '375',
+			'height' => '667',
+		],
+	];
+
+	$thumbnail_urls = [];
+	foreach ($thumbnail_sizes as $size => $options) {
+		$size_options = $options;
+		$size_options['url'] = $eshop_url;
+		$thumbnail_urls[$size] = $urlbox->generateUrl( $size_options );
+	}
+
+	update_post_meta( $post_id, 'screen_thumbnail', $thumbnail_urls );
 });

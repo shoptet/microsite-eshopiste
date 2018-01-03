@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 $includes = [
 	'lib/site.php',
 	'lib/setup.php',

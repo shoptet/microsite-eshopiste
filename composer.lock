@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "65bf25822cb7b6bd699b2e60e7fc88e3",
+    "content-hash": "7656fe382a0e1083e757c82bf4a0569a",
     "packages": [
         {
             "name": "composer/installers",
@@ -125,6 +125,67 @@
                 "zikula"
             ],
             "time": "2017-12-29T09:13:20+00:00"
+        },
+        {
+            "name": "urlbox/screenshots",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/urlbox-io/urlbox-screenshots-php.git",
+                "reference": "a7445c17736d6d26a369af3006f64a676a0b187f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/urlbox-io/urlbox-screenshots-php/zipball/a7445c17736d6d26a369af3006f64a676a0b187f",
+                "reference": "a7445c17736d6d26a369af3006f64a676a0b187f",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "^4.0",
+                "phpunit/phpunit": "5.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Urlbox\\Screenshots\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Roebuck",
+                    "email": "chris@urlbox.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Use urlbox to easily generate website thumbnail screenshots from a URL",
+            "homepage": "https://github.com/urlbox-io/urlbox-screenshots-php",
+            "keywords": [
+                "Thumbnails",
+                "browser",
+                "capture",
+                "convert",
+                "facade",
+                "headless",
+                "image",
+                "laravel",
+                "phantomjs",
+                "preview",
+                "provider",
+                "render",
+                "responsive",
+                "retina",
+                "screenshot",
+                "screenshots",
+                "thumbnail",
+                "urlbox",
+                "webpage",
+                "website"
+            ],
+            "time": "2017-03-10T17:52:24+00:00"
         }
     ],
     "packages-dev": [],
