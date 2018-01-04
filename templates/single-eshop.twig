@@ -10,141 +10,262 @@
 	<div class="container">
 		<article>
 
-			<div class="card">
-			  <div class="card-body">
+				<div class="row">
 
-					<div class="row">
+					<div class="col-12 col-md-6">
 
-						<div class="col-12 col-md-6">
+						<h1 class="card-title font-weight-bold mb-1">{{ post.title }}</h1>
 
-							<h1 class="card-title font-weight-bold mb-1">{{ post.title }}</h1>
+						<nav aria-label="breadcrumb">
+						  <ol class="breadcrumb py-0 px-0 mb-4 bg-white" style="line-height:1">
+						    <li class="breadcrumb-item"><a href="{{ site.url }}">Domů</a></li>
+								{% if post.get_field('category') %}
+						    	<li class="breadcrumb-item"><a href="{{ post.get_field('category').link }}">{{ post.get_field('category').name }}</a></li>
+								{% endif %}
+								<li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+						  </ol>
+						</nav>
 
-							<nav aria-label="breadcrumb">
-							  <ol class="breadcrumb py-0 px-0 mb-4 bg-white" style="line-height:1">
-							    <li class="breadcrumb-item"><a href="{{ site.url }}">Domů</a></li>
-									{% if post.get_field('category') %}
-							    	<li class="breadcrumb-item"><a href="{{ post.get_field('category').link }}">{{ post.get_field('category').name }}</a></li>
-									{% endif %}
-									<li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
-							  </ol>
-							</nav>
+						{% if post.get_field('bid_type') == 'sale' %}
 
-							{% if post.get_field('bid_type') == 'sale' %}
+							{% if post.get_field('selling_price') %}
+								<div class="mb-4" style="font-size: 133.333333333%">
+									<span class="font-weight-bold mr-1">Prodej e-shopu</span>
+									<span class="badge badge-pill badge-secondary font-weight-normal">
+										{{ post.get_field('selling_price') }} Kč bez DPH
+									</span>
+								</div>
+							{% endif %}
 
-								{% if post.get_field('selling_price') %}
-									<div class="mb-4" style="font-size: 133.333333333%">
-										<span class="font-weight-bold mr-1">Prodej e-shopu</span>
+						{% elseif post.get_field('bid_type') == 'investment' %}
+
+							{% if post.get_field('loan') %}
+								<div class="mb-4">
+									<div style="font-size: 133.333333333%">
+										<span class="font-weight-bold mr-1">Půjčka</span>
 										<span class="badge badge-pill badge-secondary font-weight-normal">
-											{{ post.get_field('selling_price') }} Kč bez DPH
+											{{ post.get_field('loan') }} Kč bez DPH
 										</span>
 									</div>
-								{% endif %}
+									<p class="mt-1">
+										Se splatností {{ post.get_field('repayment_period') }} roky
+										a úrokem {{ post.get_field('interest_rate') }} %
+									</p>
+								</div>
+							{% endif %}
 
-							{% elseif post.get_field('bid_type') == 'investment' %}
+							{% elseif post.get_field('bid_type') == 'companion_investor' %}
 
-								{% if post.get_field('loan') %}
+								{% if post.get_field('input') %}
 									<div class="mb-4">
 										<div style="font-size: 133.333333333%">
-											<span class="font-weight-bold mr-1">Půjčka</span>
+											<span class="font-weight-bold mr-1">Společník/Investor</span>
 											<span class="badge badge-pill badge-secondary font-weight-normal">
-												{{ post.get_field('loan') }} Kč bez DPH
+												{{ post.get_field('input') }} Kč bez DPH
 											</span>
 										</div>
 										<p class="mt-1">
-											Se splatností {{ post.get_field('repayment_period') }} roky
-											a úrokem {{ post.get_field('interest_rate') }} %
+											Nabízený podíl {{ post.get_field('share') }} %
 										</p>
 									</div>
 								{% endif %}
 
-								{% elseif post.get_field('bid_type') == 'companion_investor' %}
+						{% endif %}
 
-									{% if post.get_field('input') %}
-										<div class="mb-4">
-											<div style="font-size: 133.333333333%">
-												<span class="font-weight-bold mr-1">Společník/Investor</span>
-												<span class="badge badge-pill badge-secondary font-weight-normal">
-													{{ post.get_field('input') }} Kč bez DPH
-												</span>
-											</div>
-											<p class="mt-1">
-												Nabízený podíl {{ post.get_field('share') }} %
-											</p>
-										</div>
-									{% endif %}
-
+						<div class="mb-1">
+							{% if post.get_field('eshop_url') %}
+								<a
+									href="{{ post.get_field('eshop_url') }}"
+									class="font-weight-bold mr-2"
+									target="_blank"
+									style="font-size: 133.333333333%"
+								>
+									{{ post.get_field('eshop_url')|display_url }}
+								</a>
 							{% endif %}
-
-							<div class="mb-1">
-								{% if post.get_field('eshop_url') %}
-									<a
-										href="{{ post.get_field('eshop_url') }}"
-										class="font-weight-bold mr-2"
-										target="_blank"
-										style="font-size: 133.333333333%"
-									>
-										{{ post.get_field('eshop_url')|display_url }}
-									</a>
-								{% endif %}
-								{% if post.get_field('eshop_owner') %}
-									<a
-										class="text-muted"
-										href="http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_res.cgi?odp=html&ICO={{ post.get_field('eshop_owner_cin') }}"
-										target="_blank"
-										title="Majitel e-shopu"
-									>
-										{{ post.get_field('eshop_owner') }}
-									</a>
-								{% endif %}
-							</div>
-
-							<ul class="list-inline mb-4">
-								{% if post.get_field('facebook') %}
-									<li class="list-inline-item">
-										<a
-											href="{{ post.get_field('facebook') }}"
-											target="_blank"
-										>
-											Facebook
-										</a>
-									</li>
-								{% endif %}
-								{% if post.get_field('twitter') %}
-									<li class="list-inline-item">
-										<a
-											href="{{ post.get_field('twitter') }}"
-											target="_blank"
-										>
-											Twitter
-										</a>
-									</li>
-								{% endif %}
-							</ul>
-
-							{% if post.get_field('category') %}
-								<dl class="mb-4">
-									<dt>Kategorie</dt>
-									<dd><a href="{{ post.get_field('category').link }}">{{ post.get_field('category').name }}</a></dd>
-								</dl>
+							{% if post.get_field('eshop_owner') %}
+								<a
+									class="text-muted"
+									href="http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_res.cgi?odp=html&ICO={{ post.get_field('eshop_owner_cin') }}"
+									target="_blank"
+									title="Majitel e-shopu"
+								>
+									{{ post.get_field('eshop_owner') }}
+								</a>
 							{% endif %}
+						</div>
 
-							{% if post.get_field('description') %}
-								<h6 class="font-weight-bold mb-1" style="line-height: 1">Krátce o projektu</h6>
+						<ul class="list-inline mb-4">
+							{% if post.get_field('facebook') %}
+								<li class="list-inline-item">
+									<a
+										href="{{ post.get_field('facebook') }}"
+										target="_blank"
+									>
+										Facebook
+									</a>
+								</li>
+							{% endif %}
+							{% if post.get_field('twitter') %}
+								<li class="list-inline-item">
+									<a
+										href="{{ post.get_field('twitter') }}"
+										target="_blank"
+									>
+										Twitter
+									</a>
+								</li>
+							{% endif %}
+						</ul>
+
+						{% if post.get_field('category') %}
+							<dl class="mb-4">
+								<dt>Kategorie</dt>
+								<dd><a href="{{ post.get_field('category').link }}">{{ post.get_field('category').name }}</a></dd>
+							</dl>
+						{% endif %}
+
+						{% if post.get_field('description') %}
+							<div class="mb-4">
+								<h2 class="h6 font-weight-bold mb-1" style="line-height: 1">Krátce o projektu</h2>
 								{{ post.get_field('description') }}
-							{% endif %}
+							</div>
+						{% endif %}
 
+						<div class="small">
+							<div class="row">
+								<div class="col-12 col-md-6 col-lg-4">
+									<dl>
+										<dt>Hodnota e-shopu</dt>
+										<dd>4000000 Kč bez DPH</dd>
+									</dl>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4">
+									<dl>
+										<dt>Obrat e-shopu za poslední rok</dt>
+										<dd>
+											{% if (post.get_field('turnover')) %}
+												{{ post.get_field('turnover') }} Kč
+											{% else %}
+												<em>Neuvedeno</em>
+											{% endif %}
+									</dl>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4">
+									<dl>
+										<dt>EBITDA za poslední rok</dt>
+										<dd>
+											{% if (post.get_field('ebitda')) %}
+												{{ post.get_field('ebitda') }} Kč
+											{% else %}
+												<em>Neuvedeno</em>
+											{% endif %}
+										</dd>
+									</dl>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4">
+									<dl>
+										<dt>Stáří e-shopu</dt>
+										<dd>
+											{% if (post.get_field('age')) %}
+												{{ post.get_field('age') }} let
+											{% else %}
+												<em>Neuvedeno</em>
+											{% endif %}
+										</dd>
+									</dl>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4">
+									<dl>
+										<dt>Majitel e-shopu</dt>
+										<dd>{{ post.get_field('eshop_owner') ?: '<em>Neuvedeno</em>' }}</dd>
+									</dl>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4">
+									<dl>
+										<dt>Návštěvnost za poslední rok</dt>
+										<dd>
+											{% if (post.get_field('traffic')) %}
+												{{ post.get_field('traffic') }} UN
+											{% else %}
+												<em>Neuvedeno</em>
+											{% endif %}
+										</dd>
+									</dl>
+								</div>
+							</div>
 						</div>
-						<div class="col-12 col-md-6">
 
-							<img src="{{ post.get_field('screen_thumbnail').large }}">
-							<img src="{{ post.get_field('screen_thumbnail').medium }}">
-							<img src="{{ post.get_field('screen_thumbnail').small }}">
-
-						</div>
 					</div>
+					<div class="col-12 col-md-6">
 
-			  </div>
-			</div>
+						<div class="row">
+							<div class="col-12">
+								<div style="background-color: #222; padding: 3.5%; border-radius: 10px;">
+									<a href="{{ post.get_field('eshop_url') }}">
+										<img src="{{ post.get_field('screen_thumbnail').large }}" style="width:100%">
+									</a>
+								</div>
+								<div class="mb-3">
+									<div style="width: 13%; padding-bottom: 12%; margin: 0 auto; background-color: #333;"></div>
+									<div style="width: 42%; padding-bottom: 2.5%; margin: 0 auto; background-color: #333; border-top-left-radius: 10px;  border-top-right-radius: 10px;"></div>
+								</div>
+							</div>
+							<div class="col-8">
+								<div style="background-color: #222; padding: 3.5% 8.5%; border-radius: 12px;">
+									<a href="{{ post.get_field('eshop_url') }}">
+										<img src="{{ post.get_field('screen_thumbnail').medium }}" style="width:100%">
+									</a>
+								</div>
+							</div>
+							<div class="col-3">
+								<div style="background-color: #222; padding: 23% 5%; border-radius: 10px;">
+									<a href="{{ post.get_field('eshop_url') }}">
+										<img src="{{ post.get_field('screen_thumbnail').small }}" style="width:100%">
+									</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<hr style="margin: 2rem 0">
+
+				<div class="row">
+					<div class="col-12 col-lg-8">
+
+						<div class="card">
+							<div class="card-body">
+
+								{% if post.get_field('description') %}
+									<div class="mb-4">
+										<h2 class="h5 font-weight-bold">O projektu</h2>
+										{{ post.get_field('description') }}
+									</div>
+								{% endif %}
+
+								{% if post.get_field('reason') %}
+									<div class="mb-4">
+										<h2 class="h5 font-weight-bold">Důvod prodeje</h2>
+										{{ post.get_field('reason') }}
+									</div>
+								{% endif %}
+
+							</div>
+						</div>
+
+					</div>
+					<div class="col-12 col-lg-4">
+
+						<div class="card bg-light">
+						  <div class="card-body">
+						    <h2 class="h5 font-weight-bold">O majiteli</h2>
+						  </div>
+						</div>
+
+					</div>
+				</div>
 
 		</article>
 	</div>
