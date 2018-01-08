@@ -1,0 +1,48 @@
+<div class="row mb-3">
+  <div class="col-12">
+    <div style="background-color: #222; padding: 3.5%; border-radius: 10px;">
+      <a
+        href="{{ post.get_field('eshop_url') }}"
+        style="display: block; position: relative; padding-bottom: 62.5%;"
+      >
+        <img
+          class="img-fluid"
+          src="{{ thumbnails.large.url ?: 'http://via.placeholder.com/1280x800/555/999?text=Náhled+není+k+dispozici' }}"
+          style="position: absolute;"
+        >
+      </a>
+    </div>
+    <div class="mb-3">
+      <div style="width: 13%; padding-bottom: 12%; margin: 0 auto; background-color: #ccc;"></div>
+      <div style="width: 42%; padding-bottom: 2.5%; margin: 0 auto; background-color: #ccc; border-top-left-radius: 10px;  border-top-right-radius: 10px;"></div>
+    </div>
+  </div>
+  <div class="col-8">
+    <div style="background-color: #222; padding: 3.5% 8.5%; border-radius: 12px;">
+      <a
+        href="{{ post.get_field('eshop_url') }}"
+        style="display: block; position: relative; padding-bottom: 75%;"
+      >
+        <img
+          class="img-fluid"
+          src="{{ thumbnails.medium.url ?: 'http://via.placeholder.com/1024x768/555/999?text=+' }}"
+          style="position: absolute;"
+        >
+      </a>
+    </div>
+  </div>
+  <div class="col-3">
+    <div style="background-color: #222; padding: 23% 5%; border-radius: 10px;">
+      <a
+        href="{{ post.get_field('eshop_url') }}"
+        style="display: block; position: relative; padding-bottom: 177.866666667%;"
+      >
+        <img
+          class="img-fluid"
+          src="{{ thumbnails.small.url ?: 'http://via.placeholder.com/375x667/555/999?text=+' }}"
+          style="position: absolute;"
+        >
+      </a>
+    </div>
+  </div>
+</div>

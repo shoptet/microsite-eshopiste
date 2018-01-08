@@ -61,9 +61,10 @@ add_action( 'save_post', function ( $post_id ){
 	if ( 'eshop' !== get_post_type( $post_id ) ) {
 		return;
 	}
-	// Empty url, bail out
+	// Empty url, delete post meta
 	$eshop_url = get_field( 'eshop_url', $post_id );
-	if ( $eshop_url === '' ) {
+	if ( ! isset( $eshop_url ) || trim( $eshop_url ) === '' ) {
+		delete_post_meta( $post_id, 'screen_thumbnail' );
 		return;
 	}
 
@@ -83,12 +84,10 @@ add_action( 'save_post', function ( $post_id ){
 		],
 	];
 
-	$thumbnail_urls = [];
 	foreach ($thumbnail_sizes as $size => $options) {
-		$size_options = $options;
-		$size_options['url'] = $eshop_url;
-		$thumbnail_urls[$size] = $urlbox->generateUrl( $size_options );
+		$options['url'] = $eshop_url;
+		$thumbnail_sizes[$size]['url'] = $urlbox->generateUrl( $options );
 	}
 
-	update_post_meta( $post_id, 'screen_thumbnail', $thumbnail_urls );
+	update_post_meta( $post_id, 'screen_thumbnail', $thumbnail_sizes );
 });

@@ -1,0 +1,46 @@
+<div class="card bg-light">
+  <div class="card-body">
+    {% if post.get_field('seller_name') or post.get_field('seller_position') or post.get_field('seller_about_you') %}
+      <h2 class="h5 font-weight-bold mb-3">O majiteli</h2>
+
+      {% if post.get_field('seller_name') or post.get_field('seller_position') %}
+        <p class="h6 font-weight-bold mb-1">
+          {{ post.get_field('seller_name') ?: '<em>Jméno neuvedeno</em>' }}
+
+          {% if post.get_field('seller_position') %}
+            <small class="text-muted">
+              {{ post.get_field('seller_position') }}
+            </small>
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% if post.get_field('info_about_you') %}
+        <div class="font-italic">
+          {{ post.get_field('info_about_you') }}
+        </div>
+      {% endif %}
+
+      <hr>
+    {% endif %}
+
+    <h2 class="h5 font-weight-bold mb-3">Kontaktovat majitele</h2>
+
+    <div>
+      <div class="form-group">
+        <label for="name">Vaše jméno</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Váš e-mail</label>
+        <input type="e-mail" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="text">Zpráva majiteli e-shopu</label>
+        <textarea class="form-control" rows="5"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary btn-block">Odeslat</button>
+    </div>
+
+  </div>
+</div>
