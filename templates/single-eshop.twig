@@ -85,12 +85,12 @@
 						callbacks: {
 							custom: function(tooltip) {
 				        if (!tooltip) return;
-				        tooltip.displayColors = false; // disable displaying the color box;
+				        tooltip.displayColors = false; // disable displaying the color box
 				      },
+							label: function () { return }, // remove colored box with value
 							footer: function (item, data) {
 								return item[0].yLabel + ' ' + yAxesPostfix;
 							},
-							label: function () { return },
 						},
 			    },
 				},
