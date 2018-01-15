@@ -11,7 +11,7 @@
     </ol>
   </nav>
 
-  {% if post.get_field('bid_type') == 'sale' %}
+  {% if post.get_field('type') == 'sale' %}
 
     {% if post.get_field('selling_price') %}
       <div class="mb-4" style="font-size: 133.333333333%">
@@ -22,7 +22,7 @@
       </div>
     {% endif %}
 
-  {% elseif post.get_field('bid_type') == 'investment' %}
+  {% elseif post.get_field('type') == 'investment' %}
 
     {% if post.get_field('loan') %}
       <div class="mb-4">
@@ -39,7 +39,7 @@
       </div>
     {% endif %}
 
-    {% elseif post.get_field('bid_type') == 'companion_investor' %}
+    {% elseif post.get_field('type') == 'companion_investor' %}
 
       {% if post.get_field('input') %}
         <div class="mb-4">

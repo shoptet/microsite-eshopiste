@@ -6,8 +6,8 @@ namespace Eshopiste\Filters;
  * Hide redundant categories metabox in eshop edit page
  */
 add_filter('add_meta_boxes', function() {
-  remove_meta_box( 'tagsdiv-shop_categories', 'eshop', 'side' );
-	remove_meta_box( 'shop_categoriesdiv', 'eshop', 'side' ); // if taxonomy is hierarchical
+  remove_meta_box( 'tagsdiv-eshop_category', 'eshop', 'side' );
+	remove_meta_box( 'eshop_categorydiv', 'eshop', 'side' ); // if taxonomy is hierarchical
 });
 
 /**

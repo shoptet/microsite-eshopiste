@@ -91,3 +91,31 @@ add_action( 'save_post', function ( $post_id ){
 
 	update_post_meta( $post_id, 'screen_thumbnail', $thumbnail_sizes );
 });
+
+/**
+ * Handle sorting and filtering of e-shop archive
+ */
+add_action('pre_get_posts', function ( $wp_query ){
+	// bail early if is in admin or if not main query (allows custom code / plugins to continue working)
+	if ( is_admin() || !$wp_query->is_main_query() ) return;
+
+	$meta_query = $wp_query->get('meta_query');
+
+	if( isset($_GET[ 'category' ]) ) {
+		$meta_query[] = [
+      'key'		=> 'category',
+      'value'		=> $_GET[ 'category' ],
+      'compare'	=> 'IN',
+    ];
+	}
+
+	if( isset($_GET[ 'type' ]) ) {
+  	$meta_query[] = [
+      'key'		=> 'type',
+      'value'		=> $_GET[ 'type' ],
+      'compare'	=> 'IN',
+    ];
+	}
+
+	$wp_query->set('meta_query', $meta_query);
+});
