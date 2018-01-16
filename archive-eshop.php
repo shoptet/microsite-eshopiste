@@ -31,11 +31,7 @@ $context['order_choices'] = [
 	'date_desc' => 'Nejnověji přidáno',
 	'price_asc' => 'Nejlevnější',
 	'price_desc' => 'Nejdražší',
-<<<<<<< HEAD
 	'turnover_asc' => 'Nejmenší obrat',
-=======
-	'turnover_asc' => 'Největší obrat',
->>>>>>> d393c9519264a9f4e4c02a1a6fd5e7950aa5c34c
 	'turnover_desc' => 'Největší obrat',
 	'age_desc' => 'Nejstarší',
 	'age_asc' => 'Nejmladší',
