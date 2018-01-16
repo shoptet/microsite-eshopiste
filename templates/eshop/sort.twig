@@ -1,0 +1,19 @@
+<div class="d-lg-flex w-100 align-items-center justify-content-between">
+  <div class="form-inline">
+    <div class="form-group mb-0">
+      <label for="orderSelect">
+        Seřadit podle:
+      </label>
+      <select class="form-control ml-sm-2 mr-sm-4" id="orderSelect" name="orderby" onchange="this.form.submit()">
+        {% for value, choice in order_choices %}
+          <option value="{{ value }}" {{ value in selected_orderby ? 'selected' }}>
+            {{ choice }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="text-muted mt-3 mt-lg-0">
+    Celkem {{ posts|length }} z {{ found_posts }} e-shopů
+  </div>
+</div>

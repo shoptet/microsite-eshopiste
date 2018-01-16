@@ -101,6 +101,19 @@ add_action('pre_get_posts', function ( $wp_query ){
 
 	$meta_query = $wp_query->get('meta_query');
 
+	$wp_query->set('posts_per_page', 2);
+
+	if( isset($_GET[ 'orderby' ]) ) {
+		$query = explode("_", $_GET[ 'orderby' ]);
+
+		// bail out default order by post_date DESC
+		if ( $query[0] === 'date' && $query[1] === 'desc' ) return;
+
+		$wp_query->set('orderby', 'meta_value_num');
+		$wp_query->set('meta_key', $query[0]);
+		$wp_query->set('order', $query[1]);
+	}
+
 	if( isset($_GET[ 'category' ]) ) {
 		$meta_query[] = [
       'key'		=> 'category',
