@@ -1,45 +1,65 @@
-<p class="h5 font-weight-bold">
-  O co máte zájem?
-</p>
+<div class="mb-4 mb-md-0">
+  <button
+    class="btn btn-secondary d-md-none"
+    type="button"
+    data-toggle="collapse"
+    href="#filtersCollapse"
+    role="button"
+    aria-expanded="false"
+    aria-controls="filtersCollapse"
+  >
+    Zobrazit filtry
+  </button>
 
-{% for choice in type_choices %}
-  <div class="form-check">
-    <input
-      class="form-check-input"
-      type="checkbox"
-      value="{{ loop.index0 }}"
-      id="filterType{{ loop.index0 }}"
-      name="type[]"
-      {{ loop.index0 in checked_types ? 'checked' }}
-    >
-    <label class="form-check-label" for="filterType{{ loop.index0 }}">
-      {{ choice }}
-    </label>
+  <div class="collapse d-md-block" id="filtersCollapse">
+    <div class="mt-3 mt-md-0">
+
+      <p class="h5 font-weight-bold">
+        O co máte zájem?
+      </p>
+
+      {% for index, choice in type_choices %}
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="{{ index }}"
+            id="filterType{{ index }}"
+            name="type[]"
+            {{ index in checked_types ? 'checked' }}
+          >
+          <label class="form-check-label" for="filterType{{ index }}">
+            {{ choice }}
+          </label>
+        </div>
+      {% endfor %}
+
+      <hr>
+
+      <p class="h5 font-weight-bold">
+        Kategorie
+      </p>
+
+      {% for term in all_categories %}
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="{{ term.id }}"
+            id="filterCategory{{ term.id }}"
+            name="category[]"
+            {{ term.id in checked_categories ? 'checked' }}
+          >
+          <label class="form-check-label" for="filterCategory{{ term.id }}">
+            {{ term.name }}
+          </label>
+        </div>
+      {% endfor %}
+
+      <hr>
+
+      <button type="submit" class="btn btn-primary btn-block">Filtrovat</button>
+
+    </div>
   </div>
-{% endfor %}
-
-<hr>
-
-<p class="h5 font-weight-bold">
-  Kategorie
-</p>
-
-{% for term in all_categories %}
-  <div class="form-check">
-    <input
-      class="form-check-input"
-      type="checkbox"
-      value="{{ term.id }}"
-      id="filterCategory{{ term.id }}"
-      name="category[]"
-      {{ term.id in checked_categories ? 'checked' }}
-    >
-    <label class="form-check-label" for="filterCategory{{ term.id }}">
-      {{ term.name }}
-    </label>
-  </div>
-{% endfor %}
-
-<hr>
-
-<button type="submit" class="btn btn-primary btn-block">Filtrovat</button>
+</div>
