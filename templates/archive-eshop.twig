@@ -3,6 +3,11 @@
 {% block content %}
 	<div class="container">
 		<form action="{{ archive_link }}" method="get">
+
+			{% if search_query %}
+				<input type="hidden" name="s" value="{{ search_query }}">
+			{% endif %}
+
 			<div class="row">
 				<div class="col-12 col-md-4 col-lg-3">
 

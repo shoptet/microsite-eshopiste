@@ -58,8 +58,108 @@
 
       <hr>
 
+      <p class="h5 font-weight-bold mb-0">
+        Cena
+      </p>
+      <p class="mb-3">Při prodeji a bez DPH</p>
+      <div class="mx-3">
+        <div class="mb-3" id="filterPrice"></div>
+      </div>
+      <div class="d-flex w-100 align-items-center justify-content-between ">
+        <input class="form-control form-control-sm" type="number" id="filterPriceInputMin" name="price_min" value="{{ price_range.min }}">
+        <span class="small text-muted mx-1">až</span>
+        <input class="form-control form-control-sm" type="number" id="filterPriceInputMax" name="price_max" value="{{ price_range.max }}">
+        <span class="small text-muted ml-1">Kč</span>
+      </div>
+
+      <hr>
+
+      <p class="h5 font-weight-bold mb-0">
+        Obrat
+      </p>
+      <p class="mb-3">Za poslední rok</p>
+      <div class="mx-3">
+        <div class="mb-3" id="filterTurnover"></div>
+      </div>
+      <div class="d-flex w-100 align-items-center justify-content-between ">
+        <input class="form-control form-control-sm" type="number" id="filterTurnoverInputMin" name="turnover_min" value="{{ turnover_range.min }}">
+        <span class="small text-muted mx-1">až</span>
+        <input class="form-control form-control-sm" type="number" id="filterTurnoverInputMax" name="turnover_max" value="{{ turnover_range.max }}">
+        <span class="small text-muted ml-1">Kč</span>
+      </div>
+
+      <hr>
+
+      <p class="h5 font-weight-bold mb-0">
+        Návštěvnost
+      </p>
+      <p class="mb-3">Za poslední rok</p>
+      <div class="mx-3">
+        <div class="mb-4" id="filterTraffic"></div>
+      </div>
+      <div class="d-flex w-100 align-items-center justify-content-between ">
+        <input class="form-control form-control-sm" type="number" id="filterTrafficInputMin" name="traffic_min" value="{{ traffic_range.min }}">
+        <span class="small text-muted mx-1">až</span>
+        <input class="form-control form-control-sm" type="number" id="filterTrafficInputMax" name="traffic_max" value="{{ traffic_range.max }}">
+        <span class="small text-muted ml-1">UN</span>
+      </div>
+
+      <hr>
+
       <button type="submit" class="btn btn-primary btn-block">Filtrovat</button>
 
     </div>
   </div>
 </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.0.0/nouislider.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.0.0/nouislider.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+
+<script>
+  var createSlider = function (sliderId, start, range) {
+    var slider = document.getElementById(sliderId),
+        inputMin = document.getElementById(sliderId + 'InputMin'),
+        inputMax = document.getElementById(sliderId + 'InputMax');
+
+    noUiSlider.create(slider, {
+      start: start,
+      step: 1000,
+      connect: true,
+      range: range,
+      format: wNumb({decimals: 0}),
+    });
+    slider.noUiSlider.on('update', function(values) {
+      inputMin.value = values[0];
+      inputMax.value = values[1];
+    });
+    inputMin.addEventListener('change', function() {
+    	slider.noUiSlider.set([this.value, null]);
+    });
+    inputMax.addEventListener('change', function() {
+    	slider.noUiSlider.set([null, this.value]);
+    });
+  };
+
+  createSlider(
+    'filterPrice',
+    [{{ price_start[0] }}, {{ price_start[1] }}],
+    {min: {{ price_range.min }}, max: {{ price_range.max }}},
+  );
+  createSlider(
+    'filterTurnover',
+    [{{ turnover_start[0] }}, {{ turnover_start[1] }}],
+    {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
+  );
+  createSlider(
+    'filterTraffic',
+    [{{ traffic_start[0] }}, {{ traffic_start[1] }}],
+    {min: {{ traffic_range.min }}, max: {{ traffic_range.max }}},
+  );
+
+</script>
+<style>
+  .noUi-connect {
+    background: #007bff;
+  }
+</style>
