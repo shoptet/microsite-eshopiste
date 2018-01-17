@@ -93,7 +93,7 @@ add_action( 'save_post', function ( $post_id ){
 });
 
 /**
- * Handle sorting and filtering of e-shop archive
+ * Handle ordering and filtering of e-shop archive
  */
 add_action('pre_get_posts', function ( $wp_query ){
 	// bail early if is in admin or if not main query (allows custom code / plugins to continue working)
@@ -103,32 +103,63 @@ add_action('pre_get_posts', function ( $wp_query ){
 
 	$wp_query->set('posts_per_page', 2);
 
+	/**
+	 * Handle ordering queries
+	 */
+
 	if( isset($_GET[ 'orderby' ]) ) {
 		$query = explode( "_", $_GET[ 'orderby' ] );
 
 		// skip default ordering by post_date DESC
+		// e.g. '?orderby=date_asc'
 		if ( $query[0] !== 'date' && $query[1] !== 'desc' ) {
 			$wp_query->set('orderby', 'meta_value_num');
 			$wp_query->set('meta_key', $query[0]);
 			$wp_query->set('order', $query[1]);
-		};
+		}
 	}
 
-	if( isset($_GET[ 'category' ]) ) {
-		$meta_query[] = [
-      'key'		=> 'category',
-      'value'		=> $_GET[ 'category' ],
-      'compare'	=> 'IN',
-    ];
-	}
+	/**
+	 * Handle filtering queries
+	 */
 
-	if( isset($_GET[ 'type' ]) ) {
-  	$meta_query[] = [
-      'key'		=> 'type',
-      'value'		=> $_GET[ 'type' ],
-      'compare'	=> 'IN',
-    ];
-	}
+	 // Get array meta query
+	 // e.g. '?query[]=0&query[]=1...'
+	$getArrayMetaQuery = function ($query) {
+		$result = [];
+		if( isset($_GET[ $query ]) ) {
+			$result[] = [
+				'key' => $query,
+				'value' => $_GET[ $query ],
+				'compare'	=> 'IN',
+			];
+		}
+		return $result;
+	};
+
+	// Get range meta query
+	// e.g. '?query_min=1000&query_max=200'
+	$getRangeMetaQuery = function ($query) {
+		$result = [];
+		foreach (['min', 'max'] as $ext) {
+			if( !isset($_GET[ $query . '_' . $ext ]) ) continue;
+			$result[] = [
+				'key' => $query,
+				'value' => $_GET[ $query . '_' . $ext ],
+				'compare'	=> ($ext === 'min' ? '>=' : '<='),
+				'type' => 'NUMERIC',
+			];
+		}
+		return $result;
+	};
+
+	$meta_query[] = $getArrayMetaQuery('category');
+	$meta_query[] = $getArrayMetaQuery('type');
+	$meta_query[] = $getArrayMetaQuery('age');
+
+	$meta_query[] = $getRangeMetaQuery('price');
+	$meta_query[] = $getRangeMetaQuery('turnover');
+	$meta_query[] = $getRangeMetaQuery('traffic');
 
 	$wp_query->set('meta_query', $meta_query);
 });

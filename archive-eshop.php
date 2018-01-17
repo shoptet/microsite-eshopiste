@@ -23,9 +23,9 @@ $context = Timber::get_context();
 $context['posts'] = new Timber\PostQuery();
 $context['search_query'] = get_search_query();
 $context['found_posts'] = $wp_query->found_posts;
-$context['archive_link'] =  get_post_type_archive_link( get_post_type() );
+$context['archive_link'] =  get_post_type_archive_link( get_queried_object()->name );
 $context['all_categories'] = Timber::get_terms('eshop_category');
-
+$context['age_choices'] = get_field_object('field_5a43bd098e708')['choices']; // used post_name instead of post_excerpt
 $context['type_choices'] = [
 	0 => 'Koupit e-shop',
 	1 => 'Půjčit e-shopu',
@@ -44,13 +44,15 @@ $context['order_choices'] = [
 
 $context['checked_categories'] = isset($_GET[ 'category' ]) ? $_GET[ 'category' ] : [];
 $context['checked_types'] = isset($_GET[ 'type' ]) ? $_GET[ 'type' ] : [];
+$context['checked_ages'] = isset($_GET[ 'age' ]) ? $_GET[ 'age' ] : [];
 $context['selected_orderby'] = isset($_GET[ 'orderby' ]) ? $_GET[ 'orderby' ] : null;
 
-foreach (['price', 'turnover', 'traffic'] as $range) {
-	$context[ $range . '_range' ] = get_post_meta_value_min_max( get_post_type(), $range );
-	$context[ $range . '_start'] = [
-		isset($_GET[ $range . '_min' ]) ? $_GET[ $range . '_min' ] : $context[$range . '_range']['min'],
-		isset($_GET[ $range . '_max' ]) ? $_GET[ $range . '_max' ] : $context[$range . '_range']['max'],
+// pass range and start values to context
+foreach (['price', 'turnover', 'traffic'] as $query) {
+	$context[ $query . '_range' ] = get_post_meta_value_min_max( get_queried_object()->name, $query );
+	$context[ $query . '_start'] = [
+		isset($_GET[ $query . '_min' ]) ? $_GET[ $query . '_min' ] : $context[$query . '_range']['min'],
+		isset($_GET[ $query . '_max' ]) ? $_GET[ $query . '_max' ] : $context[$query . '_range']['max'],
 	];
 }
 

@@ -8,7 +8,7 @@ namespace Eshopiste\Helpers;
 function get_post_meta_value_min_max($post_type, $meta_key): array
 {
   global $wpdb;
-  return $wpdb->get_results( "
+  return $wpdb->get_results("
   	SELECT MIN(" . $wpdb->postmeta . ".meta_value) as min, MAX(" . $wpdb->postmeta . ".meta_value) as max
   	FROM " . $wpdb->posts . "
   	LEFT JOIN " . $wpdb->postmeta . "
