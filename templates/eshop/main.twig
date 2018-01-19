@@ -11,20 +11,20 @@
     </ol>
   </nav>
 
-  {% if post.get_field('type') == 'sale' %}
+  {% if post.get_field('type') == 0 %}
 
-    {% if post.get_field('selling_price') %}
+    {% if post.get_field('price') %}
       <div class="mb-4" style="font-size: 133.333333333%">
         <span class="font-weight-bold mr-1">Prodej e-shopu</span>
         <span class="badge badge-pill badge-secondary font-weight-normal">
-          {{ post.get_field('selling_price') }} Kč bez DPH
+          {{ post.get_field('price') }} Kč bez DPH
         </span>
       </div>
     {% endif %}
 
-  {% elseif post.get_field('type') == 'investment' %}
+  {% elseif post.get_field('type') == 1 %}
 
-    {% if post.get_field('loan') %}
+    {% if post.get_field('price') %}
       <div class="mb-4">
         <div style="font-size: 133.333333333%">
           <span class="font-weight-bold mr-1">Půjčka</span>
@@ -39,9 +39,9 @@
       </div>
     {% endif %}
 
-    {% elseif post.get_field('type') == 'companion_investor' %}
+    {% elseif post.get_field('type') == 2 %}
 
-      {% if post.get_field('input') %}
+      {% if post.get_field('price') %}
         <div class="mb-4">
           <div style="font-size: 133.333333333%">
             <span class="font-weight-bold mr-1">Společník/Investor</span>

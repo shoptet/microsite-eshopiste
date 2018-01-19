@@ -9,7 +9,9 @@ function get_post_meta_value_min_max($post_type, $meta_key): array
 {
   global $wpdb;
   return $wpdb->get_results("
-  	SELECT MIN(" . $wpdb->postmeta . ".meta_value) as min, MAX(" . $wpdb->postmeta . ".meta_value) as max
+  	SELECT
+      MIN(CAST(" . $wpdb->postmeta . ".meta_value as UNSIGNED)) as min, -- convert longtext meta_value to unsigned
+      MAX(CAST(" . $wpdb->postmeta . ".meta_value as UNSIGNED)) as max -- convert longtext meta_value to unsigned
   	FROM " . $wpdb->posts . "
   	LEFT JOIN " . $wpdb->postmeta . "
   	ON
