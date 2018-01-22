@@ -16,20 +16,24 @@
 				</div>
 				<div class="col-12 col-md-8 col-lg-9">
 
-					{% include 'eshop/sort.twig' %}
+					{% if posts is not empty %}
 
-					<hr class="mb-4">
+						{% include 'eshop/sort.twig' %}
 
-					<div class="row">
-						{% for post in posts %}
-							<div class="col-12 col-md-6 col-xl-4">
-								{% include 'eshop/thumbnail.twig' %}
-							</div>
-						{% endfor %}
-					</div>
+						<hr class="mb-4">
 
-					{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-
+						<div class="row">
+							{% for post in posts %}
+								<div class="col-12 col-md-6 col-xl-4">
+									{% include 'eshop/thumbnail.twig' %}
+								</div>
+							{% endfor %}
+						</div>
+						{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+					{% else %}
+						<p class="h4 font-weight-bold">Nemůžeme najít žádný e-shop s těmito požadavky</p>
+						<p>Zkuste prosím snížit vaše požadavky pomocí filtrů.</p>
+					{% endif %}
 				</div>
 			</div>
 		</form>
