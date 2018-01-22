@@ -22,6 +22,8 @@ class EshopisteSite extends TimberSite {
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 		parent::__construct();
 	}
 
@@ -88,6 +90,30 @@ class EshopisteSite extends TimberSite {
 			'show_in_quick_edit' => false,
 		);
 		register_taxonomy( 'eshop_category', array( 'eshop' ), $args );
+	}
+
+	function load_styles() {
+		/* Load styles and add a cache-breaking URL parameter */
+
+		$fileName = '/assets/main.css';
+		$fileUrl = get_template_directory_uri() . $fileName;
+		$filePath = get_template_directory() . $fileName;
+		wp_enqueue_style( 'main', $fileUrl, [], filemtime($filePath), 'all' );
+	}
+
+	function load_scripts() {
+		/* Load scripts and add a cache-breaking URL parameter */
+
+		$fileName = '/assets/vendor.js';
+		$fileUrl = get_template_directory_uri() . $fileName;
+		$filePath = get_template_directory() . $fileName;
+		wp_enqueue_script( 'vendor', $fileUrl, [], filemtime($filePath), true );
+
+		$fileName = '/assets/main.js';
+		$fileUrl = get_template_directory_uri() . $fileName;
+		$filePath = get_template_directory() . $fileName;
+		wp_enqueue_script( 'main', $fileUrl, ['vendor'], filemtime($filePath), true );
+
 	}
 
 	function add_to_context( $context ) {

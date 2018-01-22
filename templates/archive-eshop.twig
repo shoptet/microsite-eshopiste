@@ -2,7 +2,7 @@
 
 {% block content %}
 	<div class="container">
-		<form action="{{ archive_link }}" method="get">
+		<form action="{{ archive_link }}" method="get" id="archiveForm">
 
 			{% if search_query %}
 				<input type="hidden" name="s" value="{{ search_query }}">
@@ -16,26 +16,57 @@
 				</div>
 				<div class="col-12 col-md-8 col-lg-9">
 
-					{% if posts is not empty %}
+					<div id="archiveList">
 
-						{% include 'eshop/sort.twig' %}
+					  {% if posts is not empty %}
 
-						<hr class="mb-4">
+					    {% include 'eshop/sort.twig' %}
 
-						<div class="row">
-							{% for post in posts %}
-								<div class="col-12 col-md-6 col-xl-4">
-									{% include 'eshop/thumbnail.twig' %}
-								</div>
-							{% endfor %}
-						</div>
-						{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-					{% else %}
-						<p class="h4 font-weight-bold">Nemůžeme najít žádný e-shop s těmito požadavky</p>
-						<p>Zkuste prosím snížit vaše požadavky pomocí filtrů.</p>
-					{% endif %}
+					    <hr class="mb-4">
+
+					    <div class="row">
+					      {% for post in posts %}
+					        <div class="col-12 col-md-6 col-xl-4">
+					          {% include 'eshop/thumbnail.twig' %}
+					        </div>
+					      {% endfor %}
+					    </div>
+
+					    {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+
+					  {% else %}
+
+					    <p class="h4 font-weight-bold">Nemůžeme najít žádný e-shop s těmito požadavky</p>
+					    <p>Zkuste prosím snížit vaše požadavky pomocí filtrů.</p>
+
+					  {% endif %}
+
+					</div>
+
 				</div>
 			</div>
 		</form>
 	</div>
+{% endblock %}
+
+{% block script_footer %}
+	<script>
+		window.sliderData = [
+			{
+				id: 'filterPrice',
+				start: [{{ price_start[0] }}, {{ price_start[1] }}],
+				range: {min: {{ price_range.min }}, max: {{ price_range.max }}},
+			},
+			{
+				id: 'filterTurnover',
+				start: [{{ turnover_start[0] }}, {{ turnover_start[1] }}],
+				range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
+			},
+			{
+				id: 'filterTraffic',
+				start: [{{ traffic_start[0] }}, {{ traffic_start[1] }}],
+				range: {min: {{ traffic_range.min }}, max: {{ traffic_range.max }}},
+			},
+		];
+	</script>
 {% endblock %}

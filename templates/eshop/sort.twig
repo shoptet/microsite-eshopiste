@@ -4,7 +4,7 @@
       <label for="orderSelect">
         Seřadit podle:
       </label>
-      <select class="form-control ml-sm-2 mr-sm-4" id="orderSelect" name="orderby" onchange="this.form.submit()">
+      <select class="form-control ml-sm-2 mr-sm-4" id="orderSelect" name="orderby">
         {% for value, choice in order_choices %}
           <option value="{{ value }}" {{ value in selected_orderby ? 'selected' }}>
             {{ choice }}
