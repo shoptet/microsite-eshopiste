@@ -16,8 +16,15 @@ add_filter('add_meta_boxes', function() {
 add_filter( 'views_edit-eshop', function ( $views ){
 	global $current_user;
 	wp_get_current_user(); // Make sure global $current_user is set, if not set it
-  if ( user_can( $current_user, 'subscriber' ) ) {
-    return [];
-  }
+  if ( user_can( $current_user, 'subscriber' ) ) return [];
   return $views;
 });
+
+/**
+ * Rewrite Pagination slug rules
+ */
+add_filter('init', function () {
+  global $wp_rewrite;
+  $wp_rewrite->pagination_base = 'strana';
+  $wp_rewrite->flush_rules();
+}, 0);
