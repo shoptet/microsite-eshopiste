@@ -120,13 +120,19 @@ class EshopisteSite extends TimberSite {
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;
 		$context['current_url'] = Timber\URLHelper::get_current_url();
+		$context['archive_link'] =  get_post_type_archive_link( 'eshop' );
 		return $context;
 	}
 
 	function add_to_twig( $twig ) {
 		$twig->addExtension( new Twig_Extension_StringLoader() );
 		$twig->addFilter('display_url', new Twig_SimpleFilter('display_url', [$this, 'display_url']));
+		$twig->addFilter('static_assets', new Twig_SimpleFilter('static_assets', array($this, 'static_assets')));
 		return $twig;
+	}
+
+	function static_assets( $filePath ) {
+	  return $this->theme->link . '/assets/' . $filePath;
 	}
 
 	function display_url( $url ) {

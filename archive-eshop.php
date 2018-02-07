@@ -23,7 +23,6 @@ $context = Timber::get_context();
 $context['posts'] = new Timber\PostQuery();
 $context['search_query'] = get_search_query();
 $context['found_posts'] = $wp_query->found_posts;
-$context['archive_link'] =  get_post_type_archive_link( get_queried_object()->name );
 $context['all_categories'] = Timber::get_terms('eshop_category');
 $context['age_choices'] = get_field_object('field_5a43bd098e708')['choices']; // used post_name instead of post_excerpt
 $context['type_choices'] = [

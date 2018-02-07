@@ -1,0 +1,114 @@
+<header role="banner" itemscope itemtype="https://schema.org/WebSite">
+
+  <meta itemprop="headline" content="
+    {% if wp_title %}
+      {{ wp_title }}, {{ site.name }}
+    {% else %}
+      {{ site.name }}, {{ site.description }}
+    {% endif %}
+  ">
+  <meta itemprop="url" content="{{ site.url }}">
+  <meta itemprop="text" content="{{ meta_description|striptags }}">
+
+  <div class="header">
+  	<div class="container">
+      <div class="header-inner">
+
+        <div class="header-controls">
+      		<a
+      			class="header-logo"
+      			href="{{ site.url }}"
+      			title="Zpět na domovskou stránku"
+      		>
+      			<img
+      				src="{{ "eshopiste-logo.svg"|static_assets }}"
+      				alt="Eshopiste.cz"
+      			>
+      		</a>
+
+          <div class="header-menu">
+            <button role="button" class="btn btn-orange px-3" data-header-button-search aria-label="Zobrazit vyhledávání">
+              <span class="iconholder"><i class="fas fa-search" aria-hidden></i></span>
+            </button>
+            <button role="button" class="btn btn-orange px-3" data-header-button-actions aria-label="Zobrazit nabídku">
+              <span class="iconholder"><i class="fas fa-bars" aria-hidden></i></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="header-collapse">
+
+      		<form
+      			class="header-search"
+            id="headerSearch"
+      			action="{{ archive_link }}"
+      			role="search"
+      			itemprop="potentialAction"
+      			itemtype="https://schema.org/SearchAction"
+      		>
+      			<meta itemprop="target" content="?s={s}">
+      			<div class="input-group">
+      	      <input
+      					type="search"
+      					class="form-control border-right-0"
+      					name="s"
+      					value="{{ query }}"
+      					placeholder="Vyhledat e-shop"
+      					autocomplete="off"
+      					required
+      				>
+      	      <span class="input-group-append">
+      	        <button type="submit" class="btn btn-input px-3 border-left-0" aria-label="Vyhledat">
+                  <span class="iconholder"><i class="fas fa-search" aria-hidden></i></span>
+                </button>
+      	      </span>
+      	    </div>
+          </form>
+
+          <div class="header-actions" id="headerActions">
+            <a class="btn btn-orange text-uppercase" href="#">
+              <span class="iconholder"><i class="fas fa-plus-circle" aria-hidden></i></span>
+              Přidat e-shop
+            </a>
+            <a class="align-middle ml-3" href="#">
+              <span class="iconholder mr-1"><i class="fas fa-user" aria-hidden></i></span>Přihlásit se
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+	</div>
+
+  <nav class="menu">
+    <div class="container">
+      <div class="menu-overlay">
+        <ul class="menu-nav">
+          <li>
+            <a href="#">Kategorie</a>
+          </li>
+          <li>
+            <a href="#">Chci prodat e-shop</a>
+          </li>
+          <li>
+            <a href="#">Chci investovat</a>
+          </li>
+          <li>
+            <a href="#">Tipy a rady</a>
+          </li>
+          <li>
+            <a href="#">Vzorové dokumenty</a>
+          </li>
+          <li>
+            <a href="#">O projektu</a>
+          </li>
+          <li>
+            <a href="#">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>

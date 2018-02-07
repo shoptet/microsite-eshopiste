@@ -1,11 +1,16 @@
-//
-// Bootstrap
-// Core variables and mixins
-//
+@import "~bootstrap/scss/functions";
+@import "variables/custom";
+@import "variables/bootstrap";
+
 @import "~bootstrap/scss/bootstrap";
 
 @import "~nouislider/distribute/nouislider";
 
-
 @import "functions";
 @import "utilities";
+@import "globals";
+
+@import "components/header";
+@import "components/menu";
+@import "components/button";
+@import "components/iconholder";
