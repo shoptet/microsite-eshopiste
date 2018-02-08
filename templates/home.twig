@@ -1,4 +1,50 @@
 {% extends "base.twig" %}
 
 {% block content %}
+
+  <div class="hero">
+    <div class="container">
+      <h1>Tržiště pro prodej a&nbsp;investice do&nbsp;zavedených e-shopů</h1>
+    </div>
+  </div>
+
+  <div class="row-section">
+    <div class="container">
+
+      <h2 class="row-section-title h3 mb-5">Nové e-shopy nabídnuté k prodeji</h2>
+
+      <div class="row">
+        {% for post in last_added_posts %}
+          <div class="col-12 col-md-6 col-xl-3 mb-4">
+            {% include 'eshop/thumbnail.twig' %}
+          </div>
+
+          {% if loop.index == 3 %}
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+              {% include 'category/thumbnail.twig' with {'term': term_fashion} %}
+            </div>
+          {% elseif loop.index == 5 %}
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+              {% include 'category/thumbnail.twig' with {'term': term_furniture} %}
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      <p class="text-center mt-3 mb-0">
+        <a href="#" class="btn btn-blue btn-lg">Zobrazit všechny e-shopy k prodeji</a>
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row-section bg-light">
+    <div class="container">
+
+      <h2 class="row-section-title h3">Rady do začátku</h2>
+
+    </div>
+  </div>
+
 {% endblock %}

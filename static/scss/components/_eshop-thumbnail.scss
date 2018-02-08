@@ -1,0 +1,45 @@
+.eshop-thumbnail {
+  display: block;
+  padding: 1rem 1.25rem;
+  font-size: $font-size-base * .9;
+  color: $text-muted;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius;
+
+  @include hover-focus {
+    color: $text-muted;
+    border: 1px solid $link-color;
+    text-decoration: none;
+  }
+}
+
+.eshop-thumbnail-title {
+  font-size: $font-size-base * 1.2;
+  font-weight: $font-weight-normal;
+  color: $blue;
+}
+
+.eshop-thumbnail-price {
+  color: $body-color;
+}
+
+.eshop-thumbnail-wrapper {
+  position: relative;
+}
+
+.eshop-thumbnail-badges {
+  position: absolute;
+  top: 0;
+  right: -1.25rem;
+  margin-right: -1px;
+}
+
+.eshop-thumbnail-screen {
+  position: relative;
+  padding-bottom: 62.5%;
+
+  img {
+    position: absolute;
+    width: 100%;
+  }
+}

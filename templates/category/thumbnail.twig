@@ -1,0 +1,21 @@
+<div class="category-thumbnail text-center h-100">
+  <div class="category-thumbnail-inner">
+
+    {% if term.get_field('image') %}
+      <div class="category-thumbnail-icon mb-2">
+        <svg data-src="{{ term.get_field('image').sizes.medium }}"></svg>
+      </div>
+    {% endif %}
+
+    <p class="category-thumbnail-title h5 mb-2">
+      {{ term.get_field('thumbnail_title') ?: term.name }}
+    </p>
+
+    <p class="mb-4">120 e-shopů připravených k&nbsp;prodeji</p>
+
+    <a class="btn btn-green" href="{{ archive_link }}?category%5B%5D={{ term.id }}">
+      Zobrazit
+    </a>
+
+  </div>
+</div>

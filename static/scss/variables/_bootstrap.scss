@@ -10,7 +10,7 @@
 
 // stylelint-disable
 $white:    #fff !default;
-$gray-100: #f8f9fa !default;
+$gray-100: #f6f6f6;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
 $gray-400: #ced4da !default;
@@ -34,14 +34,14 @@ $grays: map-merge((
   "900": $gray-900
 ), $grays);
 
-$blue:    #10aae7;
+$blue:    #14b1ef;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
 $red:     #dc3545 !default;
 $orange:  #f89e00;
 $yellow:  #ffc107 !default;
-$green:   #28a745 !default;
+$green:   #a7c720;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
@@ -207,9 +207,9 @@ $line-height-sm:              1.5 !default;
 $border-width:                1px !default;
 $border-color:                $gray-300 !default;
 
-$border-radius:               .25rem !default;
-$border-radius-lg:            .3rem !default;
-$border-radius-sm:            .2rem !default;
+$border-radius:               .35rem;
+$border-radius-lg:            .4rem;
+$border-radius-sm:            .25rem;
 
 $component-active-color:      $white !default;
 $component-active-bg:         theme-color("primary") !default;
@@ -252,7 +252,7 @@ $h6-font-size:                $font-size-base !default;
 
 $headings-margin-bottom:      ($spacer / 2) !default;
 $headings-font-family:        inherit !default;
-$headings-font-weight:        500 !default;
+$headings-font-weight:        300 !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              inherit !default;
 
@@ -354,8 +354,8 @@ $btn-padding-y-sm:            $input-btn-padding-y-sm !default;
 $btn-padding-x-sm:            $input-btn-padding-x-sm !default;
 $btn-line-height-sm:          $input-btn-line-height-sm !default;
 
-$btn-padding-y-lg:            $input-btn-padding-y-lg !default;
-$btn-padding-x-lg:            $input-btn-padding-x-lg !default;
+$btn-padding-y-lg:            1.15rem;
+$btn-padding-x-lg:            1.9rem;
 $btn-line-height-lg:          $input-btn-line-height-lg !default;
 
 $btn-border-width:            $input-btn-border-width !default;

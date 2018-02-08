@@ -32,5 +32,11 @@ if ( !is_front_page() ){
 /**
  * Homepage
  */
+$query = [ 'post_type' => 'eshop', 'posts_per_page' => 6 ];
+$context['last_added_posts'] = new Timber\PostQuery($query);
+
+$context['term_fashion'] = new TimberTerm('moda', 'eshop_category');
+$context['term_furniture'] = new TimberTerm('nabytek', 'eshop_category');
+
 
 Timber::render( 'home.twig', $context );

@@ -1,6 +1,10 @@
 .header {
-  padding: 1.4rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid $gray-200;
+
+  @include media-breakpoint-up(lg) {
+    padding: 1.4rem 0;
+  }
 }
 
 .header-inner {
@@ -59,7 +63,7 @@
 }
 
 .header-actions {
-  text-align: right;
+  text-align: center;
 
   @include media-breakpoint-up(lg) {
     margin-left: 1rem;

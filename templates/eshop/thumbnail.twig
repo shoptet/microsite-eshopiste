@@ -1,41 +1,51 @@
-<a class="card text-dark mb-4" style="text-decoration: none" href="{{post.link}}" title="{{ post.title }}">
+<a class="eshop-thumbnail" href="{{post.link}}" title="{{ post.title }}">
 
-  <div class="card-body px-3" style="padding-top:.7rem;padding-bottom:.7rem;">
-    <p class="h5 font-weight-bold text-truncate mb-0">{{ post.title }}</p>
-    <div class="d-flex w-100 justify-content-between">
-      <span>
-        {% if post.get_field('type') == 0 %}
-          Prodej
-        {% elseif post.get_field('type') == 1 %}
-          Půjčka
-        {% elseif post.get_field('type') == 2 %}
-          Investor
-        {% endif %}
-      </span>
-      <strong>{{ post.get_field('price') }} Kč</strong>
-    </div>
+  <p class="eshop-thumbnail-title h5 text-truncate mb-1">{{ post.title }}</p>
+
+  <p class="mb-0 text-truncate">{{ post.get_field('category').name ?: 'Bez kategorie' }}</p>
+
+  <div class="d-flex w-100 justify-content-between">
+    <span>
+      {% if post.get_field('type') == 0 %}
+        Prodej
+      {% elseif post.get_field('type') == 1 %}
+        Půjčka
+      {% elseif post.get_field('type') == 2 %}
+        Investice
+
+      {% endif %}
+    </span>
+    <strong class="eshop-thumbnail-price">{{ post.get_field('price') ?: '0' }} Kč</strong>
   </div>
 
-  <div
-    class="position-relative"
-    style="padding-bottom: 62.5%;"
-  >
-    <img
-      class="position-absolute img-fluid border border-left-0 border-right-0"
-      src="{{ post.get_field('screen_thumbnail').large.url ?: 'http://via.placeholder.com/1280x800/555/999?text=Náhled+není+k+dispozici' }}"
-    >
-  </div>
+  <div class="eshop-thumbnail-wrapper">
 
-  <div class="card-body px-3 py-2">
-    <div class="d-flex w-100 justify-content-between small" title="Za poslední rok">
-      <span class="text-muted">Obrat</span>
-      <span>{{ post.get_field('turnover') }} Kč</span>
+    <div class="eshop-thumbnail-screen mt-2 mb-3">
+      <img
+        src="{{ post.get_field('screen_thumbnail').large.url ?: 'http://via.placeholder.com/1280x800/555/999?text=Náhled+není+k+dispozici' }}"
+        alt="{{ post.title }}"
+      >
     </div>
 
-    <div class="d-flex w-100 justify-content-between small" title="Za poslední rok">
-      <span class="text-muted">Návštěvnost</span>
-      <span>{{ post.get_field('traffic') }}</span>
+    <div class="eshop-thumbnail-badges">
+      {% spaceless %}
+        <span class="eshop-badge eshop-badge-shoptet">shoptet</span>
+        <span class="eshop-badge eshop-badge-new">nový</span>
+      {% endspaceless %}
     </div>
+
   </div>
+
+  <ul class="list-unstyled mb-0">
+
+    <li class="text-truncate">
+      <span class="font-weight-bold">Obrat:</span> {{ post.get_field('turnover') ?: '0' }} Kč / 12 měsíců
+    </li>
+
+    <li class="text-truncate">
+      <span class="font-weight-bold">Návštěvnost:</span> {{ post.get_field('traffic') ?: '0' }} / 12 měsíců
+    </li>
+
+  </ul>
 
 </a>
