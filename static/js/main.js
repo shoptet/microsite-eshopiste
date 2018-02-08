@@ -64,24 +64,33 @@ $(function () {
   // Refresh browser after state popped
   window.onpopstate = () => { window.location.href = document.location };
 
-  const createSlider = (sliderId, start, range) => {
+  const createSlider = (sliderId, start, range, submitOnChange = true) => {
     const slider = document.getElementById(sliderId),
-        inputMin = document.getElementById(sliderId + 'InputMin'),
-        inputMax = document.getElementById(sliderId + 'InputMax');
+          inputMin = document.getElementById(sliderId + 'InputMin'),
+          inputMax = document.getElementById(sliderId + 'InputMax'),
+          indicatorMin = document.getElementById(sliderId + 'IndicatorMin'),
+          indicatorMax = document.getElementById(sliderId + 'IndicatorMax');
+
+    const hasIndicator = indicatorMin && indicatorMax;
 
     noUiSlider.create(slider, {
       start, range, step: 1000, connect: true, format: wNumb({decimals: 0})
     });
+
     slider.noUiSlider.on('update', values => {
-      inputMin.value = values[0]; inputMax.value = values[1];
+        inputMin.value = values[0]; inputMax.value = values[1];
+        if (!hasIndicator) return;
+        indicatorMin.innerHTML = values[0]; indicatorMax.innerHTML = values[1];
     });
-    slider.noUiSlider.on('change', () => {
+
+    submitOnChange && slider.noUiSlider.on('change', () => {
       $archiveForm.submit();
     });
-    inputMin.addEventListener('change', (e) => {
+
+    inputMin.addEventListener('change', e => {
       slider.noUiSlider.set([$(e.target).val(), null]);
     });
-    inputMax.addEventListener('change', (e) => {
+    inputMax.addEventListener('change', e => {
       slider.noUiSlider.set([null, $(e.target).val()]);
     });
   };
@@ -90,7 +99,12 @@ $(function () {
   if (window.sliderData) {
     const sliderData = window.sliderData;
     for (let i = 0, len = sliderData.length; i < len; i++) {
-      createSlider(sliderData[i].id, sliderData[i].start, sliderData[i].range);
+      createSlider(
+        sliderData[i].id,
+        sliderData[i].start,
+        sliderData[i].range,
+        sliderData[i].submitOnChange,
+      );
     }
   }
 

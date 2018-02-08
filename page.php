@@ -21,6 +21,8 @@
  * @since    Timber 0.1
  */
 
+use function Eshopiste\Helpers\get_post_meta_value_min_max;
+
 $context = Timber::get_context();
 $post = new TimberPost();
 $context['post'] = $post;
@@ -32,11 +34,15 @@ if ( !is_front_page() ){
 /**
  * Homepage
  */
-$query = [ 'post_type' => 'eshop', 'posts_per_page' => 6 ];
-$context['last_added_posts'] = new Timber\PostQuery($query);
 
+$context['all_categories'] = Timber::get_terms('eshop_category');
+$context['type_choices'] = [
+	0 => 'Prodej',
+	2 => 'Investice',
+];
+$context['turnover_range'] = get_post_meta_value_min_max( 'eshop', 'turnover' );
+$context['last_added_posts'] = new Timber\PostQuery([ 'post_type' => 'eshop', 'posts_per_page' => 6 ]);
 $context['term_fashion'] = new TimberTerm('moda', 'eshop_category');
 $context['term_furniture'] = new TimberTerm('nabytek', 'eshop_category');
-
 
 Timber::render( 'home.twig', $context );

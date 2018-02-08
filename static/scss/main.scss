@@ -6,10 +6,12 @@
 
 @import "~nouislider/distribute/nouislider";
 
-@import "functions";
 @import "utilities";
+@import "functions";
 @import "globals";
 
+@import "components/no-ui-slider";
+@import "components/custom-forms";
 @import "components/list";
 @import "components/header";
 @import "components/menu";
