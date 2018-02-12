@@ -108,6 +108,41 @@
     </div>
   </div>
 
+  {% if advice_posts %}
+    <div class="row-section bg-light">
+      <div class="container">
+
+        <h2 class="row-section-title h4 mb-5">
+          Komu jsme už pomohli?
+        </h2>
+
+        <div class="row">
+          {% for testimonial in testimonials %}
+            <div class="
+              col-12
+              col-md-6
+              {% if loop.last and testimonials|length != 2 %}
+                offset-md-3
+              {% endif %}
+              col-lg-4
+              {% if loop.first and testimonials|length == 1 %}
+                offset-lg-4
+              {% elseif loop.first and testimonials|length == 2 %}
+                offset-lg-2
+              {% else %}
+                offset-lg-0
+              {% endif %}
+              mb-4
+            ">
+              {% include 'testimonial/thumbnail.twig' %}
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock %}
 
 {% block script_footer %}

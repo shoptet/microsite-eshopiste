@@ -69,5 +69,6 @@ $context['posts_for_invest'] = new Timber\PostQuery( $posts_for_invest_query );
 $context['term_fashion'] = new TimberTerm('moda', 'eshop_category');
 $context['term_furniture'] = new TimberTerm('nabytek', 'eshop_category');
 $context['advice_posts'] = $advice_posts;
+$context['testimonials'] = get_fields('options')['homepage_testimonial'];
 
 Timber::render( 'home.twig', $context );
