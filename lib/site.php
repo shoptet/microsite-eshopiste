@@ -119,6 +119,7 @@ class EshopisteSite extends TimberSite {
 	function add_to_context( $context ) {
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;
+		$context['options'] = get_fields('options');
 		$context['current_url'] = Timber\URLHelper::get_current_url();
 		$context['archive_link'] =  get_post_type_archive_link( 'eshop' );
 		return $context;

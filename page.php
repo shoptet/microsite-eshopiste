@@ -51,15 +51,23 @@ $posts_for_invest_query = [
   ],
 ];
 
+// map post ids to timber post objects
+$advice_posts = [];
+foreach ( get_fields('options')['homepage_posts_ids'] as $post_id ) {
+  $advice_posts[] = new TimberPost( $post_id );
+};
+
 $context['all_categories'] = Timber::get_terms('eshop_category');
 $context['type_choices'] = [
 	0 => 'Prodej',
 	2 => 'Investice',
 ];
+
 $context['turnover_range'] = get_post_meta_value_min_max( 'eshop', 'turnover' );
 $context['posts_for_sale'] = new Timber\PostQuery( $posts_for_sale_query );
 $context['posts_for_invest'] = new Timber\PostQuery( $posts_for_invest_query );
 $context['term_fashion'] = new TimberTerm('moda', 'eshop_category');
 $context['term_furniture'] = new TimberTerm('nabytek', 'eshop_category');
+$context['advice_posts'] = $advice_posts;
 
 Timber::render( 'home.twig', $context );
