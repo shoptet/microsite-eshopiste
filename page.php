@@ -35,13 +35,30 @@ if ( !is_front_page() ){
  * Homepage
  */
 
+$posts_for_sale_query = [
+  'post_type' => 'eshop',
+  'posts_per_page' => 6,
+  'meta_query' => [[ 'key' => 'type', 'value' => 0 ]],
+];
+
+$posts_for_invest_query = [
+  'post_type' => 'eshop',
+  'posts_per_page' => 3,
+  'meta_query' => [
+    'relation' => 'OR',
+    [ 'key' => 'type', 'value' => 1 ],
+    [ 'key' => 'type', 'value' => 2 ],
+  ],
+];
+
 $context['all_categories'] = Timber::get_terms('eshop_category');
 $context['type_choices'] = [
 	0 => 'Prodej',
 	2 => 'Investice',
 ];
 $context['turnover_range'] = get_post_meta_value_min_max( 'eshop', 'turnover' );
-$context['last_added_posts'] = new Timber\PostQuery([ 'post_type' => 'eshop', 'posts_per_page' => 6 ]);
+$context['posts_for_sale'] = new Timber\PostQuery( $posts_for_sale_query );
+$context['posts_for_invest'] = new Timber\PostQuery( $posts_for_invest_query );
 $context['term_fashion'] = new TimberTerm('moda', 'eshop_category');
 $context['term_furniture'] = new TimberTerm('nabytek', 'eshop_category');
 

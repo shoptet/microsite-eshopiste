@@ -10,15 +10,24 @@
     </div>
   </div>
 
+  <div class="row-info-banner">
+    <div class="container">
+      <p class="h4 mb-0">
+        <strong>24</strong> e-shopů s obratem <strong>30&nbsp;220&nbsp;500&nbsp;Kč</strong>
+        dostalo nabídky od <strong>212</strong> investorů
+      </p>
+    </div>
+  </div>
+
   <div class="row-section">
     <div class="container">
 
-      <h2 class="row-section-title h3 mb-5">
+      <h2 class="row-section-title h4 mb-5">
         Nové e-shopy nabídnuté k&nbsp;prodeji
       </h2>
 
       <div class="row">
-        {% for post in last_added_posts %}
+        {% for post in posts_for_sale %}
           <div class="col-12 col-md-6 col-xl-3 mb-4">
             {% include 'eshop/thumbnail.twig' %}
           </div>
@@ -38,6 +47,35 @@
 
       <p class="text-center mt-3 mb-0">
         <a href="{{ archive_link }}?type%5B%5D=0" class="btn btn-blue btn-lg ws-normal">Zobrazit všechny e-shopy k&nbsp;prodeji</a>
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row-section">
+    <div class="container">
+
+      <h2 class="row-section-title h4 mb-5">
+        Nové e-shopy se zájmem o&nbsp;půjčku nebo investici
+      </h2>
+
+      <div class="row">
+        {% for post in posts_for_invest %}
+          <div class="col-12 col-md-6 col-xl-3 mb-4">
+            {% include 'eshop/thumbnail.twig' %}
+          </div>
+
+          {% if loop.index == 3 %}
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+              {% include 'category/thumbnail.twig' with {'term': term_fashion} %}
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      <p class="text-center mt-3 mb-0">
+        <a href="{{ archive_link }}?type%5B%5D=1&type%5B%5D=2" class="btn btn-blue btn-lg ws-normal">Zobrazit všechny e-shopy k&nbsp;prodeji</a>
       </p>
 
     </div>

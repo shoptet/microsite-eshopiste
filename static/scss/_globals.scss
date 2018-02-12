@@ -9,3 +9,10 @@
     font-family: $headings-font-family-wf-active;
   }
 }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  strong {
+    font-weight: $font-weight-semibold;
+  }
+}
