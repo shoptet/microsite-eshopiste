@@ -1,7 +1,32 @@
-<div class="post-thumbnail" href="{{post.link}}" title="{{ post.title }}">
+<article class="post-thumbnail" href="{{post.link}}" title="{{ post.title }}">
 
-  <a class="eshop-thumbnail-title h5 text-truncate mb-1">
-    <p class="">{{ post.title }}</p>
-  </a>
+  <h3 class="post-thumbnail-title h5 mb-3">
+    <a href="{{post.link}}" title="{{ post.title }}">
+      {{ post.title }}
+    </a>
+  </h3>
 
-</div>
+  {% if post.thumbnail %}
+    <a
+      class="post-thumbnail-image"
+      href="{{post.link}}"
+      title="{{ post.title }}"
+    >
+      <div
+        style="background-image:url({{ post.thumbnail.src|resize(400, 270) }})"
+      >
+      </div>
+    </a>
+  {% endif %}
+
+  <p class="mb-3">
+    {{ post.content|striptags|truncate(30) }}
+  </p>
+
+  <p class="mb-0">
+    <a href="{{post.link}}" title="{{ post.title }}">
+      Celé článek
+    </a>
+  </p>
+
+</article>
