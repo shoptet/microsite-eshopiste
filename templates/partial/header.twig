@@ -86,26 +86,21 @@
       <div class="menu-overlay">
         <ul class="menu-nav">
           <li>
-            <a href="#">Kategorie</a>
+            <a href="#" role="button" id="menuCategoriesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Kategorie
+              <span class="iconholder"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="menuCategoriesLink">
+              {% for term in all_categories %}
+                <a class="dropdown-item" href="{{ archive_link }}?category%5B%5D={{ term.id }}">
+                  {{ term.name }}
+                </a>
+              {% endfor %}
+            </div>
           </li>
-          <li>
-            <a href="#">Chci prodat e-shop</a>
-          </li>
-          <li>
-            <a href="#">Chci investovat</a>
-          </li>
-          <li>
-            <a href="#">Tipy a rady</a>
-          </li>
-          <li>
-            <a href="#">Vzorové dokumenty</a>
-          </li>
-          <li>
-            <a href="#">O projektu</a>
-          </li>
-          <li>
-            <a href="#">Kontakt</a>
-          </li>
+          {% for item in header_menu.items %}
+            <li><a href="{{ item.link }}">{{ item.title }}</a></li>
+          {% endfor %}
         </ul>
       </div>
     </div>

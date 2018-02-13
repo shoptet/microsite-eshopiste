@@ -1,0 +1,22 @@
+.footer {
+  padding: 3rem 0;
+}
+
+.footer-content {
+  padding-bottom: 1rem;
+}
+
+.footer-shoptet {
+  display: block;
+
+  img {
+    max-width: rem-calc(110px);
+  }
+}
+
+.footer-info {
+  color: $text-muted;
+  padding-top: 2.5rem;
+  text-align: center;
+  border-top: 1px solid $gray-200;
+}

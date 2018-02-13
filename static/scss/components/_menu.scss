@@ -13,9 +13,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: rem-calc(70px);
+    width: rem-calc(100px);
     height: 100%;
-    background: linear-gradient(to right, rgba($white, 0) 0%, rgba($white, 1) 100%);
+    background: linear-gradient(to right, rgba($white, 0) 0%, rgba($white, .8) 50%, rgba($white, 1) 100%);
   }
 }
 
@@ -46,12 +46,17 @@
       text-decoration: none;
     }
   }
+
+  .dropdown-menu {
+    top: 100% !important;
+    left: - rem-calc(7px) !important;
+  }
 }
 
 .wf-active {
   .menu-nav {
     > li + li {
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(xl) {
         margin-left: 2.3rem;
       }
     }

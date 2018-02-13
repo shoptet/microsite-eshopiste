@@ -6,6 +6,16 @@ use Urlbox\Screenshots\Urlbox;
 
 
 /**
+ * Register template menus
+ */
+add_action( 'init', function () {
+	register_nav_menus([
+    'header-menu' => 'Menu v hlavičce',
+    'footer-menu' => 'Menu v patičce',
+  ]);
+});
+
+/**
  * Remove update nag in admin
  */
 add_action( 'admin_head', function() {
