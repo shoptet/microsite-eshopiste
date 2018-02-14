@@ -147,17 +147,55 @@
     </div>
   {% endif %}
 
+  <div class="row-section row-section-faq">
+    <div class="container">
+
+      <h2 class="row-section-title h4 mb-5">
+        Otázky a odpovědi
+      </h2>
+
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 offset-xl-1">
+          <p class="h-heavy">Pro nakupující</p>
+
+          <ul class="fa-ul">
+            {% for post in posts_for_buyer %}
+              <li>
+                <span class="fa-li"><i class="far fa-question-circle"></i></span>
+                <a href="{{ post.link }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 offset-lg-4 offset-xl-3">
+
+          <p class="h-heavy">Pro prodejce</p>
+
+          <ul class="fa-ul">
+            {% for post in posts_for_seller %}
+              <li>
+                <span class="fa-li"><i class="far fa-question-circle"></i></span>
+                <a href="{{ post.link }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block script_footer %}
 	<script>
-		window.sliderData = [
-			{
-				id: 'filterTurnover',
-				start: [{{ turnover_range.min }}, {{ turnover_range.max }}],
-				range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
-				submitOnChange: false,
-			},
-		];
+		window.sliderData = [{
+			id: 'filterTurnover',
+			start: [{{ turnover_range.min }}, {{ turnover_range.max }}],
+			range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
+			submitOnChange: false,
+		}];
 	</script>
 {% endblock %}

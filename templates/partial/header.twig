@@ -51,11 +51,10 @@
       	      <input
       					type="search"
       					class="form-control border-right-0"
-      					name="s"
+      					name="q"
       					value="{{ query }}"
       					placeholder="Vyhledat e-shop"
       					autocomplete="off"
-      					required
       				>
       	      <span class="input-group-append">
       	        <button type="submit" class="btn btn-input px-3 border-left-0" aria-label="Vyhledat">
@@ -86,7 +85,7 @@
       <div class="menu-overlay">
         <ul class="menu-nav">
           <li>
-            <a href="#" role="button" id="menuCategoriesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="{{ archive_link }}" role="button" id="menuCategoriesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Kategorie
               <span class="iconholder"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
             </a>

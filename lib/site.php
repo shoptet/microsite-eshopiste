@@ -123,7 +123,9 @@ class EshopisteSite extends TimberSite {
 		$context['options'] = get_fields('options');
 		$context['current_url'] = Timber\URLHelper::get_current_url();
 		$context['archive_link'] =  get_post_type_archive_link( 'eshop' );
+		$context['all_categories'] = Timber::get_terms('eshop_category');
 		$context['footer_text'] = get_fields('options')['footer_text'];
+		$context['query'] = ( isset($_GET['q']) ? $_GET['q'] : null );
 		return $context;
 	}
 

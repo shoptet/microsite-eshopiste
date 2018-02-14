@@ -8,5 +8,3 @@
  * @subpackage  Timber
  * @since   Timber 0.1
  */
-
- require_once 'archive-eshop.php';

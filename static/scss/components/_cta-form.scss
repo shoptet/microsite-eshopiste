@@ -1,0 +1,14 @@
+.cta-form {
+  max-width: 33rem;
+  margin: 0 auto;
+}
+
+.cta-form-btn {
+  display: block;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    display: inline-block;
+    width: auto;
+  }
+}

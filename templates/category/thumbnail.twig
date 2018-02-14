@@ -11,7 +11,17 @@
       {{ term.get_field('thumbnail_title') ?: term.name }}
     </p>
 
-    <p class="mb-4">120 e-shopů připravených k&nbsp;prodeji</p>
+    <p class="mb-4">
+      {{ term.count }}
+      {% if term.count == 1 %}
+        e-shop připravený
+      {% elseif term.count <= 4 %}
+        e-shopy připravené
+      {% else %}
+        e-shopů připravených
+      {% endif %}
+      k&nbsp;prodeji
+    </p>
 
     <a class="btn btn-green" href="{{ archive_link }}?category%5B%5D={{ term.id }}">
       Zobrazit

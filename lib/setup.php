@@ -114,6 +114,14 @@ add_action('pre_get_posts', function ( $wp_query ){
 	$wp_query->set('posts_per_page', 12);
 
 	/**
+	 * Handle searching
+	 */
+
+	if( isset($_GET[ 'q' ]) ) {
+		$wp_query->set('s', $_GET[ 'q' ]);
+	}
+
+	/**
 	 * Handle ordering queries
 	 */
 
@@ -172,4 +180,57 @@ add_action('pre_get_posts', function ( $wp_query ){
 	$meta_query[] = $getRangeMetaQuery('traffic');
 
 	$wp_query->set('meta_query', $meta_query);
+});
+
+/**
+ * Join posts and postmeta tables
+ *
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_join
+ */
+add_filter('posts_join', function ( $join ) {
+  global $wpdb;
+
+  if ( !is_admin() && is_archive() ) {
+    $join .=' LEFT JOIN '.$wpdb->postmeta. ' AS mt0 ON '. $wpdb->posts . '.ID = mt0.post_id ';
+  }
+
+  return $join;
+});
+
+/**
+ * Modify the search query with posts_where
+ *
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
+ */
+add_filter( 'posts_where', function ( $where ) {
+  global $wpdb;
+
+  if ( !is_admin() && is_archive() ) {
+    $where = preg_replace(
+      "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+      "(".$wpdb->posts.".post_title LIKE $1)
+      OR (
+				(mt0.meta_key = 'description' OR mt0.meta_key = 'reason')
+        AND
+        (mt0.meta_value LIKE $1)
+      )", $where );
+  }
+
+  return $where;
+});
+
+
+/**
+ * Prevent duplicates
+ *
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_distinct
+ */
+add_filter( 'posts_distinct', function ( $where ) {
+  global $wpdb;
+
+  if ( !is_admin() && is_archive() ) {
+    return "DISTINCT";
+  }
+
+  return $where;
 });
