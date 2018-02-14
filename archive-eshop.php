@@ -20,6 +20,7 @@ global $wp_query;
 
 $context = Timber::get_context();
 
+$context['wp_title'] = 'E-shopy k prodeji a investicím';
 $context['posts'] = new Timber\PostQuery();
 $context['search_query'] = get_search_query();
 $context['found_posts'] = $wp_query->found_posts;
@@ -54,5 +55,13 @@ foreach (['price', 'turnover', 'traffic'] as $query) {
 		isset($_GET[ $query . '_max' ]) ? $_GET[ $query . '_max' ] : $context[$query . '_range']['max'],
 	];
 }
+
+$banner_post_id = get_fields('options')['archive_post_id'];
+$context['banner_post'] = ( $banner_post_id ? new TimberPost( $banner_post_id ) : null );
+$context['seo_text'] = get_fields('options')['archive_seo_text'];
+
+$context['breadcrumbs'] = [
+	'Kategorie' => '',
+];
 
 Timber::render( 'archive-eshop.twig', $context );

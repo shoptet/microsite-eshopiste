@@ -1,10 +1,10 @@
-<div class="d-lg-flex w-100 align-items-center justify-content-between">
+<div class="d-lg-flex w-100 align-items-center justify-content-between mb-4">
   <div class="form-inline">
     <div class="form-group mb-0">
       <label for="orderSelect">
         Seřadit podle:
       </label>
-      <select class="form-control ml-sm-2 mr-sm-4" id="orderSelect" name="orderby">
+      <select class="form-control custom-select ml-sm-2 mr-sm-4" id="orderSelect" name="orderby">
         {% for value, choice in order_choices %}
           <option value="{{ value }}" {{ value in selected_orderby ? 'selected' }}>
             {{ choice }}

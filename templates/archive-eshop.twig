@@ -1,51 +1,69 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<div class="container py-5">
-		<form action="{{ archive_link }}" method="get" id="archiveForm">
+	<div class="row-section">
+		<div class="container">
+			<form action="{{ archive_link }}" method="get" id="archiveForm">
 
-			{% if search_query %}
-				<input type="hidden" name="q" value="{{ search_query }}">
-			{% endif %}
+				{% if search_query %}
+					<input type="hidden" name="q" value="{{ search_query }}">
+				{% endif %}
 
-			<div class="row">
-				<div class="col-12 col-md-4 col-lg-3">
+				<div class="row">
+					<div class="col-12 col-md-4 col-lg-3">
 
-					{% include 'eshop/filters.twig' %}
-
-				</div>
-				<div class="col-12 col-md-8 col-lg-9">
-
-					<div id="archiveList">
-
-					  {% if posts is not empty %}
-
-					    {% include 'eshop/sort.twig' %}
-
-					    <hr class="mb-4">
-
-					    <div class="row">
-					      {% for post in posts %}
-					        <div class="col-12 col-md-6 col-xl-4 mb-4">
-					          {% include 'eshop/thumbnail.twig' %}
-					        </div>
-					      {% endfor %}
-					    </div>
-
-					    {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
-
-					  {% else %}
-
-					    <p class="h4 font-weight-bold">Nemůžeme najít žádný e-shop s těmito požadavky</p>
-					    <p>Zkuste prosím snížit vaše požadavky pomocí filtrů.</p>
-
-					  {% endif %}
+						{% include 'eshop/filters.twig' %}
 
 					</div>
+					<div class="col-12 col-md-8 col-lg-9">
 
+						<div id="archiveList">
+
+						  {% if posts is not empty %}
+
+								<h1 class="h3 mb-3">E-shopy připravené k prodeji nebo investicím</h1>
+
+								{% include 'partial/breadcrumbs.twig' %}
+
+								{% include 'eshop/sort.twig' %}
+
+						    <div class="row mb-n4">
+						      {% for post in posts %}
+						        <div class="col-12 col-md-6 col-xl-4 mb-4">
+						          {% include 'eshop/thumbnail.twig' %}
+						        </div>
+
+										{% if banner_post and loop.index == 6 %}
+											<div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2 mb-4">
+												{% include 'post/banner.twig' with {'post': banner_post} %}
+											</div>
+										{% endif %}
+
+						      {% endfor %}
+						    </div>
+
+						    {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+
+								{% if seo_text %}
+									<div class="mt-5 mb-n3">
+										{{ seo_text }}
+									</div>
+								{% endif %}
+
+						  {% else %}
+
+						    <p class="h3">Nemůžeme najít žádný e-shop s těmito požadavky</p>
+						    <p>Zkuste prosím snížit vaše požadavky pomocí filtrů.</p>
+
+						  {% endif %}
+
+						</div>
+
+
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 {% endblock %}
 

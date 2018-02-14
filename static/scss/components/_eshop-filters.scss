@@ -1,0 +1,12 @@
+.eshop-filters {
+  padding: 1.5rem 1.25rem;
+  border: 1px solid lighten($blue, 35%);
+  background-color: lighten($blue, 47%);
+  border-radius: $border-radius;
+}
+
+.eshop-filters-divider {
+  margin: 1rem 0;
+  height: 1px;
+  background-color: lighten($blue, 35%);
+}
