@@ -58,7 +58,10 @@ foreach (['price', 'turnover', 'traffic'] as $query) {
 
 $banner_post_id = get_fields('options')['archive_post_id'];
 $context['banner_post'] = ( $banner_post_id ? new TimberPost( $banner_post_id ) : null );
-$context['seo_text'] = get_fields('options')['archive_seo_text'];
+
+if ( isset( get_fields('options')['archive_seo_text'] ) ) {
+	$context['seo_text'] = get_fields('options')['archive_seo_text'];
+}
 
 $context['breadcrumbs'] = [
 	'Výpis e-shopů' => '',

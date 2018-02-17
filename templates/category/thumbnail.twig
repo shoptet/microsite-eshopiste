@@ -20,7 +20,7 @@
       {% else %}
         e-shopů připravených
       {% endif %}
-      k&nbsp;prodeji
+      k&nbsp;{{ invest ? 'investici' : 'prodeji' }}
     </p>
 
     <a class="btn btn-green" href="{{ archive_link }}?category%5B%5D={{ term.id }}">

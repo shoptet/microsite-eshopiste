@@ -66,8 +66,10 @@ $posts_for_seller_query = [
 
 // map post ids to timber post objects
 $advice_posts = [];
-foreach ( get_fields('options')['homepage_posts_ids'] as $post_id ) {
-  $advice_posts[] = new TimberPost( $post_id );
+if ( isset( get_fields('options')['homepage_posts_ids'] ) ) {
+  foreach ( get_fields('options')['homepage_posts_ids'] as $post_id ) {
+    $advice_posts[] = new TimberPost( $post_id );
+  }
 }
 
 $context['type_choices'] = [
@@ -75,13 +77,25 @@ $context['type_choices'] = [
 	2 => 'Investice',
 ];
 
+if ( isset( get_fields('options')['homepage_category_for_sale_1'] ) ) {
+  $context['term_for_sale_1'] = new TimberTerm( get_fields('options')['homepage_category_for_sale_1'] );
+}
+
+if ( isset( get_fields('options')['homepage_category_for_sale_2'] ) ) {
+  $context['term_for_sale_2'] = new TimberTerm( get_fields('options')['homepage_category_for_sale_2'] );
+}
+
+if ( isset( get_fields('options')['homepage_category_for_sale_2'] ) ) {
+  $context['term_for_invest'] = new TimberTerm( get_fields('options')['homepage_category_for_invest'] );
+}
+
 $context['turnover_range'] = get_post_meta_value_min_max( 'eshop', 'turnover' );
 $context['posts_for_sale'] = new Timber\PostQuery( $posts_for_sale_query );
 $context['posts_for_invest'] = new Timber\PostQuery( $posts_for_invest_query );
-$context['term_fashion'] = new TimberTerm(6);
-$context['term_furniture'] = new TimberTerm(2);
 $context['advice_posts'] = $advice_posts;
-$context['testimonials'] = get_fields('options')['homepage_testimonial'];
+if ( get_fields('options')['homepage_testimonial'] ) {
+  $context['testimonials'] = get_fields('options')['homepage_testimonial'];
+}
 $context['posts_for_buyer'] = new Timber\PostQuery( $posts_for_buyer_query );
 $context['posts_for_seller'] = new Timber\PostQuery( $posts_for_seller_query );
 

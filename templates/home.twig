@@ -34,13 +34,13 @@
             {% include 'eshop/thumbnail.twig' %}
           </div>
 
-          {% if loop.index == 3 %}
+          {% if loop.index == 3 and term_for_sale_1 %}
             <div class="col-12 col-md-6 col-xl-3 mb-4">
-              {% include 'category/thumbnail.twig' with {'term': term_fashion} %}
+              {% include 'category/thumbnail.twig' with {'term': term_for_sale_1} %}
             </div>
-          {% elseif loop.index == 5 %}
+          {% elseif loop.index == 5 and term_for_sale_2 %}
             <div class="col-12 col-md-6 col-xl-3 mb-4">
-              {% include 'category/thumbnail.twig' with {'term': term_furniture} %}
+              {% include 'category/thumbnail.twig' with {'term': term_for_sale_2} %}
             </div>
           {% endif %}
 
@@ -96,9 +96,9 @@
             {% include 'eshop/thumbnail.twig' %}
           </div>
 
-          {% if loop.index == 3 %}
+          {% if loop.index == 3 and term_for_invest %}
             <div class="col-12 col-md-6 col-xl-3 mb-4">
-              {% include 'category/thumbnail.twig' with {'term': term_fashion} %}
+              {% include 'category/thumbnail.twig' with {'term': term_for_invest, 'invest': true} %}
             </div>
           {% endif %}
 
