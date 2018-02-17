@@ -133,6 +133,7 @@ class EshopisteSite extends TimberSite {
 		$twig->addExtension( new Twig_Extension_StringLoader() );
 		$twig->addFilter('display_url', new Twig_SimpleFilter('display_url', [$this, 'display_url']));
 		$twig->addFilter('static_assets', new Twig_SimpleFilter('static_assets', array($this, 'static_assets')));
+		$twig->addFilter('is_new', new Twig_SimpleFilter('is_new', array($this, 'is_post_new')));
 		return $twig;
 	}
 
@@ -161,6 +162,14 @@ class EshopisteSite extends TimberSite {
 		}
 
 	  return $url;
+	}
+
+	function is_post_new( $post ) {
+		$today = new DateTime();
+		$post_date = new DateTime($post->date('Y-m-d'));
+		$interval = $today->diff($post_date);
+
+		return $interval->days <= 30;
 	}
 
 }

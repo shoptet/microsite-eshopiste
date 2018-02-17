@@ -32,7 +32,9 @@
         {% if post.get_field('is_shoptet') %}
           <span class="eshop-badge eshop-badge-shoptet">shoptet</span>
         {% endif %}
-        {# <span class="eshop-badge eshop-badge-new">nový</span> #}
+        {% if post|is_new %}
+          <span class="eshop-badge eshop-badge-new">nový</span>
+        {% endif %}
       {% endspaceless %}
     </div>
 
