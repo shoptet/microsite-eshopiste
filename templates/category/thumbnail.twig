@@ -8,7 +8,7 @@
     {% endif %}
 
     <p class="category-thumbnail-title h5 mb-2">
-      {{ term.get_field('thumbnail_title') ?: term.name }}
+      {{ term.get_field('thumbnail_title') ?: ('Kategorie ' ~ term.name) }}
     </p>
 
     <p class="mb-4">

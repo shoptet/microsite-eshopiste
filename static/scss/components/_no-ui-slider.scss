@@ -1,4 +1,5 @@
 .no-ui-slider-container {
+  min-height: rem-calc($no-ui-line-height);
   margin: 0 rem-calc($no-ui-handle-size / 2);
 }
 
