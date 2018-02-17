@@ -61,7 +61,7 @@ $context['banner_post'] = ( $banner_post_id ? new TimberPost( $banner_post_id ) 
 $context['seo_text'] = get_fields('options')['archive_seo_text'];
 
 $context['breadcrumbs'] = [
-	'Kategorie' => '',
+	'Výpis e-shopů' => '',
 ];
 
 Timber::render( 'archive-eshop.twig', $context );

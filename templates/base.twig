@@ -90,6 +90,11 @@
 		{% include 'partial/header.twig' %}
 
 		{% block breadcrumb %}
+			<div class="py-3">
+				<div class="container">
+					{% include 'partial/breadcrumbs.twig' %}
+				</div>
+			</div>
 		{% endblock %}
 
 		<main role="main">

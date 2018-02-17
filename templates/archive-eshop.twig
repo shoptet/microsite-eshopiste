@@ -1,5 +1,8 @@
 {% extends "base.twig" %}
 
+
+{% block breadcrumb %}{% endblock %}
+
 {% block content %}
 	<div class="row-section">
 		<div class="container">
@@ -23,7 +26,9 @@
 
 								<h1 class="h3 mb-3">E-shopy připravené k prodeji nebo investicím</h1>
 
-								{% include 'partial/breadcrumbs.twig' %}
+								<div class="mb-3">
+									{% include 'partial/breadcrumbs.twig' %}
+								</div>
 
 								{% include 'eshop/sort.twig' %}
 
