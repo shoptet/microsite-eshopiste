@@ -67,11 +67,9 @@
 	      google: {families: [
 					'Source Sans Pro:300,400,600:latin-ext',
 					'Libre Franklin:200,300,400:latin-ext',
-				]},
-				active: function() { localStorage.setItem('webfont', 'loaded') }
+				]}
 	  	};
 			(function(d){
-	      if (localStorage.getItem('webfont')) { d.documentElement.classList.add('wf-active'); return }
 	      var wf = d.createElement('script'), s = d.scripts[0];
 				wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
 	      wf.async = true;
