@@ -1,43 +1,38 @@
 {% extends "base.twig" %}
 
-{% block breadcrumb %}
-	<div class="container">
-
-	</div>
-{% endblock %}
 
 {% block content %}
-	<div class="container py-5">
-		<article>
+	<div class="container">
+		<article class="eshop">
 
-				<div class="row">
+			<h1 class="eshop-title mt-1">{{ post.title }}</h1>
 
-					<div class="col-12 col-md-6">
+			<div class="row">
 
-						{% include 'eshop/main.twig' %}
+				<div class="col-12 col-md-7">
 
-					</div>
-					<div class="col-12 col-md-6">
+					{% include 'eshop/main.twig' %}
 
-						{% include 'eshop/screens.twig' with {'thumbnails': post.get_field('screen_thumbnail')} %}
-
-					</div>
 				</div>
+				<div class="col-12 col-md-5">
 
-				<hr style="margin-bottom: 2rem">
+					{% include 'eshop/screens.twig' with {'thumbnails': post.get_field('screen_thumbnail')} %}
 
-				<div class="row">
-					<div class="col-12 col-lg-8">
-
-						{% include 'eshop/detail.twig' %}
-
-					</div>
-					<div class="col-12 col-lg-4">
-
-						{% include 'eshop/contact.twig' %}
-
-					</div>
 				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 col-lg-8">
+
+					{% include 'eshop/detail.twig' %}
+
+				</div>
+				<div class="col-12 col-lg-4">
+
+					{% include 'eshop/contact.twig' %}
+
+				</div>
+			</div>
 
 		</article>
 	</div>

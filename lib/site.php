@@ -1,6 +1,6 @@
 <?php
 
-use Eshopiste\Helpers;
+use function Eshopiste\Helpers\get_eshop_category_link;
 
 if ( ! class_exists( 'Timber' ) ) {
 	add_action( 'admin_notices', function() {
@@ -134,6 +134,7 @@ class EshopisteSite extends TimberSite {
 		$twig->addFilter('display_url', new Twig_SimpleFilter('display_url', [$this, 'display_url']));
 		$twig->addFilter('static_assets', new Twig_SimpleFilter('static_assets', array($this, 'static_assets')));
 		$twig->addFilter('is_new', new Twig_SimpleFilter('is_new', array($this, 'is_post_new')));
+		$twig->addFilter('category_link', new Twig_SimpleFilter('category_link', array($this, 'category_link')));
 		return $twig;
 	}
 
@@ -170,6 +171,10 @@ class EshopisteSite extends TimberSite {
 		$interval = $today->diff($post_date);
 
 		return $interval->days <= 30;
+	}
+
+	function category_link( $term ) {
+		return get_eshop_category_link( $term->id );
 	}
 
 }

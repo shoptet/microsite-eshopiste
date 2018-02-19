@@ -25,3 +25,11 @@ function get_post_meta_value_min_max($post_type, $meta_key): array
     ARRAY_A
   )[0];
 }
+
+/**
+ * Returns link to e-shop category
+ */
+function get_eshop_category_link($term_id): string
+{
+  return get_post_type_archive_link('eshop') . '?category%5B%5D=' . $term_id;
+}

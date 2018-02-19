@@ -23,7 +23,7 @@
       k&nbsp;{{ invest ? 'investici' : 'prodeji' }}
     </p>
 
-    <a class="btn btn-green" href="{{ archive_link }}?category%5B%5D={{ term.id }}">
+    <a class="btn btn-green" href="{{ term|category_link }}">
       Zobrazit
     </a>
 
