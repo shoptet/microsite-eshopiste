@@ -1,0 +1,21 @@
+.eshop-property {
+  position: relative;
+  padding-left: rem-calc(40px);
+}
+
+.eshop-property-icon {
+  display: flex;
+  position: absolute;
+  left: 0;
+  width: rem-calc(40px);
+  height: 100%;
+  align-items: center;
+
+  svg {
+    width: rem-calc(25px);
+
+    * {
+      fill: $green !important;
+    }
+  }
+}

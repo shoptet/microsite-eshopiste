@@ -25,5 +25,47 @@ if ( $post_category = $post->get_field('category') ) {
 
 $context['breadcrumbs'][$post->title] = '';
 
+$age_field = get_field_object('age');
+$post_age_label = null;
+if ( $age_field ) {
+	$post_age_label = $age_field['choices'][$age_field['value']];
+}
+
+$context['properties'] = [
+	[
+		'name' => 'Hodnota e-shopu',
+		'value' => $post->get_field('price'),
+		'postfix' => 'Kč bez DPH',
+		'icon' => 'price-tag.svg',
+	],
+	[
+		'name' => 'Obrat za poslední rok',
+		'value' => $post->get_field('turnover'),
+		'postfix' => 'Kč',
+		'icon' => 'up-trend.svg',
+	],
+	[
+		'name' => 'EBITDA za poslední rok',
+		'value' => $post->get_field('ebitda'),
+		'postfix' => 'Kč',
+		'icon' => 'bar-chart.svg',
+	],
+	[
+		'name' => 'Stáří e-shopu',
+		'value' => $post_age_label,
+		'icon' => 'cake.svg',
+	],
+	[
+		'name' => 'Majitel e-shopu',
+		'value' => $post->get_field('eshop_owner'),
+		'icon' => 'user.svg',
+	],
+	[
+		'name' => 'Návštěvnost za poslední rok',
+		'value' => $post->get_field('traffic'),
+		'postfix' => 'UN',
+		'icon' => 'line-chart.svg',
+	],
+];
 
 Timber::render( 'single-eshop.twig', $context );

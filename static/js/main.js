@@ -1,6 +1,13 @@
 import '../scss/main.scss';
 import '../images/eshopiste-logo.svg';
 
+import '../images/properties/bar-chart.svg';
+import '../images/properties/cake.svg';
+import '../images/properties/line-chart.svg';
+import '../images/properties/price-tag.svg';
+import '../images/properties/up-trend.svg';
+import '../images/properties/user.svg';
+
 
 $(function () {
 
