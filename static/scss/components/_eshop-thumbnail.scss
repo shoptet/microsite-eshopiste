@@ -11,6 +11,13 @@
     border: 1px solid $link-color;
     text-decoration: none;
   }
+
+  .eshop-badges {
+    position: absolute;
+    top: 0;
+    right: -1.25rem;
+    margin-right: -1px;
+  }
 }
 
 .eshop-thumbnail-title {
@@ -25,13 +32,6 @@
 
 .eshop-thumbnail-wrapper {
   position: relative;
-}
-
-.eshop-thumbnail-badges {
-  position: absolute;
-  top: 0;
-  right: -1.25rem;
-  margin-right: -1px;
 }
 
 .eshop-thumbnail-screen {

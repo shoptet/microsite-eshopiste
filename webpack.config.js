@@ -42,6 +42,7 @@ var providePlugin = new webpack.ProvidePlugin({
   SVGInjector: 'svg-injector-2',
   noUiSlider: 'nouislider',
   wNumb: 'wnumb',
+  Chart: 'chart.js',
 });
 
 var faviconsWebpackPlugin = new FaviconsWebpackPlugin({
@@ -60,6 +61,7 @@ var config = {
       'svg-injector-2',
       'nouislider',
       'wnumb',
+      'chart.js',
     ],
   },
   output: output,

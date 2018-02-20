@@ -1,52 +1,50 @@
-<div class="card mb-3 mb-lg-0">
-  <div class="card-body">
+<div class="eshop-detail mb-4 mb-lg-0">
 
-    {% if post.get_field('description') %}
-      <div class="mb-4">
-        <h2 class="h5 font-weight-bold">O projektu</h2>
-        {{ post.get_field('description') }}
-      </div>
-    {% endif %}
+  {% if post.get_field('description') %}
+    <div class="mb-4">
+      <h2 class="h-heavy">O projektu</h2>
+      {{ post.get_field('description') }}
+    </div>
+  {% endif %}
 
-    {% if post.get_field('reason') %}
-      <div class="mb-4">
-        <h2 class="h5 font-weight-bold">Důvod prodeje</h2>
-        {{ post.get_field('reason') }}
-      </div>
-    {% endif %}
+  {% if post.get_field('reason') %}
+    <div class="mb-4">
+      <h2 class="h-heavy">Důvod nabídky</h2>
+      {{ post.get_field('reason') }}
+    </div>
+  {% endif %}
 
-    {% if post.get_field('offered_items')|length > 0 %}
-      <div class="mb-4">
-        <h2 class="h5 font-weight-bold mb-3">Co je předmětem prodeje</h2>
-        <ul class="fa-ul clearfix" style="margin-left:1.5rem">
-          {% for item in post.get_field('offered_items') %}
-            <li class="mb-1" style="float:left;width:220px">
-              <span class="fa-li"><i class="far fa-check-circle text-success"></i></span>
-              {{ item }}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
+  {% if post.get_field('offered_items')|length > 0 %}
+    <div class="mb-4">
+      <h2 class="h-heavy">Co je předmětem nabídky</h2>
+      <ul class="fa-ul list-horizontal">
+        {% for item in post.get_field('offered_items') %}
+          <li>
+            <span class="fa-li"><i class="fas fa-check-circle text-success"></i></span>
+            {{ item }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
-    {% if post.get_field('turnover_history') or post.get_field('traffic_history') %}
-      <div class="row">
-        {% if post.get_field('turnover_history') %}
-          <div class="col-12 col-md-6">
-            <h2 class="h5 font-weight-bold mb-3">Obrat e-shopu</h2>
-            <canvas id="eshopTurnoverHistoryChart" class="mb-3 mb-md-0"></canvas>
-          </div>
-        {% endif %}
+  {% if post.get_field('turnover_history') or post.get_field('traffic_history') %}
+    <div class="row">
+      {% if post.get_field('turnover_history') %}
+        <div class="col-12 col-md-6">
+          <h2 class="h-heavy mb-3">Obrat e-shopu</h2>
+          <canvas id="eshopTurnoverHistoryChart" class="mb-3 mb-md-0"></canvas>
+        </div>
+      {% endif %}
 
-        {% if post.get_field('traffic_history') %}
-          <div class="col-12 col-md-6">
-            <h2 class="h5 font-weight-bold mb-3">Návštěvnost e-shopu</h2>
-            <canvas id="eshopTrafficHistoryChart"></canvas>
-          </div>
-        {% endif %}
+      {% if post.get_field('traffic_history') %}
+        <div class="col-12 col-md-6">
+          <h2 class="h-heavy mb-3">Návštěvnost e-shopu</h2>
+          <canvas id="eshopTrafficHistoryChart"></canvas>
+        </div>
+      {% endif %}
 
-      </div>
-    {% endif %}
+    </div>
+  {% endif %}
 
-  </div>
 </div>

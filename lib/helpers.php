@@ -33,3 +33,26 @@ function get_eshop_category_link($term_id): string
 {
   return get_post_type_archive_link('eshop') . '?category%5B%5D=' . $term_id;
 }
+
+/**
+ * Returns posts from the same categories
+ */
+function get_similiar_posts($post, $number = 4) {
+  $similarPosts = [];
+
+  // Collect all post from all post categories
+  foreach ($post->terms() as $term) {
+  	$similarPosts = array_merge($similarPosts, $term->posts());
+  }
+
+  // Exclude own post from similar posts
+  $similarPosts = array_filter($similarPosts, function ($similarPost) use ($post) {
+  	return ($similarPost->id !== $post->id);
+  });
+
+  $similarPosts = array_unique($similarPosts);
+  shuffle($similarPosts);
+  $similarPosts = array_slice($similarPosts, 0, $number);
+
+  return $similarPosts;
+}

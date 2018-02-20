@@ -9,3 +9,20 @@
   }
 
 }
+
+.list-horizontal {
+
+  > li {
+    margin-bottom: .25rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    flex-wrap: wrap;
+
+    > li {
+      width: percentage(1/3);
+      padding-right: 2rem;
+    }
+  }
+}

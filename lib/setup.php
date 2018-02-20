@@ -4,6 +4,14 @@ namespace Eshopiste\Setup;
 
 use Urlbox\Screenshots\Urlbox;
 
+/**
+ * Redirect to login page when user is not logged in
+ */
+global $pagenow;
+if( !is_user_logged_in() && !is_admin() &&  $pagenow != 'wp-login.php' ){
+	wp_redirect( '/wp-admin/' );
+	exit;
+}
 
 /**
  * Register template menus

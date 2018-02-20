@@ -10,6 +10,7 @@
  */
 
 use function Eshopiste\Helpers\get_eshop_category_link;
+use function Eshopiste\Helpers\get_similiar_posts;
 
 $context = Timber::get_context();
 $post = Timber::query_post();
@@ -25,11 +26,15 @@ if ( $post_category = $post->get_field('category') ) {
 
 $context['breadcrumbs'][$post->title] = '';
 
+$context['similar_posts'] = get_similiar_posts($post);
+
 $age_field = get_field_object('age');
 $post_age_label = null;
 if ( $age_field ) {
 	$post_age_label = $age_field['choices'][$age_field['value']];
 }
+
+
 
 $context['properties'] = [
 	[
