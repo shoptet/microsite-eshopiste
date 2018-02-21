@@ -73,26 +73,26 @@
 {% endblock %}
 
 {% block script_footer %}
-	<script>
-		window.sliderData = [
-			{
-				id: 'filterPrice',
-				start: [{{ price_start[0] }}, {{ price_start[1] }}],
-				range: {min: {{ price_range.min }}, max: {{ price_range.max }}},
-				submitOnChange: true,
-			},
-			{
-				id: 'filterTurnover',
-				start: [{{ turnover_start[0] }}, {{ turnover_start[1] }}],
-				range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
-				submitOnChange: true,
-			},
-			{
-				id: 'filterTraffic',
-				start: [{{ traffic_start[0] }}, {{ traffic_start[1] }}],
-				range: {min: {{ traffic_range.min }}, max: {{ traffic_range.max }}},
-				submitOnChange: true,
-			},
-		];
-	</script>
+	{{ parent() }}
+
+	window.sliderData = [
+		{
+			id: 'filterPrice',
+			start: [{{ price_start[0] }}, {{ price_start[1] }}],
+			range: {min: {{ price_range.min }}, max: {{ price_range.max }}},
+			submitOnChange: true,
+		},
+		{
+			id: 'filterTurnover',
+			start: [{{ turnover_start[0] }}, {{ turnover_start[1] }}],
+			range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
+			submitOnChange: true,
+		},
+		{
+			id: 'filterTraffic',
+			start: [{{ traffic_start[0] }}, {{ traffic_start[1] }}],
+			range: {min: {{ traffic_range.min }}, max: {{ traffic_range.max }}},
+			submitOnChange: true,
+		},
+	];
 {% endblock %}

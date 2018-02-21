@@ -56,3 +56,65 @@ function get_similiar_posts($post, $number = 4) {
 
   return $similarPosts;
 }
+
+/**
+ * Handle e-shop contact form submit
+ */
+function handle_contact_form_submit() {
+  $name = sanitize_text_field( $_POST['name'] );
+	$email = sanitize_email( $_POST['email'] );
+	$message = sanitize_textarea_field( $_POST['message'] );
+	$eshop_id = intval( $_POST['eshop_id'] );
+
+	$postarr = [
+		'post_type' => 'eshop_bid',
+	  'post_title' => $name,
+		'post_status' => 'publish',
+		'meta_input' => [
+			'email' => $email,
+			'message' => $message,
+			'eshop' => $eshop_id,
+		],
+	];
+	wp_insert_post( $postarr );
+
+  $eshop_title = get_the_title( $eshop_id );
+  $eshop_contact_email = get_post_meta( $eshop_id, 'contact_email' );
+
+  $options = get_fields('options');
+  $seller_email_body = $options['seller_email_body'];
+  $seller_email_subject = $options['seller_email_subject'];
+  $buyer_email_body = $options['buyer_email_body'];
+  $buyer_email_subject = $options['buyer_email_subject'];
+
+  $to_replace = [
+    '%contact_name%' => $name,
+    '%contact_email%' => $email,
+    '%contact_message%' => $message,
+    '%eshop_name%' => $eshop_title,
+  ];
+  $seller_email_body = strtr($seller_email_body, $to_replace);
+  $buyer_email_body = strtr($buyer_email_body, $to_replace);
+
+  // Send e-mail to seller
+	wp_mail(
+    $eshop_contact_email,
+    $seller_email_subject,
+		$seller_email_body,
+		[
+			'From: Eshopiště <info@eshopiste.cz>',
+			'Replay-to: ' . $email,
+		]
+	);
+
+  // Send e-mail to buyer
+  wp_mail(
+		$email,
+    $buyer_email_subject,
+		$buyer_email_body,
+		[
+			'From: Eshopiště <info@eshopiste.cz>',
+		]
+	);
+
+}

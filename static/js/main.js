@@ -11,6 +11,7 @@ import '../images/properties/user.svg';
 import initHeader from './header';
 import initFiltering from './filtering';
 import initCharts from './charts';
+import initEshopContactForm from './eshop-contact';
 
 
 $(function () {
@@ -24,5 +25,7 @@ $(function () {
   initFiltering();
 
   initCharts();
+
+  initEshopContactForm();
 
 });

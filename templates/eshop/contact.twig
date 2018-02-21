@@ -1,4 +1,4 @@
-<div class="eshop-contact">
+<form class="eshop-contact" id="eshopContactForm">
   {% if post.get_field('seller_name') or post.get_field('seller_position') or post.get_field('seller_about_you') %}
     <div class="mb-4">
       <h2 class="h-heavy">O majiteli</h2>
@@ -28,20 +28,26 @@
 
   <h3 class="h-heavy mb-3">Kontaktovat majitele</h3>
 
-  <div>
-    <div class="form-group">
-      <label class="required" for="name">Vaše jméno</label>
-      <input type="text" class="form-control">
-    </div>
-    <div class="form-group">
-      <label class="required" for="email">Váš e-mail</label>
-      <input type="e-mail" class="form-control">
-    </div>
-    <div class="form-group">
-      <label class="required" for="text">Zpráva majiteli e-shopu</label>
-      <textarea class="form-control" rows="5"></textarea>
-    </div>
-    <button type="button" class="btn btn-primary btn-block">Odeslat</button>
+  <div class="form-group">
+    <label class="required" for="eshopContactFormName">Vaše jméno</label>
+    <input type="text" name="name" class="form-control" id="eshopContactFormName">
   </div>
 
-</div>
+  <div class="form-group">
+    <label class="required" for="eshopContactFormEmail">Váš e-mail</label>
+    <input type="email" name="email" class="form-control" id="eshopContactFormEmail">
+  </div>
+
+  <div class="form-group">
+    <label class="required" for="eshopContactFormMessage">Zpráva majiteli e-shopu</label>
+    <textarea class="form-control" name="message" rows="5" id="eshopContactFormMessage"></textarea>
+  </div>
+
+  <input type="hidden" name="eshop_id" value="{{ post.id }}">
+
+  <p class="text-danger d-none" id="eshopContactFormError"></p>
+  <p class="text-success text-center form-control-plaintext font-weight-bold d-none" id="eshopContactFormSuccess"></p>
+
+  <button type="submit" class="btn btn-primary btn-block">Odeslat</button>
+
+</form>

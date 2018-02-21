@@ -56,27 +56,27 @@
 {% endblock %}
 
 {% block script_footer %}
-	<script>
-		window.chartData = [
+	{{ parent() }}
+	
+	window.chartData = [
 
-			{% if post.get_field('turnover_history')|length > 0 %}
-				{
-					id: 'eshopTurnoverHistoryChart',
-					labels: [{% for point in post.get_field('turnover_history') %}{{ point.year }},{% endfor %}],
-					data: [{% for point in post.get_field('turnover_history') %}{{ point.turnover }},{% endfor %}],
-					yAxesPostfix: 'Kč',
-				},
-			{% endif %}
+		{% if post.get_field('turnover_history')|length > 0 %}
+			{
+				id: 'eshopTurnoverHistoryChart',
+				labels: [{% for point in post.get_field('turnover_history') %}{{ point.year }},{% endfor %}],
+				data: [{% for point in post.get_field('turnover_history') %}{{ point.turnover }},{% endfor %}],
+				yAxesPostfix: 'Kč',
+			},
+		{% endif %}
 
-			{% if post.get_field('traffic_history')|length > 0 %}
-				{
-					id: 'eshopTrafficHistoryChart',
-					labels: [{% for point in post.get_field('traffic_history') %}{{ point.year }},{% endfor %}],
-					data: [{% for point in post.get_field('traffic_history') %}{{ point.traffic }},{% endfor %}],
-					yAxesPostfix: 'UN',
-				},
-			{% endif %}
+		{% if post.get_field('traffic_history')|length > 0 %}
+			{
+				id: 'eshopTrafficHistoryChart',
+				labels: [{% for point in post.get_field('traffic_history') %}{{ point.year }},{% endfor %}],
+				data: [{% for point in post.get_field('traffic_history') %}{{ point.traffic }},{% endfor %}],
+				yAxesPostfix: 'UN',
+			},
+		{% endif %}
 
-		];
-	</script>
+	];
 {% endblock %}

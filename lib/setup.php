@@ -3,15 +3,16 @@
 namespace Eshopiste\Setup;
 
 use Urlbox\Screenshots\Urlbox;
+use function Eshopiste\Helpers\handle_contact_form_submit;
 
 /**
  * Redirect to login page when user is not logged in
  */
-global $pagenow;
-if( !is_user_logged_in() && !is_admin() &&  $pagenow != 'wp-login.php' ){
-	wp_redirect( '/wp-admin/' );
-	exit;
-}
+//global $pagenow;
+//if( !is_user_logged_in() && !is_admin() &&  $pagenow != 'wp-login.php' ){
+//	wp_redirect( '/wp-admin/' );
+//	exit;
+//}
 
 /**
  * Register template menus
@@ -245,4 +246,12 @@ add_filter( 'posts_distinct', function ( $where ) {
   }
 
   return $where;
+});
+
+/**
+ * Handle ajax e-shop bid request
+ */
+add_action( 'wp_ajax_eshop_contact', function () {
+	handle_contact_form_submit();
+  wp_die();
 });

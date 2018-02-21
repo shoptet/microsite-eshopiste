@@ -192,12 +192,12 @@
 {% endblock %}
 
 {% block script_footer %}
-	<script>
-		window.sliderData = [{
-			id: 'filterTurnover',
-			start: [{{ turnover_range.min }}, {{ turnover_range.max }}],
-			range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
-			submitOnChange: false,
-		}];
-	</script>
+  {{ parent() }}
+  
+	window.sliderData = [{
+		id: 'filterTurnover',
+		start: [{{ turnover_range.min }}, {{ turnover_range.max }}],
+		range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
+		submitOnChange: false,
+	}];
 {% endblock %}

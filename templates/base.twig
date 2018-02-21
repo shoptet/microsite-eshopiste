@@ -107,11 +107,13 @@
 
 		{% include 'partial/footer.twig' %}
 
-		{% block script_footer %}
-		{% endblock %}
+		<script>
+			{% block script_footer %}
+				window.ajaxurl = '{{ function('admin_url', 'admin-ajax.php') }}';
+			{% endblock %}
+		</script>
 
 		{{ function('wp_footer') }}
-
 
 	</body>
 </html>
