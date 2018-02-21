@@ -22,6 +22,7 @@
  */
 
 use function Eshopiste\Helpers\get_post_meta_value_min_max;
+use function Eshopiste\Helpers\get_post_meta_sum;
 
 $context = Timber::get_context();
 $post = new TimberPost();
@@ -102,5 +103,13 @@ if ( get_fields('options')['homepage_testimonial'] ) {
 }
 $context['posts_for_buyer'] = new Timber\PostQuery( $posts_for_buyer_query );
 $context['posts_for_seller'] = new Timber\PostQuery( $posts_for_seller_query );
+
+$eshop_count = wp_count_posts( 'eshop' );
+$context['eshop_count'] = $eshop_count->publish + $eshop_count->draft;
+
+$context['total_turnover'] = get_post_meta_sum( 'eshop', 'turnover' );
+
+$eshop_bid_count = wp_count_posts( 'eshop_bid' );
+$context['eshop_bid_count'] = $eshop_bid_count->publish + $eshop_bid_count->draft;
 
 Timber::render( 'home.twig', $context );

@@ -15,8 +15,8 @@
   <div class="row-info-banner">
     <div class="container">
       <p class="h4 mb-0">
-        <strong>24</strong> e-shopů s obratem <strong>30&nbsp;220&nbsp;500&nbsp;Kč</strong>
-        dostalo nabídky od <strong>212</strong> investorů
+        <strong>{{ eshop_count }}</strong> e-shopů s obratem <strong>{{ total_turnover }}&nbsp;Kč</strong>
+        dostalo nabídky od <strong>{{ eshop_bid_count }}</strong> investorů
       </p>
     </div>
   </div>
@@ -193,7 +193,7 @@
 
 {% block script_footer %}
   {{ parent() }}
-  
+
 	window.sliderData = [{
 		id: 'filterTurnover',
 		start: [{{ turnover_range.min }}, {{ turnover_range.max }}],
