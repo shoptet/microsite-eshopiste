@@ -251,7 +251,9 @@ add_filter( 'posts_distinct', function ( $where ) {
 /**
  * Handle ajax e-shop bid request
  */
-add_action( 'wp_ajax_eshop_contact', function () {
+add_action( 'wp_ajax_eshop_contact',  __NAMESPACE__ . '\\handle_eshop_contact_ajax');
+add_action( 'wp_ajax_nopriv_eshop_contact', __NAMESPACE__ . '\\handle_eshop_contact_ajax');
+function handle_eshop_contact_ajax () {
 	handle_contact_form_submit();
   wp_die();
-});
+}

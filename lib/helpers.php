@@ -29,8 +29,7 @@ function get_post_meta_value_min_max($post_type, $meta_key): array
 /**
  * Returns post meta sum
  */
-function get_post_meta_sum($post_type, $meta_key): string
-{
+function get_post_meta_sum($post_type, $meta_key) {
   global $wpdb;
   return $wpdb->get_var("
   	SELECT
