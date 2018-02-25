@@ -5,14 +5,6 @@ namespace Eshopiste\Setup;
 use Urlbox\Screenshots\Urlbox;
 use function Eshopiste\Helpers\handle_contact_form_submit;
 
-/**
- * Redirect to login page when user is not logged in
- */
-//global $pagenow;
-//if( !is_user_logged_in() && !is_admin() &&  $pagenow != 'wp-login.php' ){
-//	wp_redirect( '/wp-admin/' );
-//	exit;
-//}
 
 /**
  * Register template menus
@@ -38,7 +30,7 @@ add_action('admin_init', function() {
 	global $current_user, $pagenow;
 	wp_get_current_user(); // Make sure global $current_user is set, if not set it
   if( 'index.php' === $pagenow && user_can( $current_user, 'subscriber' ) ){
-    wp_redirect( admin_url( '/edit.php?post_type=eshop', 'http' ), 301 );
+    wp_redirect( admin_url( '/edit.php?post_type=eshop' ), 301 );
     exit;
   }
 });
@@ -61,14 +53,24 @@ add_action( 'pre_get_posts', function ( $wp_query ){
 });
 
 /**
- * Remove menu items for subscriber
+ * Disable admin bar for subscriber
+ */
+add_action('after_setup_theme', function () {
+	global $current_user;
+	wp_get_current_user(); // Make sure global $current_user is set, if not set it
+	if ( user_can( $current_user, 'subscriber' ) ) {
+		show_admin_bar(false);
+	}
+});
+
+/**
+ * Remove admin dashboard for subscriber
  */
 add_action( 'admin_menu', function (){
 	global $current_user;
 	wp_get_current_user(); // Make sure global $current_user is set, if not set it
   if ( user_can( $current_user, 'subscriber' ) ) {
 		remove_menu_page( 'index.php' );
-	  remove_menu_page( 'tools.php' );
   }
 });
 
@@ -257,3 +259,12 @@ function handle_eshop_contact_ajax () {
 	handle_contact_form_submit();
   wp_die();
 }
+
+/**
+ * Hide WP logo on login page
+ */
+add_action( 'login_enqueue_scripts', function () { ?>
+  <style type="text/css">
+		#login h1:first-child {display: none}
+  </style>
+<?php });

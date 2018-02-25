@@ -36,7 +36,7 @@ function get_cpt_eshop_args(): array
     'has_archive' => 'eshopy',
     'show_in_menu' => true,
     'exclude_from_search' => false,
-    'capability_type' => 'post',
+    'capability_type' => 'eshop',
     'map_meta_cap' => true,
     'hierarchical' => false,
     'rewrite' => array( 'slug' => 'eshop', 'with_front' => true ),
@@ -109,7 +109,7 @@ function get_cpt_bid_args(): array
     'has_archive' => false,
     'show_in_menu' => true,
     'exclude_from_search' => true,
-    'capability_type' => 'post',
+    'capability_type' => 'bid',
     'capabilities' => array(
       'create_posts' => 'do_not_allow',
     ),

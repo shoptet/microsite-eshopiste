@@ -73,6 +73,14 @@ class EshopisteSite extends TimberSite {
 		$context['all_categories'] = Timber::get_terms('eshop_category');
 		$context['footer_text'] = get_fields('options')['footer_text'];
 		$context['query'] = ( isset($_GET['q']) ? $_GET['q'] : null );
+		$context['is_user_logged_in'] = is_user_logged_in();
+		$context['user'] = wp_get_current_user();
+		$context['login_url'] = wp_login_url();
+		$context['logout_url'] = wp_logout_url();
+		$context['registration_url'] = wp_registration_url();
+		$context['admin_url'] = admin_url();
+		$context['admin_eshops_url'] = admin_url( '/edit.php?post_type=eshop' );
+		$context['new_eshop_url'] = admin_url( 'post-new.php?post_type=eshop' );
 		return $context;
 	}
 
