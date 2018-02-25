@@ -9,11 +9,13 @@
 					<article>
 						<h1 class="page-row-title">{{ post.title }}</h1>
 
-						<img
-							class="page-row-thumbnail"
-							src="{{ post.thumbnail.src('large') }}"
-							alt="{{ post.title }}"
-						>
+						{% if post.thumbnail %}
+							<img
+								class="page-row-thumbnail"
+								src="{{ post.thumbnail.src('large') }}"
+								alt="{{ post.title }}"
+							>
+						{% endif %}
 
 						{{post.content}}
 					</article>
