@@ -131,7 +131,7 @@ class EshopisteSite extends TimberSite {
 	}
 
 	function category_link( $term ) {
-		return get_eshop_category_link( $term->id );
+		return get_eshop_category_link( $term->term_id );
 	}
 
 	function separate_thousands( $num ) {
