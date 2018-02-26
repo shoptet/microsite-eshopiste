@@ -117,8 +117,8 @@ add_action( 'save_post', function ( $post_id ){
  * Handle ordering and filtering of e-shop archive
  */
 add_action('pre_get_posts', function ( $wp_query ){
-	// bail early if is in admin or if not main query (allows custom code / plugins to continue working)
-	if ( is_admin() || !$wp_query->is_main_query() ) return;
+	// bail early if is in admin, if not main query (allows custom code / plugins to continue working) or if not e-shop
+	if ( is_admin() || !$wp_query->is_main_query() || $wp_query->get('post_type') !== 'eshop' ) return;
 
 	$meta_query = $wp_query->get('meta_query');
 
@@ -174,15 +174,29 @@ add_action('pre_get_posts', function ( $wp_query ){
 	// e.g. '?query_min=1000&query_max=200'
 	$getRangeMetaQuery = function ($query) {
 		$result = [];
-		foreach (['min', 'max'] as $ext) {
-			if( !isset($_GET[ $query . '_' . $ext ]) || !is_numeric($_GET[ $query . '_' . $ext ]) ) continue;
-			$result[] = [
-				'key' => $query,
-				'value' => $_GET[ $query . '_' . $ext ],
-				'compare'	=> ($ext === 'min' ? '>=' : '<='),
-				'type' => 'NUMERIC',
-			];
+		$is_min = isset($_GET[ $query . '_min' ]) && is_numeric($_GET[ $query . '_min' ]);
+		$is_max = isset($_GET[ $query . '_max' ]) && is_numeric($_GET[ $query . '_max' ]);
+
+		if ($is_min && $is_max) {
+			$value = [ $_GET[ $query . '_min' ], $_GET[ $query . '_max' ] ];
+			$compare = 'BETWEEN';
+		} else if ($is_min) {
+			$value = $_GET[ $query . '_min' ];
+			$compare = '>=';
+		} else if ($is_max) {
+			$value = $_GET[ $query . '_max' ];
+			$compare = '<=';
+		} else {
+			return $result;
 		}
+
+		$result[] = [
+			'key' => $query,
+			'value' => $value,
+			'compare'	=> $compare,
+			'type' => 'NUMERIC',
+		];
+
 		return $result;
 	};
 
