@@ -65,6 +65,12 @@
 .header-actions {
   text-align: center;
 
+  @include media-breakpoint-only(xs) {
+    > * {
+      display: block;
+    }
+  }
+
   @include media-breakpoint-up(lg) {
     margin-left: 1rem;
   }

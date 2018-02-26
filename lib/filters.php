@@ -72,7 +72,7 @@ add_filter( 'login_message', function ($message) {
 add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
   if ( isset( $user->roles ) && is_array( $user->roles ) ) {
     if ( in_array( 'subscriber', $user->roles ) ) {
-      return admin_url( '/edit.php?post_type=eshop' );
+      return admin_url( 'edit.php?post_type=eshop' );
     }
   }
   return $redirect_to;

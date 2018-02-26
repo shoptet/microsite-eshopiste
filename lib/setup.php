@@ -30,7 +30,7 @@ add_action('admin_init', function() {
 	global $current_user, $pagenow;
 	wp_get_current_user(); // Make sure global $current_user is set, if not set it
   if( 'index.php' === $pagenow && user_can( $current_user, 'subscriber' ) ){
-    wp_redirect( admin_url( '/edit.php?post_type=eshop' ), 301 );
+    wp_redirect( admin_url( 'edit.php?post_type=eshop' ), 301 );
     exit;
   }
 });

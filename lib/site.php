@@ -79,7 +79,8 @@ class EshopisteSite extends TimberSite {
 		$context['logout_url'] = wp_logout_url();
 		$context['registration_url'] = wp_registration_url();
 		$context['admin_url'] = admin_url();
-		$context['admin_eshops_url'] = admin_url( '/edit.php?post_type=eshop' );
+		$context['admin_profile_url'] = admin_url( 'profile.php' );
+		$context['admin_eshops_url'] = admin_url( 'edit.php?post_type=eshop' );
 		$context['new_eshop_url'] = admin_url( 'post-new.php?post_type=eshop' );
 		return $context;
 	}
