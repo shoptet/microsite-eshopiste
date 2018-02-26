@@ -69,6 +69,8 @@ $posts_for_seller_query = [
   'cat' => 11,
 ];
 
+$context['claim'] = get_fields('options')['homepage_claim'];
+
 // map post ids to timber post objects
 $advice_posts = [];
 if ( isset( get_fields('options')['homepage_posts_ids'] ) ) {
