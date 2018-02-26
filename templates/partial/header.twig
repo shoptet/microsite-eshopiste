@@ -104,6 +104,10 @@
               <span class="iconholder"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="menuCategoriesLink">
+              <a class="dropdown-item" href="{{ archive_link }}">
+                Všechny
+              </a>
+              <div class="dropdown-divider"></div>
               {% for term in all_categories %}
                 <a class="dropdown-item" href="{{ archive_link }}?category%5B%5D={{ term.id }}">
                   {{ term.name }}
