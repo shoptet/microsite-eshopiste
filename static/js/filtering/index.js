@@ -52,25 +52,48 @@ const createSlider = (sliderId, start, range, submitOnChange = true) => {
 
   const hasIndicator = indicatorMin && indicatorMax;
 
+  const separatedThousands = wNumb({thousand: ' '});
+
+  const formatOptions = {
+    numeral: true,
+    numeralDecimalMark: ',',
+    delimiter: ' ',
+  };
+
+  new Cleave(indicatorMin, formatOptions);
+  new Cleave(indicatorMax, formatOptions);
+
   noUiSlider.create(slider, {
     start, range, step: 1000, connect: true, format: wNumb({decimals: 0})
   });
 
   slider.noUiSlider.on('update', values => {
       inputMin.value = values[0]; inputMax.value = values[1];
+
       if (!hasIndicator) return;
-      indicatorMin.innerHTML = values[0]; indicatorMax.innerHTML = values[1];
+
+      const indicatorMinValue = separatedThousands.to(Number(values[0])),
+            indicatorMaxValue = separatedThousands.to(Number(values[1]));
+
+      if (indicatorMin.tagName === 'INPUT') indicatorMin.value = indicatorMinValue;
+      else indicatorMin.innerHTML = indicatorMinValue;
+
+      if (indicatorMax.tagName === 'INPUT') indicatorMax.value = indicatorMaxValue;
+      else indicatorMax.innerHTML = indicatorMaxValue;
+
   });
 
   submitOnChange && slider.noUiSlider.on('change', () => {
     $archiveForm.submit();
   });
 
-  inputMin.addEventListener('change', e => {
-    slider.noUiSlider.set([$(e.target).val(), null]);
+  indicatorMin.addEventListener('change', function () {
+    slider.noUiSlider.set([$(this).val(), null]);
+    submitOnChange && $archiveForm.submit();
   });
-  inputMax.addEventListener('change', e => {
-    slider.noUiSlider.set([null, $(e.target).val()]);
+  indicatorMax.addEventListener('change', function () {
+    slider.noUiSlider.set([null, $(this).val()]);
+    submitOnChange && $archiveForm.submit();
   });
 };
 
@@ -78,9 +101,7 @@ const initFiltering = () => {
 
   initOrderSelect();
 
-  if (!window.sliderData) {
-    return;
-  }
+  if (!window.sliderData) return;
 
   const sliderData = window.sliderData;
   for (let i = 0, len = sliderData.length; i < len; i++) {

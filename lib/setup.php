@@ -160,7 +160,7 @@ add_action('pre_get_posts', function ( $wp_query ){
 	 // e.g. '?query[]=0&query[]=1...'
 	$getArrayMetaQuery = function ($query) {
 		$result = [];
-		if( isset($_GET[ $query ]) ) {
+		if( isset($_GET[ $query ]) && is_array($_GET[ $query ]) ) {
 			$result[] = [
 				'key' => $query,
 				'value' => $_GET[ $query ],
@@ -175,7 +175,7 @@ add_action('pre_get_posts', function ( $wp_query ){
 	$getRangeMetaQuery = function ($query) {
 		$result = [];
 		foreach (['min', 'max'] as $ext) {
-			if( !isset($_GET[ $query . '_' . $ext ]) ) continue;
+			if( !isset($_GET[ $query . '_' . $ext ]) || !is_numeric($_GET[ $query . '_' . $ext ]) ) continue;
 			$result[] = [
 				'key' => $query,
 				'value' => $_GET[ $query . '_' . $ext ],

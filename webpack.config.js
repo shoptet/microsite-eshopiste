@@ -43,6 +43,7 @@ var providePlugin = new webpack.ProvidePlugin({
   noUiSlider: 'nouislider',
   wNumb: 'wnumb',
   Chart: 'chart.js',
+  Cleave: 'cleave.js',
 });
 
 var faviconsWebpackPlugin = new FaviconsWebpackPlugin({
@@ -62,6 +63,7 @@ var config = {
       'nouislider',
       'wnumb',
       'chart.js',
+      'cleave.js',
     ],
   },
   output: output,

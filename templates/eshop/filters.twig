@@ -63,27 +63,31 @@
       <div class="d-flex w-100 align-items-center justify-content-between">
         <div class="eshop-filters-range-field-min">
           <input
-            class="form-control form-control-sm"
-            type="number"
-            id="filterPriceInputMin"
+            type="hidden"
             name="price_min"
+            id="filterPriceInputMin"
             value="{{ price_start[0] }}"
-            min="{{ price_range.min }}"
-            max="{{ price_range.min }}"
-            step="1000"
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            id="filterPriceIndicatorMin"
+            value="{{ price_start[0] }}"
           >
         </div>
         <span class="small text-muted mx-1">až</span>
         <div class="eshop-filters-range-field-max">
           <input
-            class="form-control form-control-sm"
-            type="number"
-            id="filterPriceInputMax"
+            type="hidden"
             name="price_max"
+            id="filterPriceInputMax"
             value="{{ price_start[1] }}"
-            min="{{ price_range.min }}"
-            max="{{ price_range.max }}"
-            step="1000"
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            id="filterPriceIndicatorMax"
+            value="{{ price_start[1] }}"
           >
         </div>
         <span class="small text-muted ml-1">Kč</span>
@@ -100,27 +104,31 @@
       <div class="d-flex w-100 align-items-center justify-content-between">
         <div class="eshop-filters-range-field-min">
           <input
-            class="form-control form-control-sm"
-            type="number"
-            id="filterTurnoverInputMin"
+            type="hidden"
             name="turnover_min"
+            id="filterTurnoverInputMin"
             value="{{ turnover_start[0] }}"
-            min="{{ turnover_range.min }}"
-            max="{{ turnover_range.max }}"
-            step="1000"
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            id="filterTurnoverIndicatorMin"
+            value="{{ turnover_start[0] }}"
           >
         </div>
         <span class="small text-muted mx-1">až</span>
         <div class="eshop-filters-range-field-max">
           <input
-            class="form-control form-control-sm"
-            type="number"
-            id="filterTurnoverInputMax"
+            type="hidden"
             name="turnover_max"
+            id="filterTurnoverInputMax"
             value="{{ turnover_start[1] }}"
-            min="{{ turnover_range.min }}"
-            max="{{ turnover_range.max }}"
-            step="1000"
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            id="filterTurnoverIndicatorMax"
+            value="{{ turnover_start[1] }}"
           >
         </div>
         <span class="small text-muted ml-1">Kč</span>
@@ -137,27 +145,31 @@
       <div class="d-flex w-100 align-items-center justify-content-between">
         <div class="eshop-filters-range-field-min">
           <input
-            class="form-control form-control-sm"
-            type="number"
-            id="filterTrafficInputMin"
+            type="hidden"
             name="traffic_min"
+            id="filterTrafficInputMin"
             value="{{ traffic_start[0] }}"
-            min="{{ traffic_range.min }}"
-            max="{{ traffic_range.max }}"
-            step="1000"
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            id="filterTrafficIndicatorMin"
+            value="{{ traffic_start[0] }}"
           >
         </div>
         <span class="small text-muted mx-1">až</span>
         <div class="eshop-filters-range-field-max">
           <input
-            class="form-control form-control-sm"
-            type="number"
-            id="filterTrafficInputMax"
+            type="hidden"
             name="traffic_max"
+            id="filterTrafficInputMax"
             value="{{ traffic_start[1] }}"
-            min="{{ traffic_range.min }}"
-            max="{{ traffic_range.max }}"
-            step="1000"
+          >
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            id="filterTrafficIndicatorMax"
+            value="{{ traffic_start[1] }}"
           >
         </div>
         <span class="small text-muted ml-1">UN</span>

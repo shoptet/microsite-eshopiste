@@ -12,7 +12,7 @@
       Investice:
     {% endif %}
 
-    <span>{{ post.get_field('price') }} Kč bez DPH</span>
+    <span>{{ post.get_field('price')|separate_thousands }} Kč bez DPH</span>
 
   </span>
 

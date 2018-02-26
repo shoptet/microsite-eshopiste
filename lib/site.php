@@ -91,6 +91,7 @@ class EshopisteSite extends TimberSite {
 		$twig->addFilter('static_assets', new Twig_SimpleFilter('static_assets', array($this, 'static_assets')));
 		$twig->addFilter('is_new', new Twig_SimpleFilter('is_new', array($this, 'is_post_new')));
 		$twig->addFilter('category_link', new Twig_SimpleFilter('category_link', array($this, 'category_link')));
+		$twig->addFilter('separate_thousands', new Twig_SimpleFilter('separate_thousands', [$this, 'separate_thousands']));
 		return $twig;
 	}
 
@@ -131,6 +132,11 @@ class EshopisteSite extends TimberSite {
 
 	function category_link( $term ) {
 		return get_eshop_category_link( $term->id );
+	}
+
+	function separate_thousands( $num ) {
+		if ( ! is_numeric( $num ) ) return $num;
+		return number_format ( $num, 0 , ',', '&nbsp;' );
 	}
 
 }

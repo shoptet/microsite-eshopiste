@@ -15,8 +15,8 @@
   <div class="row-info-banner">
     <div class="container">
       <p class="h4 mb-0">
-        <strong>{{ eshop_count }}</strong> e-shopů s obratem <strong>{{ total_turnover }}&nbsp;Kč</strong>
-        dostalo nabídky od <strong>{{ eshop_bid_count }}</strong> investorů
+        <strong>{{ eshop_count|separate_thousands }}</strong> e-shopů s obratem <strong>{{ total_turnover|separate_thousands }}&nbsp;Kč</strong>
+        dostalo nabídky od <strong>{{ eshop_bid_count|separate_thousands }}</strong> investorů
       </p>
     </div>
   </div>

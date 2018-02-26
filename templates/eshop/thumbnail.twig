@@ -15,7 +15,7 @@
 
       {% endif %}
     </span>
-    <strong class="eshop-thumbnail-price">{{ post.get_field('price') ?: '0' }} Kč</strong>
+    <strong class="eshop-thumbnail-price">{{ (post.get_field('price') ?: '0')|separate_thousands }} Kč</strong>
   </div>
 
   <div class="eshop-thumbnail-wrapper">
@@ -34,11 +34,11 @@
   <ul class="list-unstyled mb-0">
 
     <li class="text-truncate">
-      <span class="font-weight-bold">Obrat:</span> {{ post.get_field('turnover') ?: '0' }} Kč / 12 měsíců
+      <span class="font-weight-bold">Obrat:</span> {{ (post.get_field('turnover') ?: '0')|separate_thousands }} Kč / 12 měsíců
     </li>
 
     <li class="text-truncate">
-      <span class="font-weight-bold">Návštěvnost:</span> {{ post.get_field('traffic') ?: '0' }} / 12 měsíců
+      <span class="font-weight-bold">Návštěvnost:</span> {{ (post.get_field('traffic') ?: '0')|separate_thousands }} / 12 měsíců
     </li>
 
   </ul>

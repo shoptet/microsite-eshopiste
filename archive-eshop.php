@@ -42,17 +42,17 @@ $context['order_choices'] = [
 	'age_asc' => 'Nejmladší',
 ];
 
-$context['checked_categories'] = isset($_GET[ 'category' ]) ? $_GET[ 'category' ] : [];
-$context['checked_types'] = isset($_GET[ 'type' ]) ? $_GET[ 'type' ] : [];
-$context['checked_ages'] = isset($_GET[ 'age' ]) ? $_GET[ 'age' ] : [];
+$context['checked_categories'] = ( isset($_GET[ 'category' ]) && is_array($_GET[ 'category' ]) ) ? $_GET[ 'category' ] : [];
+$context['checked_types'] = ( isset($_GET[ 'type' ]) && is_array($_GET[ 'type' ]) ) ? $_GET[ 'type' ] : [];
+$context['checked_ages'] = ( isset($_GET[ 'age' ]) && is_array($_GET[ 'age' ]) ) ? $_GET[ 'age' ] : [];
 $context['selected_orderby'] = isset($_GET[ 'orderby' ]) ? $_GET[ 'orderby' ] : null;
 
 // pass range and start values to context
 foreach (['price', 'turnover', 'traffic'] as $query) {
 	$context[ $query . '_range' ] = get_post_meta_value_min_max( get_queried_object()->name, $query );
 	$context[ $query . '_start'] = [
-		isset($_GET[ $query . '_min' ]) ? $_GET[ $query . '_min' ] : $context[$query . '_range']['min'],
-		isset($_GET[ $query . '_max' ]) ? $_GET[ $query . '_max' ] : $context[$query . '_range']['max'],
+		( isset($_GET[ $query . '_min' ]) && is_numeric($_GET[ $query . '_min' ]) ) ? $_GET[ $query . '_min' ] : $context[$query . '_range']['min'],
+		( isset($_GET[ $query . '_max' ]) && is_numeric($_GET[ $query . '_max' ]) ) ? $_GET[ $query . '_max' ] : $context[$query . '_range']['max'],
 	];
 }
 
