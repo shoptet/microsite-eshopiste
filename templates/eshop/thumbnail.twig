@@ -1,8 +1,19 @@
-<a class="eshop-thumbnail" href="{{post.link}}" title="{{ post.title }}">
+<a
+  class="eshop-thumbnail"
+  href="{{post.link}}"
+  title="{{ post.title }}"
+  itemscope
+  itemtype="https://schema.org/Product"
+>
+  <meta itemprop="url" content="{{ post.link }}">
 
-  <p class="eshop-thumbnail-title h5 text-truncate mb-1">{{ post.title }}</p>
+  <p class="eshop-thumbnail-title h5 text-truncate mb-1" itemprop="name">
+    {{ post.title }}
+  </p>
 
-  <p class="mb-0 text-truncate">{{ post.get_field('category').name ?: 'Bez kategorie' }}</p>
+  <p class="mb-0 text-truncate">
+    {{ post.get_field('category').name ?: 'Bez kategorie' }}
+  </p>
 
   <div class="d-flex w-100 justify-content-between">
     <span>
@@ -15,7 +26,11 @@
 
       {% endif %}
     </span>
-    <strong class="eshop-thumbnail-price">{{ (post.get_field('price') ?: '0')|separate_thousands }} Kč</strong>
+    <strong class="eshop-thumbnail-price" itemscope itemtype="https://schema.org/Offer">
+      <meta itemprop="price" content="{{ (post.get_field('price') ?: '0') }}">
+      <meta itemprop="priceCurrency" content="CZK">
+      {{ (post.get_field('price') ?: '0')|separate_thousands }}&nbsp;Kč
+    </strong>
   </div>
 
   <div class="eshop-thumbnail-wrapper">
@@ -24,6 +39,7 @@
       <img
         src="{{ post.get_field('screen_thumbnail').large.url ?: 'http://via.placeholder.com/1280x800/555/999?text=Náhled+není+k+dispozici' }}"
         alt="{{ post.title }}"
+        itemprop="image"
       >
     </div>
 

@@ -138,3 +138,13 @@ function handle_contact_form_submit() {
 	);
 
 }
+
+/**
+ * Get truncated string
+ */
+function truncate( $string, $limit, $separator = '...' ) {
+  if (strlen($string) <= $limit) return $string;
+  $newlimit = $limit - strlen($separator);
+  $s = substr($string, 0, $newlimit + 1);
+  return substr($s, 0, strrpos($s, ' ')) . $separator;
+}

@@ -1,13 +1,26 @@
 {% extends "base.twig" %}
 
+{% block head %}
+	<meta property="og:url" content="{{ post.link }}">
+	<meta property="og:type" content="article">
+
+	{% if post.thumbnail %}
+		<meta property="og:image" content="{{ post.thumbnail.src('large') }}">
+	{% endif %}
+{% endblock %}
+
 {% block content %}
 	<div class="page-row">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
 
-					<article>
-						<h1 class="page-row-title">{{ post.title }}</h1>
+					<article itemscope itemtype="https://schema.org/Article">
+						<meta itemprop="url" content="{{post.link}}">
+					  {% if post.thumbnail %}
+					    <meta itemprop="image" content="{{ post.thumbnail }}">
+					  {% endif %}
+						<h1 class="page-row-title" itemprop="name">{{ post.title }}</h1>
 
 						{% if post.thumbnail %}
 							<img
@@ -17,7 +30,9 @@
 							>
 						{% endif %}
 
-						{{post.content}}
+						<div itemprop="articleBody">
+							{{post.content}}
+						</div>
 					</article>
 
 				</div>

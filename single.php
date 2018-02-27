@@ -9,9 +9,13 @@
  * @since    Timber 0.1
  */
 
+ use function Eshopiste\Helpers\truncate;
+
 $context = Timber::get_context();
 $post = Timber::query_post();
 $context['post'] = $post;
+
+$context['meta_description'] = truncate( strip_tags( $post->content ), 200 );
 
 $context['breadcrumbs'] = [
 	$post->title => '',

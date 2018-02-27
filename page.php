@@ -23,6 +23,7 @@
 
 use function Eshopiste\Helpers\get_post_meta_value_min_max;
 use function Eshopiste\Helpers\get_post_meta_sum;
+use function Eshopiste\Helpers\truncate;
 
 $context = Timber::get_context();
 $post = new TimberPost();
@@ -31,6 +32,8 @@ $context['post'] = $post;
 $context['breadcrumbs'] = [
 	$post->title => '',
 ];
+
+$context['meta_description'] = truncate( strip_tags( $post->content ), 200 );
 
 if ( !is_front_page() ){
   Timber::render( array( 'page-' . $post->post_name . '.twig', 'single.twig' ), $context );
@@ -69,7 +72,9 @@ $posts_for_seller_query = [
   'cat' => 11,
 ];
 
-$context['claim'] = get_fields('options')['homepage_claim'];
+$claim = get_fields('options')['homepage_claim'];
+$context['claim'] = $claim;
+$context['meta_description'] = $claim;
 
 // map post ids to timber post objects
 $advice_posts = [];

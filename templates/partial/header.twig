@@ -46,7 +46,7 @@
       			itemprop="potentialAction"
       			itemtype="https://schema.org/SearchAction"
       		>
-      			<meta itemprop="target" content="?s={s}">
+      			<meta itemprop="target" content="{{ archive_link }}?q={q}">
       			<div class="input-group">
       	      <input
       					type="search"
@@ -55,6 +55,7 @@
       					value="{{ query }}"
       					placeholder="Vyhledat e-shop"
       					autocomplete="off"
+                itemprop="query-input"
       				>
       	      <span class="input-group-append">
       	        <button type="submit" class="btn btn-input px-3 border-left-0" aria-label="Vyhledat">

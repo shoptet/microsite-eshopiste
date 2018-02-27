@@ -12,13 +12,7 @@
 		#}
 
 	  <meta charset="{{ site.charset }}">
-	  <title>
-	    {% if wp_title %}
-	      {{ wp_title }} – {{ site.name }}
-	    {% else %}
-	      {{ site.name }} – {{ site.description }}
-	    {% endif %}
-	  </title>
+	  <title>{% if wp_title %}{{ wp_title }} – {{ site.name }}{% else %}{{ site.name }} – {{ site.description }}{% endif %}</title>
 	  <meta name="description" content="{{ meta_description|striptags }}">
 	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,8 +27,8 @@
 			<meta property="og:type" content="website">
 		{% endblock %}
 
-		{% if options.themeOpenGraphImage %}
-			<meta property="og:image" content="{{ options.themeOpenGraphImage.url }}">
+		{% if options.opengraph_image %}
+			<meta property="og:image" content="{{ options.opengraph_image }}">
 		{% endif %}
 
 		<meta property="og:title" content="{% if wp_title %}{{ wp_title }} – {{ site.name }}{% else %}{{ site.name }} – {{ site.description }}{% endif %}">

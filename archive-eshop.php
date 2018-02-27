@@ -60,7 +60,9 @@ $banner_post_id = get_fields('options')['archive_post_id'];
 $context['banner_post'] = ( $banner_post_id ? new TimberPost( $banner_post_id ) : null );
 
 if ( isset( get_fields('options')['archive_seo_text'] ) ) {
-	$context['seo_text'] = get_fields('options')['archive_seo_text'];
+	$seo_text = get_fields('options')['archive_seo_text'];
+	$context['seo_text'] = $seo_text;
+	$context['meta_description'] = $seo_text;
 }
 
 $context['breadcrumbs'] = [

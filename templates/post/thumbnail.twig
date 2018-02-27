@@ -1,7 +1,12 @@
-<div class="post-thumbnail">
+<article class="post-thumbnail" itemscope itemtype="https://schema.org/Article">
+
+  <meta itemprop="url" content="{{post.link}}">
+  {% if post.thumbnail %}
+    <meta itemprop="image" content="{{ post.thumbnail }}">
+  {% endif %}
 
   <h3 class="post-thumbnail-title h5 mb-3">
-    <a href="{{post.link}}" title="{{ post.title }}">
+    <a href="{{post.link}}" title="{{ post.title }}" itemprop="name">
       {{ post.title }}
     </a>
   </h3>
@@ -25,8 +30,8 @@
 
   <p class="mb-0">
     <a href="{{post.link}}" title="{{ post.title }}">
-      Celé článek
+      Celý článek
     </a>
   </p>
 
-</div>
+</article>

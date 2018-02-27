@@ -11,6 +11,7 @@
 
 use function Eshopiste\Helpers\get_eshop_category_link;
 use function Eshopiste\Helpers\get_similiar_posts;
+use function Eshopiste\Helpers\truncate;
 
 $context = Timber::get_context();
 $post = Timber::query_post();
@@ -34,7 +35,11 @@ if ( $age_field ) {
 	$post_age_label = $age_field['choices'][$age_field['value']];
 }
 
-
+if ( $post->get_field('description') ) {
+	$short_description = truncate( strip_tags( $post->get_field('description') ), 200 ); ;
+	$context['short_description'] = $short_description;
+	$context['meta_description'] = $short_description;
+}
 
 $context['properties'] = [
 	[

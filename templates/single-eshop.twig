@@ -1,9 +1,33 @@
 {% extends "base.twig" %}
 
+{% set thumbnails = post.get_field('screen_thumbnail') %}
+
+{% block head %}
+	<meta property="og:url" content="{{ post.link }}">
+	<meta property="og:type" content="product">
+
+	{% if post.get_field('price') %}
+		<meta property="product:price:amount" content="{{ post.get_field('price') }}">
+	  <meta property="product:price:currency" content="CZK">
+	{% endif %}
+
+	{% if thumbnails.large.url %}
+		<meta property="og:image" content="{{ thumbnails.large.url }}">
+	{% endif %}
+{% endblock %}
 
 {% block content %}
 	<div class="container">
-		<article class="eshop">
+		<article class="eshop" itemscope itemtype="https://schema.org/Product">
+
+			<meta itemprop="name" content="{{ post.title }}">
+			<meta itemprop="url" content="{{ post.link }}">
+			<meta itemprop="description" content="{{ short_description }}">
+			<meta itemprop="category" content="Úvodní stránka > {% if post.get_field('category') %}{{ post.get_field('category').name }} > {% endif %}{{ post.title }}">
+
+			{% if thumbnails.large.url %}
+				<meta itemprop="image" content="{{ thumbnails.large.url }}">
+			{% endif %}
 
 			<div class="row">
 				<div class="col-12 col-lg-7">
@@ -30,7 +54,7 @@
 				</div>
 				<div class="col-12 col-md-5">
 
-					{% include 'eshop/screens.twig' with {'thumbnails': post.get_field('screen_thumbnail')} %}
+					{% include 'eshop/screens.twig' with {'thumbnails': thumbnails} %}
 
 				</div>
 			</div>
@@ -57,7 +81,7 @@
 
 {% block script_footer %}
 	{{ parent() }}
-	
+
 	window.chartData = [
 
 		{% if post.get_field('turnover_history')|length > 0 %}

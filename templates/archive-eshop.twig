@@ -1,5 +1,23 @@
 {% extends "base.twig" %}
 
+{% block head %}
+	<link rel="canonical" href="{{ archive_link }}">
+
+	{% if posts.pagination.total > 1 %}
+
+		{% if posts.pagination.prev %}
+			<link rel="prev" href="{{posts.pagination.prev.link}}">
+		{% endif %}
+
+		{% if posts.pagination.next %}
+			<link rel="next" href="{{posts.pagination.next.link}}">
+		{% endif %}
+		
+	{% endif %}
+
+	<meta property="og:url" content="{{ archive_link }}">
+	<meta property="og:type" content="website">
+{% endblock %}
 
 {% block breadcrumb %}{% endblock %}
 
