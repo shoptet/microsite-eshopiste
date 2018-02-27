@@ -47,6 +47,20 @@
   }
 }
 
+.header-search {
+
+  @include media-breakpoint-up(lg) {
+    width: rem-calc(200px);
+  }
+
+  @include media-breakpoint-up(xl) {
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: rem-calc(230px);
+  }
+}
+
 .header-search,
 .header-actions {
   display: none;
