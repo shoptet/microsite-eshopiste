@@ -28,4 +28,10 @@ if( function_exists('acf_add_options_page') ) {
 		'parent_slug' => 'theme-settings',
 	]);
 
+	acf_add_options_sub_page([
+		'page_title' 	=> 'Nastavení mailingu',
+		'menu_title' 	=> 'Mailing',
+		'parent_slug' => 'theme-settings',
+	]);
+
 }

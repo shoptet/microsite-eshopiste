@@ -102,6 +102,7 @@ function handle_contact_form_submit() {
   $eshop_contact_email = get_post_meta( $eshop_id, 'contact_email' );
 
   $options = get_fields('options');
+  $email_from = $options['email_from'];
   $seller_email_body = $options['seller_email_body'];
   $seller_email_subject = $options['seller_email_subject'];
   $buyer_email_body = $options['buyer_email_body'];
@@ -122,7 +123,7 @@ function handle_contact_form_submit() {
     $seller_email_subject,
 		$seller_email_body,
 		[
-			'From: Eshopiště <info@eshopiste.cz>',
+			'From: ' . $email_from,
 			'Replay-to: ' . $email,
 		]
 	);
@@ -133,7 +134,7 @@ function handle_contact_form_submit() {
     $buyer_email_subject,
 		$buyer_email_body,
 		[
-			'From: Eshopiště <info@eshopiste.cz>',
+			'From: ' . $email_from,
 		]
 	);
 

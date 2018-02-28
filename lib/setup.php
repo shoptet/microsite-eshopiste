@@ -282,3 +282,39 @@ add_action( 'login_enqueue_scripts', function () { ?>
 		#login h1:first-child {display: none}
   </style>
 <?php });
+
+/**
+ * Send e-mail when new e-shop is pending for review
+ */
+add_action( 'pending_eshop',  function ($eshop_id) {
+	$options = get_fields('options');
+
+	if ( !isset($options['pending_email_recipients']) || !is_array($options['pending_email_recipients']) ) {
+		return;
+	}
+
+	$email_recipients = $options['pending_email_recipients'];
+
+	$email_recipients_emails = [];
+	foreach ($email_recipients as $user) {
+		if ( !isset($user['user_email']) ) continue;
+		$email_recipients_emails[] = $user['user_email'];
+	}
+
+	$eshop_title = get_the_title( $eshop_id );
+	$email_from = $options['email_from'];
+	$email_subject = $options['pending_email_subject'];
+	$email_body = $options['pending_email_body'];
+
+	$to_replace = [
+		'%eshop_name%' => $eshop_title,
+  ];
+  $email_body = strtr($email_body, $to_replace);
+
+	wp_mail(
+		$email_recipients_emails,
+		$email_subject,
+		$email_body,
+		[ 'From: ' . $email_from ]
+	);
+});
