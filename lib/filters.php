@@ -30,11 +30,22 @@ add_filter('init', function () {
 }, 0);
 
 /**
- * Rewrite Pagination slug rules
+ * Update login header
  */
 add_filter( 'login_message', function ($message) {
 
-  $new_message = '';
+  $new_message = '
+    <a href="' . get_home_url() . '">
+      <img
+        src="' . get_template_directory_uri() . '/assets/eshopiste-logo-no-claim.svg"
+        style="
+          display: block;
+          margin: 0 auto 50px auto;
+          max-width: 230px;
+        "
+      >
+    </a>
+  ';
 
   // Add title to login pages
   if ( ! isset( $_REQUEST['action'] ) )
@@ -64,6 +75,24 @@ add_filter( 'login_message', function ($message) {
     $new_message .= $message;
 
   return $new_message;
+});
+
+/**
+ * Update login footer
+ */
+add_filter( 'login_footer', function () {
+  echo '
+    <a href="https://www.shoptet.cz/" target="_blank">
+      <img
+        src="' . get_template_directory_uri() . '/assets/shoptet-logo.svg"
+        style="
+          display: block;
+          max-width: 120px;
+          margin: 50px auto 50px auto;
+        "
+      >
+    </a>
+  ';
 });
 
 /**
