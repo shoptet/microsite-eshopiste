@@ -106,3 +106,29 @@ add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
   }
   return $redirect_to;
 }, 10, 3);
+
+/**
+ * Edit new user notification e-mail
+ */
+add_filter( 'wp_new_user_notification_email', function( $email, $user ) {
+  preg_match('/<http(.*?)>/', $email['message'], $match); // Get password url from message
+  $set_password_url = substr($match['0'], 1, -1); // Remove '<' and '>' from match string
+
+  $options = get_fields('options');
+
+  $email_from = $options['email_from'];
+	$email_subject = $options['welcome_email_subject'];
+	$email_body = $options['welcome_email_body'];
+
+	$to_replace = [
+		'%username%' => $user->user_login,
+		'%set_password_url%' => $set_password_url,
+  ];
+  $email_body = strtr($email_body, $to_replace);
+
+  $email['subject'] = $email_subject;
+  $email['message'] = $email_body;
+  $email['headers'] = [ 'From: ' . $email_from ];
+
+  return $email;
+}, 10, 2);
