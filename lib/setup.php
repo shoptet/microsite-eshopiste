@@ -287,7 +287,12 @@ add_action( 'login_enqueue_scripts', function () { ?>
 /**
  * Send e-mail when new e-shop is pending for review
  */
-add_action( 'pending_eshop',  function ($eshop_id) {
+add_action( 'transition_post_status',  function ($new_status, $old_status, $post) {
+
+	if ( get_post_type($post) !== 'eshop' || $old_status !== 'draft' || $new_status !== 'pending' ) {
+		return;
+  }
+
 	$options = get_fields('options');
 
 	if ( !isset($options['pending_email_recipients']) || !is_array($options['pending_email_recipients']) ) {
@@ -295,6 +300,7 @@ add_action( 'pending_eshop',  function ($eshop_id) {
 	}
 
 	$email_recipients = $options['pending_email_recipients'];
+	$eshop_id = $post->ID;
 
 	$email_recipients_emails = [];
 	foreach ($email_recipients as $user) {
@@ -302,7 +308,7 @@ add_action( 'pending_eshop',  function ($eshop_id) {
 		$email_recipients_emails[] = $user['user_email'];
 	}
 
-	$eshop_title = get_the_title( $eshop_id );
+	$eshop_title = $post->post_title;
 	$email_from = $options['email_from'];
 	$email_subject = $options['pending_email_subject'];
 	$email_body = $options['pending_email_body'];
@@ -318,4 +324,4 @@ add_action( 'pending_eshop',  function ($eshop_id) {
 		$email_body,
 		[ 'From: ' . $email_from ]
 	);
-});
+}, 10, 3);
