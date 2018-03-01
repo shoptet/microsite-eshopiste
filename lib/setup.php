@@ -107,6 +107,7 @@ add_action( 'save_post', function ( $post_id ){
 
 	foreach ($thumbnail_sizes as $size => $options) {
 		$options['url'] = $eshop_url;
+		$options['format'] = 'jpg';
 		$thumbnail_sizes[$size]['url'] = $urlbox->generateUrl( $options );
 	}
 
