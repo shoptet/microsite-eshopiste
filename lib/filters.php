@@ -3,6 +3,19 @@
 namespace Eshopiste\Filters;
 
 /**
+ * Edit robots.txt file
+ */
+add_filter('robots_txt', function( $robots_text ) {
+  // via https://moz.com/community/q/default-robots-txt-in-wordpress-should-i-change-it#reply_329849
+  return $robots_text . '
+Disallow: /*?
+Disallow: /wp-includes/
+Disallow: /wp-login.php
+Disallow: /wp-register.php
+';
+});
+
+/**
  * Hide redundant categories metabox in eshop edit page
  */
 add_filter('add_meta_boxes', function() {

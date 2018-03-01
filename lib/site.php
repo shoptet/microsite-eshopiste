@@ -27,6 +27,7 @@ class EshopisteSite extends TimberSite {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+		$this->clean_header();
 		parent::__construct();
 	}
 
@@ -93,6 +94,14 @@ class EshopisteSite extends TimberSite {
 		$twig->addFilter('category_link', new Twig_SimpleFilter('category_link', array($this, 'category_link')));
 		$twig->addFilter('separate_thousands', new Twig_SimpleFilter('separate_thousands', [$this, 'separate_thousands']));
 		return $twig;
+	}
+
+	function clean_header() {
+		/* Clean WordPress header (for cleaning emoji and oEmbed is used a plugin) */
+		remove_action( 'wp_head', 'rsd_link' );
+		remove_action( 'wp_head', 'wlwmanifest_link' );
+		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+		remove_action( 'wp_head', 'wp_generator' );
 	}
 
 	function static_assets( $filePath ) {
