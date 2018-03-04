@@ -29,4 +29,16 @@ $(function () {
 
   initEshopContactForm();
 
+  $( '#headerSearch input[type=search]' ).autocomplete({
+    source: function(request, response) {
+      var matcher = new RegExp('^' + $.ui.autocomplete.escapeRegex(request.term), 'i');
+      response($.grep( window.allEshops, function(eshop) {
+        return matcher.test(eshop.label);
+      }));
+    },
+    select: function(e, ui) {
+      window.location.href = ui.item.link;
+    },
+  });
+
 });

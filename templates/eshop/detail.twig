@@ -19,10 +19,12 @@
       <h2 class="h-heavy">Co je předmětem nabídky</h2>
       <ul class="fa-ul list-horizontal">
         {% for item in post.get_field('offered_items') %}
-          <li>
-            <span class="fa-li"><i class="fas fa-check-circle text-success"></i></span>
-            {{ item }}
-          </li>
+          {% if item is not empty %}
+            <li>
+              <span class="fa-li"><i class="fas fa-check-circle text-success"></i></span>
+              {{ item }}
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>

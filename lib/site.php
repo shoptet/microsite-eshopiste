@@ -83,6 +83,7 @@ class EshopisteSite extends TimberSite {
 		$context['admin_profile_url'] = admin_url( 'profile.php' );
 		$context['admin_eshops_url'] = admin_url( 'edit.php?post_type=eshop' );
 		$context['new_eshop_url'] = admin_url( 'post-new.php?post_type=eshop' );
+		$context['all_eshops'] = new Timber\PostQuery( [ 'post_type' => 'eshop', 'posts_per_page' => -1 ] );
 		return $context;
 	}
 

@@ -104,6 +104,15 @@
 		<script>
 			{% block script_footer %}
 				window.ajaxurl = '{{ function('admin_url', 'admin-ajax.php') }}';
+
+				window.allEshops = [
+					{% for eshop in all_eshops %}
+						{
+							label: '{{ eshop.title }}',
+							link: '{{ eshop.link }}',
+						},
+					{% endfor %}
+				];
 			{% endblock %}
 		</script>
 

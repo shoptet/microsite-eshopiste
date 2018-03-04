@@ -59,6 +59,7 @@ var config = {
       'babel-es6-polyfill',
       'bootstrap',
       'jquery',
+      'jquery-ui/ui/widgets/autocomplete.js',
       'svg-injector-2',
       'nouislider',
       'wnumb',
