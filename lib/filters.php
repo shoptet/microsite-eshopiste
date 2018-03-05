@@ -141,7 +141,10 @@ add_filter( 'wp_new_user_notification_email', function( $email, $user ) {
 
   $email['subject'] = $email_subject;
   $email['message'] = $email_body;
-  $email['headers'] = [ 'From: ' . $email_from ];
+  $email['headers'] = [
+    'From: ' . $email_from,
+    'Content-Type: text/html; charset=UTF-8',
+  ];
 
   return $email;
 }, 10, 2);

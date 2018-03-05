@@ -322,7 +322,10 @@ add_action( 'transition_post_status',  function ($new_status, $old_status, $post
 		$email_recipients_emails,
 		$email_subject,
 		$email_body,
-		[ 'From: ' . $email_from ]
+		[
+			'From: ' . $email_from,
+			'Content-Type: text/html; charset=UTF-8',
+		]
 	);
 }, 10, 3);
 

@@ -125,6 +125,7 @@ function handle_contact_form_submit() {
 		[
 			'From: ' . $email_from,
 			'Replay-to: ' . $email,
+      'Content-Type: text/html; charset=UTF-8',
 		]
 	);
 
@@ -135,6 +136,7 @@ function handle_contact_form_submit() {
 		$buyer_email_body,
 		[
 			'From: ' . $email_from,
+      'Content-Type: text/html; charset=UTF-8',
 		]
 	);
 
