@@ -33,22 +33,33 @@
           </ul>
 
         </div>
-        <div class="col-12 col-lg-5 col-xl-4">
+        <div class="col-12 col-sm-10 col-md-7 col-lg-5">
 
           <p class="h-heavy">Odběr newsletterů</p>
 
-          <form class="input-group mb-3" method="post" target="_blank">
-            <input
-              type="text"
-              class="form-control"
-              name="email"
-              placeholder="Vložte e-mail"
-              required
-            >
-            <div class="input-group-append">
-              <button class="btn btn-orange px-3" type="submit">
-                Přihlásit k odběru
-              </button>
+          <form class="mb-3" method="post" target="_blank">
+            <div class="input-group mb-2" style="max-width:23rem">
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                placeholder="Vložte e-mail"
+                required
+              >
+              <div class="input-group-append">
+                <button class="btn btn-orange px-3" type="submit">
+                  Přihlásit k odběru
+                </button>
+              </div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="termsConditionsCheck" required>
+              <label class="form-check-label" for="termsConditionsCheck">
+                Souhlasím s
+                <a href="https://www.shoptet.cz/podminky-ochrany-osobnich-udaju/" target="_blank">
+                  podmínkami ochrany osobních údajů
+                </a>
+              </label>
             </div>
           </form>
 
