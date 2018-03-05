@@ -24,7 +24,7 @@
   padding: 0;
   white-space: nowrap;
   overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
+  //-webkit-overflow-scrolling: touch; // dropdown menu not showing
   -ms-overflow-style: none;
 
   > li {
