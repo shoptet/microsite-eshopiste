@@ -325,3 +325,20 @@ add_action( 'transition_post_status',  function ($new_status, $old_status, $post
 		[ 'From: ' . $email_from ]
 	);
 }, 10, 3);
+
+/**
+ * Add class for small and medium acf input field
+ */
+add_action('admin_head', function() {
+	echo '
+		<style>
+	    .acf-field-small .acf-input {
+				max-width: 250px !important;
+	    }
+
+			.acf-field-medium .acf-input {
+				max-width: 450px !important;
+	    }
+  	</style>
+	';
+});

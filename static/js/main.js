@@ -1,6 +1,8 @@
 import '../scss/main.scss';
 import '../images/eshopiste-logo.svg';
 import '../images/eshopiste-logo-no-claim.svg';
+import '../images/shoptetrix-meditate.png';
+import '../images/shoptet-logo.svg';
 
 import '../images/properties/bar-chart.svg';
 import '../images/properties/cake.svg';
