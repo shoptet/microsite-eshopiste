@@ -69,6 +69,7 @@ $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
+$semilight:     $gray-500;
 $dark:          $gray-800 !default;
 
 $theme-colors: () !default;
@@ -80,6 +81,7 @@ $theme-colors: map-merge((
   "warning":    $warning,
   "danger":     $danger,
   "light":      $light,
+  "semilight":  $semilight,
   "dark":       $dark
 ), $theme-colors);
 // stylelint-enable

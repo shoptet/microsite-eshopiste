@@ -26,7 +26,15 @@
   {% if type != 0 %}
     <span class="d-block d-lg-inline ml-lg-3">
       {% if type == 1 %}
-        Se splatností {{ post.get_field('repayment_period') }}&nbsp;roky
+        {% set repayment_period = post.get_field('repayment_period') %}
+        {% if repayment_period == 1 %}
+          {% set month_string = 'měsíc' %}
+        {% elseif repayment_period >= 2 and epayment_period <= 4 %}
+          {% set month_string = 'měsíce' %}
+        {% else %}
+          {% set month_string = 'měsíců' %}
+        {% endif %}
+        Se splatností {{ repayment_period }}&nbsp;{{ month_string }}
         a&nbsp;úrokem {{ post.get_field('interest_rate') }}&nbsp;%
       {% elseif type == 2 %}
         Nabízený podíl {{ post.get_field('share') }}&nbsp;%
