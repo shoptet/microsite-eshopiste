@@ -133,11 +133,15 @@ class EshopisteSite extends TimberSite {
 	}
 
 	function is_post_new( $post ) {
+		$options = get_fields('options');
+		if ( !isset($options['eshop_is_new_interval']) ) return false;
+		$is_new_interval = $options['eshop_is_new_interval'];
+
 		$today = new DateTime();
 		$post_date = new DateTime($post->date('Y-m-d'));
 		$interval = $today->diff($post_date);
 
-		return $interval->days <= 30;
+		return $interval->days <= $is_new_interval;
 	}
 
 	function category_link( $term ) {

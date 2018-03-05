@@ -345,3 +345,38 @@ add_action('admin_head', function() {
   	</style>
 	';
 });
+
+/**
+ * Set cron for expirated e-shops
+ */
+if ( ! wp_next_scheduled( 'hide_expirated_eshops' ) ) {
+  wp_schedule_event( time(), 'daily', 'hide_expirated_eshops' );
+}
+add_action( 'hide_expirated_eshops', function() {
+	$options = get_fields('options');
+	if ( !isset($options['eshop_expiration_time']) ) return;
+
+	$expiration_time = $options['eshop_expiration_time'];
+
+	$expirated_eshops_query = new \WP_Query([
+	  'post_type' => 'eshop',
+	  'posts_per_page' => -1,
+		'date_query' => [
+      'before' => date('Y-m-d', strtotime('-' . $expiration_time . ' days')),
+    ],
+	]);
+	$expirated_eshops = $expirated_eshops_query->posts;
+
+	foreach($expirated_eshops as $eshop) {
+		wp_update_post([ 'ID' => $eshop->ID, 'post_status' => 'draft' ]);
+	}
+
+	// update count of posts in all categories
+	$all_terms = get_terms([
+		'taxonomy' => 'eshop_category',
+    'fields' => 'ids',
+    'hide_empty' => false,
+	]);
+	wp_update_term_count_now( $all_terms, 'eshop_category' );
+});
+//do_action( 'hide_expirated_eshops' );
