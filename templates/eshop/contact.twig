@@ -30,17 +30,17 @@
 
   <div class="form-group">
     <label class="required" for="eshopContactFormName">Vaše jméno</label>
-    <input type="text" name="name" class="form-control" id="eshopContactFormName">
+    <input type="text" name="name" class="form-control" id="eshopContactFormName" required>
   </div>
 
   <div class="form-group">
     <label class="required" for="eshopContactFormEmail">Váš e-mail</label>
-    <input type="email" name="email" class="form-control" id="eshopContactFormEmail">
+    <input type="email" name="email" class="form-control" id="eshopContactFormEmail" required>
   </div>
 
   <div class="form-group">
     <label class="required" for="eshopContactFormMessage">Zpráva majiteli e-shopu</label>
-    <textarea class="form-control" name="message" rows="5" id="eshopContactFormMessage"></textarea>
+    <textarea class="form-control" name="message" rows="5" id="eshopContactFormMessage" required></textarea>
   </div>
 
   <input type="hidden" name="eshop_id" value="{{ post.id }}">
