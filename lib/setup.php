@@ -17,6 +17,11 @@ add_action( 'init', function () {
 });
 
 /**
+ * Remove prev and next link in e-shop detail head
+ */
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
+
+/**
  * Remove update nag in admin
  */
 add_action( 'admin_head', function() {
@@ -93,15 +98,18 @@ add_action( 'save_post', function ( $post_id ){
 	$thumbnail_sizes = [
 		'large' => [
 			'width' => '1280',
-			'height' => '800',
+			'height' => '728',
+			'thumb_width' => '470',
 		],
 		'medium' => [
-			'width' => '1024',
-			'height' => '768',
+			'width' => '768',
+			'height' => '1024',
+			'thumb_width' => '182',
 		],
 		'small' => [
 			'width' => '375',
 			'height' => '667',
+			'thumb_width' => '91',
 		],
 	];
 
@@ -109,6 +117,8 @@ add_action( 'save_post', function ( $post_id ){
 		$options['url'] = $eshop_url;
 		$options['format'] = 'jpg';
 		$thumbnail_sizes[$size]['url'] = $urlbox->generateUrl( $options );
+		$options['thumb_width'] *= 2;
+		$thumbnail_sizes[$size]['retina_url'] = $urlbox->generateUrl( $options );
 	}
 
 	update_post_meta( $post_id, 'screen_thumbnail', $thumbnail_sizes );
