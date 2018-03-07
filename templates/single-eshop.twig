@@ -25,11 +25,6 @@
 			<meta itemprop="description" content="{{ short_description }}">
 			<meta itemprop="category" content="Úvodní stránka > {% if post.get_field('category') %}{{ post.get_field('category').name }} > {% endif %}{{ post.title }}">
 
-			<div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-	      <meta itemprop="price" content="{{ (post.get_field('price') ?: '0') }}">
-	      <meta itemprop="priceCurrency" content="CZK">
-	    </div>
-
 			{% if thumbnails.large.url %}
 				<meta itemprop="image" content="{{ thumbnails.large.url }}">
 			{% endif %}

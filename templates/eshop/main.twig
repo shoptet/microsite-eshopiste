@@ -1,7 +1,7 @@
 {% set type = post.get_field('type') %}
 
 
-<div class="eshop-block" itemscope itemtype="https://schema.org/Offer">
+<div class="eshop-block" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 
   {% if post.get_field('price') %}
     <meta itemprop="price" content="{{ post.get_field('price') }}">
