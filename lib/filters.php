@@ -8,7 +8,7 @@ namespace Eshopiste\Filters;
 add_filter('robots_txt', function( $robots_text ) {
   // via https://moz.com/community/q/default-robots-txt-in-wordpress-should-i-change-it#reply_329849
   return $robots_text . '
-Disallow: /*?
+Disallow: /?p=
 Disallow: /wp-includes/
 Disallow: /wp-login.php
 Disallow: /wp-register.php

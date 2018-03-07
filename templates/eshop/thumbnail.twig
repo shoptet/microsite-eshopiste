@@ -26,7 +26,7 @@
 
       {% endif %}
     </span>
-    <strong class="eshop-thumbnail-price" itemscope itemtype="https://schema.org/Offer">
+    <strong class="eshop-thumbnail-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
       <meta itemprop="price" content="{{ (post.get_field('price') ?: '0') }}">
       <meta itemprop="priceCurrency" content="CZK">
       {{ (post.get_field('price') ?: '0')|separate_thousands }}&nbsp;Kč

@@ -20,7 +20,12 @@
 					  {% if post.thumbnail %}
 					    <meta itemprop="image" content="{{ post.thumbnail }}">
 					  {% endif %}
-						<h1 class="page-row-title" itemprop="name">{{ post.title }}</h1>
+						<meta itemprop="headline" content="{{ post.title }}">
+					  <div itemprop="author publisher" itemscope itemtype="http://schema.org/Organization">
+					    <meta itemprop="name" content="{{ site.name }}">
+					  </div>
+						<meta itemprop="datePublished" content="{{ post.date('Y-m-d') }}">
+						<h1 class="page-row-title">{{ post.title }}</h1>
 
 						{% if post.thumbnail %}
 							<img

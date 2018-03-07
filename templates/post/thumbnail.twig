@@ -1,12 +1,17 @@
 <article class="post-thumbnail" itemscope itemtype="https://schema.org/Article">
 
   <meta itemprop="url" content="{{post.link}}">
+  <meta itemprop="headline" content="{{ post.title }}">
+  <div itemprop="author publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="{{ site.name }}">
+  </div>
+  <meta itemprop="datePublished" content="{{ post.date('Y-m-d') }}">
   {% if post.thumbnail %}
     <meta itemprop="image" content="{{ post.thumbnail }}">
   {% endif %}
 
   <h3 class="post-thumbnail-title h5 mb-3">
-    <a href="{{post.link}}" title="{{ post.title }}" itemprop="name">
+    <a href="{{post.link}}" title="{{ post.title }}">
       {{ post.title }}
     </a>
   </h3>

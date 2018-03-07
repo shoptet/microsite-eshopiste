@@ -28,10 +28,10 @@
 
           <div class="header-menu">
             <button role="button" class="btn btn-orange px-3" data-header-button-search aria-label="Zobrazit vyhledávání">
-              <span class="iconholder"><i class="fas fa-search" aria-hidden></i></span>
+              <span class="iconholder"><i class="fas fa-search" aria-hidden="true"></i></span>
             </button>
             <button role="button" class="btn btn-orange px-3" data-header-button-actions aria-label="Zobrazit nabídku">
-              <span class="iconholder"><i class="fas fa-bars" aria-hidden></i></span>
+              <span class="iconholder"><i class="fas fa-bars" aria-hidden="true"></i></span>
             </button>
           </div>
         </div>
@@ -43,6 +43,7 @@
             id="headerSearch"
       			action="{{ archive_link }}"
       			role="search"
+            itemscope
       			itemprop="potentialAction"
       			itemtype="https://schema.org/SearchAction"
       		>
@@ -59,7 +60,7 @@
       				>
       	      <span class="input-group-append">
       	        <button type="submit" class="btn btn-input px-3 border-left-0" aria-label="Vyhledat">
-                  <span class="iconholder"><i class="fas fa-search" aria-hidden></i></span>
+                  <span class="iconholder"><i class="fas fa-search" aria-hidden="true"></i></span>
                 </button>
       	      </span>
             </div>
@@ -67,7 +68,7 @@
 
           <div class="header-actions" id="headerActions">
             <a class="btn btn-orange text-uppercase mb-2 mb-sm-0" href="{{ new_eshop_url }}">
-              <span class="iconholder"><i class="fas fa-plus-circle" aria-hidden></i></span>
+              <span class="iconholder"><i class="fas fa-plus-circle" aria-hidden="true"></i></span>
               Přidat e-shop
             </a>
             {% if is_user_logged_in %}
@@ -84,7 +85,7 @@
               </span>
             {% else %}
               <a class="align-middle ml-sm-3" href="{{ login_url }}">
-                <span class="iconholder mr-1"><i class="fas fa-user" aria-hidden></i></span>Přihlásit se
+                <span class="iconholder mr-1"><i class="fas fa-user" aria-hidden="true"></i></span>Přihlásit se
               </a>
             {% endif %}
           </div>
