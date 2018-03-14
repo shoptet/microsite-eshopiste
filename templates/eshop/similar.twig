@@ -1,0 +1,23 @@
+{% if similar_posts|length > 0 %}
+  <div class="row-section pt-0">
+    <div class="container">
+
+      <h2 class="row-section-title h4">
+        Nezaujal vás tento e-shop
+      </h2>
+
+      <p class="mb-4 text-center mb-5">
+        Podívejte se na další ze stejné kategorie
+      </p>
+
+      <div class="row">
+        {% for post in similar_posts %}
+          <div class="col-12 col-md-6 col-xl-3 mb-4">
+            {% include 'eshop/thumbnail.twig' %}
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+{% endif %}

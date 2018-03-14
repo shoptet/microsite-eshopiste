@@ -1,0 +1,71 @@
+.eshop-mockup-container {
+  @include clearfix;
+}
+
+.eshop-mockup {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+}
+
+.eshop-mockup-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.eshop-mockup-large {
+
+  &::before {
+    padding-bottom: percentage(720/891); // image ratio in percent from image resolution
+    background-image: url("../images/mockups/large.jpg");
+  }
+
+  .eshop-mockup-inner {
+    padding: 4% 4%;
+  }
+}
+
+.eshop-mockup-medium {
+  float: right;
+  width: 41.5%;
+  margin-top: -35%;
+  margin-right: 8%;
+
+  &::before {
+    padding-bottom: percentage(523/370); // image ratio in percent from image resolution
+    background-image: url("../images/mockups/medium.png");
+  }
+
+  .eshop-mockup-inner {
+    padding: 12% 7%;
+  }
+}
+
+.eshop-mockup-small {
+  float: left;
+  width: 20%;
+  margin-top: -17.5%;
+  margin-left: 10%;
+
+  &::before {
+    padding-bottom: percentage(370/180); // image ratio in percent from image resolution
+    background-image: url("../images/mockups/small.png");
+  }
+
+  .eshop-mockup-inner {
+    padding: 22% 5.5%;
+  }
+}

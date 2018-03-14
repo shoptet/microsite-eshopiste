@@ -1,0 +1,65 @@
+<a
+  class="eshop-thumbnail"
+  href="{{post.link}}"
+  title="{{ post.title }}"
+  itemscope
+  itemtype="https://schema.org/Product"
+>
+  <meta itemprop="url" content="{{ post.link }}">
+
+  <p class="eshop-thumbnail-title h5 text-truncate mb-1" itemprop="name">
+    {{ post.title }}
+  </p>
+
+  <p class="mb-0 text-truncate">
+    {{ post.get_field('category').name ?: 'Bez kategorie' }}
+  </p>
+
+  <div class="d-flex w-100 justify-content-between">
+    <span>
+      {% if post.get_field('type') == 0 %}
+        Prodej
+      {% elseif post.get_field('type') == 1 %}
+        Půjčka
+      {% elseif post.get_field('type') == 2 %}
+        Investice
+
+      {% endif %}
+    </span>
+    <strong class="eshop-thumbnail-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <meta itemprop="price" content="{{ (post.get_field('price') ?: '0') }}">
+      <meta itemprop="priceCurrency" content="CZK">
+      {{ (post.get_field('price') ?: '0')|separate_thousands }}&nbsp;Kč
+    </strong>
+  </div>
+
+  <div class="eshop-thumbnail-wrapper">
+
+    <div class="eshop-thumbnail-screen mt-2 mb-3">
+      <img
+        src="{{ post.get_field('screen_thumbnail').large.url ?: 'http://via.placeholder.com/1280x800/555/999?text=Náhled+není+k+dispozici' }}"
+        {% if post.get_field('screen_thumbnail').large.retina_url %}
+          srcset="{{ post.get_field('screen_thumbnail').large.retina_url }} 2x"
+        {% endif %}
+        alt="{{ post.title }}"
+        itemprop="image"
+      >
+    </div>
+
+    {% include 'eshop/badges.twig' %}
+
+  </div>
+
+  <ul class="list-unstyled mb-0">
+
+    <li class="text-truncate">
+      <span class="font-weight-bold">Obrat:</span> {{ (post.get_field('turnover') ?: '0')|separate_thousands }} Kč / 12 měsíců
+    </li>
+
+    <li class="text-truncate">
+      <span class="font-weight-bold">Návštěvnost:</span> {{ (post.get_field('traffic') ?: '0')|separate_thousands }} / 12 měsíců
+    </li>
+
+  </ul>
+
+</a>

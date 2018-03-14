@@ -1,0 +1,40 @@
+.no-ui-slider-container {
+  min-height: rem-calc($no-ui-line-height);
+  margin: 0 rem-calc($no-ui-handle-size / 2);
+}
+
+.noUi-horizontal {
+  height: rem-calc($no-ui-line-height);
+}
+
+.noUi-target {
+  border-radius: 0;
+  border-width: 0;
+  background-color: $gray-200;
+  box-shadow: none;
+}
+
+.noUi-connect {
+  background: $green;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: rem-calc($no-ui-handle-size);
+  height: rem-calc($no-ui-handle-size);
+  top: - rem-calc($no-ui-line-height);
+
+  &::after, &::before {
+    content: none;
+  }
+}
+
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+  right: - rem-calc($no-ui-handle-size / 2);
+}
+
+.noUi-handle {
+  border-width: 0;
+  border-radius: 0;
+  background-color: $blue;
+  box-shadow: none;
+}

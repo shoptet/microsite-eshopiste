@@ -1,0 +1,12 @@
+<div class="testimonial-thumbnail">
+  <img
+    class="testimonial-thumbnail-image"
+    src="{{ testimonial.image.sizes.medium|resize(180, 180) }}"
+    alt="{{ testimonial.name }}"
+  >
+  <div class="testimonial-thumbnail-body">
+    <p class="font-weight-bold mb-0">{{ testimonial.name }}</p>
+    <p class="text-muted">{{ testimonial.position }}</p>
+    <div>{{ testimonial.text }}</div>
+  </div>
+</div>

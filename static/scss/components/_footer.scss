@@ -1,0 +1,45 @@
+.footer {
+  padding-top: 3rem;
+}
+
+.footer-content {
+  padding-bottom: 1rem;
+}
+
+.footer-shoptet {
+  display: block;
+
+  img {
+    max-width: rem-calc(110px);
+  }
+}
+
+.footer-info {
+  color: $text-muted;
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid $gray-200;
+}
+
+.footer-info-wrapper {
+  @include media-breakpoint-up(md) {
+    @include clearfix;
+    display: flex;
+    position: relative;
+    height: rem-calc(70px);
+
+    p {
+      flex: 1 1 auto;
+      align-self: center;
+      margin-bottom: 0
+    }
+  }
+}
+
+.footer-info-social {
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

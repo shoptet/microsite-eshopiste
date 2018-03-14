@@ -1,0 +1,35 @@
+.btn {
+  font-weight: $font-weight-semibold;
+}
+
+.btn-input {
+  @include button-variant($input-bg, $input-border-color, darken($input-bg, 7.5%), $input-border-color);
+  color: $gray-600;
+}
+
+.btn-orange {
+  @include button-variant($orange, $orange, darken($orange, 3%), darken($orange, 3%));
+  color: $white;
+
+  @include hover-focus() {
+    color: darken($white, 3%);
+  }
+}
+
+.btn-blue {
+  @include button-variant($blue, $blue, darken($blue, 3%), darken($blue, 3%));
+  color: $white;
+
+  @include hover-focus() {
+    color: darken($white, 3%);
+  }
+}
+
+.btn-green {
+  @include button-variant($green, $green, darken($green, 3%), darken($green, 3%));
+  color: $white;
+
+  @include hover-focus() {
+    color: darken($white, 3%);
+  }
+}

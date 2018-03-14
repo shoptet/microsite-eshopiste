@@ -1,0 +1,5 @@
+.required::after {
+  display: inline;
+  content: ' *';
+  color: $danger;
+}

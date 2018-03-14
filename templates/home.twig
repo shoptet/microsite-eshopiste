@@ -1,0 +1,203 @@
+{% extends "base.twig" %}
+
+{% block breadcrumb %}{% endblock %}
+
+{% block content %}
+
+  <div class="hero">
+    <div class="container">
+      <h1 class="hero-title mb-5">{{ claim }}</h1>
+
+      {% include 'hero-form.twig' %}
+    </div>
+  </div>
+
+  <div class="row-info-banner">
+    <div class="container">
+      <p class="h4 mb-0">
+        <strong>{{ eshop_count|separate_thousands }}</strong> e-shopů s obratem <strong>{{ total_turnover|separate_thousands }}&nbsp;Kč</strong>
+        dostalo nabídky od <strong>{{ eshop_bid_count|separate_thousands }}</strong> investorů
+      </p>
+    </div>
+  </div>
+
+  <div class="row-section">
+    <div class="container">
+
+      <h2 class="row-section-title h4 mb-5">
+        Nové e-shopy nabídnuté k&nbsp;prodeji
+      </h2>
+
+      <div class="row">
+        {% for post in posts_for_sale %}
+          <div class="col-12 col-md-6 col-xl-3 mb-4">
+            {% include 'eshop/thumbnail.twig' %}
+          </div>
+
+          {% if loop.index == 3 and term_for_sale_1 %}
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+              {% include 'category/thumbnail.twig' with {'term': term_for_sale_1} %}
+            </div>
+          {% elseif loop.index == 5 and term_for_sale_2 %}
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+              {% include 'category/thumbnail.twig' with {'term': term_for_sale_2} %}
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      <p class="text-center mt-3 mb-0">
+        <a href="{{ archive_link }}?type%5B%5D=0" class="btn btn-blue btn-lg ws-normal">
+          Zobrazit všechny e-shopy k&nbsp;prodeji
+        </a>
+      </p>
+
+    </div>
+  </div>
+
+  {% if advice_posts %}
+    <div class="row-section bg-light">
+      <div class="container">
+
+        <h2 class="row-section-title h4 mb-5">
+          Rady do začátku
+        </h2>
+
+        <div class="row">
+          {% for post in advice_posts %}
+            <div class="
+              col-12
+              col-md-6
+              {% if loop.last and advice_posts|length != 2 %}
+                offset-md-3
+              {% endif %}
+              mb-4
+            ">
+              {% include 'post/thumbnail.twig' %}
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="row-section">
+    <div class="container">
+
+      <h2 class="row-section-title h4 mb-5">
+        Nové e-shopy se zájmem o&nbsp;půjčku nebo investici
+      </h2>
+
+      <div class="row">
+        {% for post in posts_for_invest %}
+          <div class="col-12 col-md-6 col-xl-3 mb-4">
+            {% include 'eshop/thumbnail.twig' %}
+          </div>
+
+          {% if loop.index == 3 and term_for_invest %}
+            <div class="col-12 col-md-6 col-xl-3 mb-4">
+              {% include 'category/thumbnail.twig' with {'term': term_for_invest, 'invest': true} %}
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      <p class="text-center mt-3 mb-0">
+        <a href="{{ archive_link }}?type%5B%5D=1&type%5B%5D=2" class="btn btn-blue btn-lg ws-normal">
+          Zobrazit všechny e-shopy k&nbsp;investici
+        </a>
+      </p>
+
+    </div>
+  </div>
+
+  {% if testimonials|length > 0 %}
+    <div class="row-section bg-light">
+      <div class="container">
+
+        <h2 class="row-section-title h4 mb-5">
+          Komu jsme už pomohli?
+        </h2>
+
+        <div class="row">
+          {% for testimonial in testimonials %}
+            <div class="
+              col-12
+              col-md-6
+              {% if loop.last and testimonials|length != 2 %}
+                offset-md-3
+              {% endif %}
+              col-lg-4
+              {% if loop.first and testimonials|length == 1 %}
+                offset-lg-4
+              {% elseif loop.first and testimonials|length == 2 %}
+                offset-lg-2
+              {% else %}
+                offset-lg-0
+              {% endif %}
+              mb-4
+            ">
+              {% include 'testimonial/thumbnail.twig' %}
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="row-section row-section-faq">
+    <div class="container">
+
+      <h2 class="row-section-title h4 mb-5">
+        Otázky a odpovědi
+      </h2>
+
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 offset-xl-1">
+          <p class="h-heavy">Pro nakupující</p>
+
+          <ul class="fa-ul">
+            {% for post in posts_for_buyer %}
+              <li>
+                <span class="fa-li"><i class="far fa-question-circle"></i></span>
+                <a href="{{ post.link }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 offset-lg-4 offset-xl-3">
+
+          <p class="h-heavy">Pro prodejce</p>
+
+          <ul class="fa-ul">
+            {% for post in posts_for_seller %}
+              <li>
+                <span class="fa-li"><i class="far fa-question-circle"></i></span>
+                <a href="{{ post.link }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block script_footer %}
+  {{ parent() }}
+
+	window.sliderData = [{
+		id: 'filterTurnover',
+		start: [{{ turnover_range.min }}, {{ turnover_range.max }}],
+		range: {min: {{ turnover_range.min }}, max: {{ turnover_range.max }}},
+		submitOnChange: false,
+	}];
+{% endblock %}

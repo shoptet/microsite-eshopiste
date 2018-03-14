@@ -1,0 +1,106 @@
+<footer class="footer" role="contentinfo">
+  <div class="footer-content">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12 col-sm-6 col-lg-4 mb-3">
+
+          <a
+      			class="footer-shoptet mb-3"
+      			href="https://www.shoptet.cz/"
+      			title="Shoptet.cz"
+      		>
+      			<img
+      				src="{{ "shoptet-logo.svg"|static_assets }}"
+      				alt="Shoptet.cz"
+      			>
+      		</a>
+
+          <div>{{ footer_text }}</div>
+
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-3">
+
+          <p class="h-heavy">Odkazy</p>
+
+          <ul class="fa-ul">
+            {% for item in footer_menu.items %}
+              <li>
+                <span class="fa-li"><i class="fas fa-angle-right"></i></span>
+                <a href="{{ item.link }}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+        <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+
+          <p class="h-heavy">Odběr newsletterů</p>
+
+          <form class="mb-3" method="post" target="_blank" action="https://www.shoptet.cz/action/MailForm/subscribeToNewsletters/">
+            <input type="hidden" name="formId" value="2">
+            <div class="input-group mb-2" style="max-width:23rem">
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                placeholder="Vložte e-mail"
+                required
+              >
+              <div class="input-group-append">
+                <button class="btn btn-orange px-3" type="submit">
+                  Přihlásit k odběru
+                </button>
+              </div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="footerTermsConditionsCheck" required>
+              <label class="form-check-label" for="footerTermsConditionsCheck">
+                Souhlasím s
+                <a href="https://www.shoptet.cz/podminky-ochrany-osobnich-udaju/" target="_blank">
+                  podmínkami ochrany osobních údajů
+                </a>
+              </label>
+            </div>
+          </form>
+
+          <p>
+            Občas vám pošleme nabídky se zajímavými investicemi.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer-info">
+    <div class="container">
+    <div class="footer-info-wrapper">
+
+      <p>
+        s
+        <span class="heart" title="láskou" aria-label="láskou"></span>
+        Shoptet
+      </p>
+
+      <div class="footer-info-social">
+        <div
+          class="fb-page"
+          data-href="https://www.facebook.com/shoptet/"
+          data-tabs="timeline"
+          data-width="255"
+          data-height="70"
+          data-small-header="true"
+          data-adapt-container-width="false"
+          data-hide-cover="true"
+          data-show-facepile="false">
+            <blockquote cite="https://www.facebook.com/shoptet/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/shoptet/">Shoptet</a>
+            </blockquote>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </div>
+</footer>

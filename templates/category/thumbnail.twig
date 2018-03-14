@@ -1,0 +1,31 @@
+<div class="category-thumbnail text-center h-100">
+  <div class="category-thumbnail-inner">
+
+    {% if term.get_field('image') %}
+      <div class="category-thumbnail-icon mb-2">
+        <svg data-src="{{ term.get_field('image').sizes.medium }}"></svg>
+      </div>
+    {% endif %}
+
+    <p class="category-thumbnail-title h5 mb-2">
+      {{ term.get_field('thumbnail_title') ?: ('Kategorie ' ~ term.name) }}
+    </p>
+
+    <p class="mb-4">
+      {{ term.count }}
+      {% if term.count == 1 %}
+        e-shop připravený
+      {% elseif term.count <= 4 %}
+        e-shopy připravené
+      {% else %}
+        e-shopů připravených
+      {% endif %}
+      k&nbsp;{{ invest ? 'investici' : 'prodeji' }}
+    </p>
+
+    <a class="btn btn-green" href="{{ term|category_link }}">
+      Zobrazit
+    </a>
+
+  </div>
+</div>

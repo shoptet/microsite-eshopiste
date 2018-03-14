@@ -1,0 +1,62 @@
+<form action="{{ archive_link }}">
+  <div class="hero-form">
+    <div class="row">
+      <div class="col-md-4 mb-4 mb-md-0">
+
+        <div class="d-lg-flex align-items-center">
+          <label class="mr-3 mb-lg-0" for="filterCategory">Kategorie:</label>
+          <div class="w-100">
+            <select class="custom-select" id="filterCategory" name="category[]">
+              <option selected disabled>Všechny</option>
+              {% for term in all_categories %}
+                <option value="{{ term.id }}">{{ term.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-5 mb-4 mb-md-0 pt-lg-2">
+
+        <div class="d-lg-flex">
+          <div class="mr-3 mb-3 mb-lg-0">Obrat:</div>
+          <div class="w-100 mt-lg-2">
+            <div class="no-ui-slider-container">
+              <div class="mb-2" id="filterTurnover"></div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="small text-primary">
+                <span id="filterTurnoverIndicatorMin">{{ turnover_range.min }}</span> Kč
+              </div>
+              <div class="small text-primary">
+                <span id="filterTurnoverIndicatorMax">{{ turnover_range.max }}</span> Kč
+              </div>
+            </div>
+
+            <input type="hidden" id="filterTurnoverInputMin" name="turnover_min">
+            <input type="hidden" id="filterTurnoverInputMax" name="turnover_max">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-3">
+
+        <div class="d-lg-flex py-md-2">
+          {% for index, choice in type_choices %}
+            <div class="custom-control custom-radio {{ loop.first ? '' : 'ml-lg-3' }}">
+              <input type="radio" id="formType{{ index }}" name="type[]" class="custom-control-input" value="{{ index }}">
+              <label class="custom-control-label" for="formType{{ index }}">{{ choice }}</label>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-form-action">
+    <button type="submit" class="btn btn-green btn-lg">Vyhledat e-shopy</button>
+  </div>
+
+</form>

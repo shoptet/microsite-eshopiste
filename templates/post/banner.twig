@@ -1,0 +1,17 @@
+<a class="post-banner" href="{{post.link}}" title="{{ post.title }}">
+
+  <div class="d-flex align-items-center">
+
+    {% if post.thumbnail %}
+      <div class="post-banner-image mr-3 mr-lg-5" href="{{post.link}}" title="{{ post.title }}">
+        <div style="background-image:url({{ post.thumbnail.src|resize(200, 200) }})"></div>
+      </div>
+    {% endif %}
+
+    <p class="post-banner-title h5 mb-0">
+      {{ post.title }}
+    </p>
+
+  </div>
+
+</a>

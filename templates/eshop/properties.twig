@@ -1,0 +1,23 @@
+<div class="eshop-block">
+  <div class="row">
+
+    {% for property in properties %}
+      <div class="col-12 col-lg-6">
+        <div class="eshop-property mb-3">
+          <div class="eshop-property-icon">
+            <svg data-src="{{ property.icon|static_assets }}"></svg>
+          </div>
+          <p class="fs-115 h-heavy mb-0">{{ property.name }}</p>
+          <p class="mb-0">
+            {% if property.value %}
+              {{ property.value|separate_thousands }} {{ property.postfix }}
+            {% else %}
+              <span class="font-italic text-muted">Neuvedeno</span>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>

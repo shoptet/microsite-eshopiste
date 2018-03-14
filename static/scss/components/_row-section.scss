@@ -1,0 +1,17 @@
+.row-section {
+  padding: 3rem 0;
+}
+
+.row-section-title {
+  text-align: center;
+}
+
+.row-section-faq {
+  @include media-breakpoint-up(lg) {
+
+    background-image: url("../images/shoptetrix-point-up.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: rem-calc(150px) rem-calc(178px);
+  }
+}

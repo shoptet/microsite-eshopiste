@@ -1,0 +1,106 @@
+{% extends "base.twig" %}
+
+{% set thumbnails = post.get_field('screen_thumbnail') %}
+
+{% block head %}
+	<meta property="og:url" content="{{ post.link }}">
+	<meta property="og:type" content="product">
+
+	{% if post.get_field('price') %}
+		<meta property="product:price:amount" content="{{ post.get_field('price') }}">
+	  <meta property="product:price:currency" content="CZK">
+	{% endif %}
+
+	{% if thumbnails.large.url %}
+		<meta property="og:image" content="{{ thumbnails.large.url }}">
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<article class="eshop" itemscope itemtype="https://schema.org/Product">
+
+			<meta itemprop="name" content="{{ post.title }}">
+			<meta itemprop="url" content="{{ post.link }}">
+			<meta itemprop="description" content="{{ short_description }}">
+			<meta itemprop="category" content="Úvodní stránka > {% if post.get_field('category') %}{{ post.get_field('category').name }} > {% endif %}{{ post.title }}">
+
+			{% if thumbnails.large.url %}
+				<meta itemprop="image" content="{{ thumbnails.large.url }}">
+			{% endif %}
+
+			<div class="row">
+				<div class="col-12 col-lg-7">
+
+					<div class="d-md-flex justify-content-between align-items-center">
+						<h1 class="eshop-title mt-1">{{ post.title }}</h1>
+
+						<div class="ml-md-3 mb-3 mb-md-0">
+				      {% include 'eshop/badges.twig' %}
+				    </div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col-12 col-md-7">
+
+					{% include 'eshop/main.twig' %}
+
+					{% include 'eshop/properties.twig' %}
+
+				</div>
+				<div class="col-12 col-md-5">
+
+					{% include 'eshop/screens.twig' with {'thumbnails': thumbnails} %}
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 col-lg-8">
+
+					{% include 'eshop/detail.twig' %}
+
+				</div>
+				<div class="col-12 col-lg-4">
+
+					{% include 'eshop/contact.twig' %}
+
+				</div>
+			</div>
+
+		</article>
+	</div>
+
+	{% include 'eshop/similar.twig' %}
+
+{% endblock %}
+
+{% block script_footer %}
+	{{ parent() }}
+
+	window.chartData = [
+
+		{% if post.get_field('turnover_history')|length > 0 %}
+			{
+				id: 'eshopTurnoverHistoryChart',
+				labels: [{% for point in post.get_field('turnover_history') %}{{ point.year }},{% endfor %}],
+				data: [{% for point in post.get_field('turnover_history') %}{{ point.turnover }},{% endfor %}],
+				yAxesPostfix: 'Kč',
+			},
+		{% endif %}
+
+		{% if post.get_field('traffic_history')|length > 0 %}
+			{
+				id: 'eshopTrafficHistoryChart',
+				labels: [{% for point in post.get_field('traffic_history') %}{{ point.year }},{% endfor %}],
+				data: [{% for point in post.get_field('traffic_history') %}{{ point.traffic }},{% endfor %}],
+				yAxesPostfix: 'UN',
+			},
+		{% endif %}
+
+	];
+{% endblock %}

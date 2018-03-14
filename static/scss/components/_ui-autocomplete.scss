@@ -1,0 +1,36 @@
+.ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-height: rem-calc(205px);
+  overflow-y: auto;
+  overflow-x: hidden;
+	cursor: default;
+  margin-bottom: 0;
+  padding: 0;
+  background-color: $white;
+  box-shadow: 0 .5rem 1rem rgba($black, .1);
+
+  > li {
+    display: block;
+  }
+
+  > li + li {
+    margin-top: -1px;
+  }
+}
+
+.ui-menu-item-wrapper {
+  padding: $input-btn-padding-y $input-btn-padding-x;
+  border: 1px solid $input-border-color;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	background: $blue;
+	color: $white;
+}
