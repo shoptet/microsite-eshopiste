@@ -124,7 +124,7 @@ function handle_contact_form_submit() {
 		$seller_email_body,
 		[
 			'From: ' . $email_from,
-			'Replay-to: ' . $email,
+			'Reply-to: ' . $email,
       'Content-Type: text/html; charset=UTF-8',
 		]
 	);
