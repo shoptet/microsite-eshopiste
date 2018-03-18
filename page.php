@@ -46,13 +46,13 @@ if ( !is_front_page() ){
 
 $posts_for_sale_query = [
   'post_type' => 'eshop',
-  'posts_per_page' => 6,
+  'posts_per_page' => 10,
   'meta_query' => [[ 'key' => 'type', 'value' => 0 ]],
 ];
 
 $posts_for_invest_query = [
   'post_type' => 'eshop',
-  'posts_per_page' => 3,
+  'posts_per_page' => 11,
   'meta_query' => [
     'relation' => 'OR',
     [ 'key' => 'type', 'value' => 1 ],
