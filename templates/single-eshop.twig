@@ -11,8 +11,8 @@
 	  <meta property="product:price:currency" content="CZK">
 	{% endif %}
 
-	{% if thumbnails.large.url %}
-		<meta property="og:image" content="{{ thumbnails.large.url }}">
+	{% if thumbnails.large.retina_url %}
+		<meta property="og:image" content="{{ thumbnails.large.retina_url }}">
 	{% endif %}
 {% endblock %}
 
@@ -25,8 +25,8 @@
 			<meta itemprop="description" content="{{ short_description }}">
 			<meta itemprop="category" content="Úvodní stránka > {% if post.get_field('category') %}{{ post.get_field('category').name }} > {% endif %}{{ post.title }}">
 
-			{% if thumbnails.large.url %}
-				<meta itemprop="image" content="{{ thumbnails.large.url }}">
+			{% if thumbnails.large.retina_url %}
+				<meta itemprop="image" content="{{ thumbnails.large.retina_url }}">
 			{% endif %}
 
 			<div class="row">
