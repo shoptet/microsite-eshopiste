@@ -53,11 +53,21 @@
   <ul class="list-unstyled mb-0">
 
     <li class="text-truncate">
-      <span class="font-weight-bold">Obrat:</span> {{ (post.get_field('turnover') ?: '0')|separate_thousands }} Kč / 12 měsíců
+      <span class="font-weight-bold">Obrat:</span>
+      {% if post.get_field('turnover') %}
+        {{ post.get_field('turnover')|separate_thousands }} Kč / 12 měsíců
+      {% else %}
+        <span class="font-italic">Neuvedeno</span>
+      {% endif %}
     </li>
 
     <li class="text-truncate">
-      <span class="font-weight-bold">Návštěvnost:</span> {{ (post.get_field('traffic') ?: '0')|separate_thousands }} / 12 měsíců
+      <span class="font-weight-bold">Návštěvnost:</span>
+      {% if post.get_field('traffic') %}
+        {{ post.get_field('traffic')|separate_thousands }} Kč / 12 měsíců
+      {% else %}
+        <span class="font-italic">Neuvedeno</span>
+      {% endif %}
     </li>
 
   </ul>
