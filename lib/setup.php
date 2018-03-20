@@ -118,6 +118,8 @@ add_action( 'save_post', function ( $post_id ){
 		$options['format'] = 'jpg';
 		$thumbnail_sizes[$size]['url'] = $urlbox->generateUrl( $options );
 		$options['thumb_width'] *= 2;
+		$thumbnail_sizes[$size]['retina_width'] = $options['thumb_width'];
+		$thumbnail_sizes[$size]['retina_height'] = round( $options['height'] * $options['thumb_width'] / $options['width'] );
 		$thumbnail_sizes[$size]['retina_url'] = $urlbox->generateUrl( $options );
 	}
 
