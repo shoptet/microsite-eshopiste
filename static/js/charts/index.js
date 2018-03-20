@@ -1,11 +1,12 @@
 const humanifyBigNumber = $num => {
-  if ($num >= 1000) {
+  if ($num >= 1000000) {
+   return Math.round($num/1000000) + ' mil.';
+  } else if ($num >= 1000) {
     return Math.round($num/1000) + ' tis.';
-  } else if ($num >= 1000000) {
-    return Math.round($num/1000000) + ' mil.';
   } else {
     return $num;
   }
+  
 };
 
 const createChart = (elementId, labels, data, yAxesPostfix) => {
