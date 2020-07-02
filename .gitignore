@@ -8,4 +8,3 @@ deployment.log
 webpack-bundle.json
 /vendor/
 /node_modules/
-/assets/
