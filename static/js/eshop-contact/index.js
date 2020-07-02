@@ -24,7 +24,7 @@ const validateForm = () => {
   let isValid = true;
   let value = '';
   let $this = null;
-  $contactForm.find('[name]').each(function () {
+  $contactForm.find('[name]:not(iframe)').each(function () {
     $this = $(this);
     value = $.trim($this.val());
     if ( !value ) {
