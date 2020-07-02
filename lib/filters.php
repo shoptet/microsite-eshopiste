@@ -2,6 +2,8 @@
 
 namespace Eshopiste\Filters;
 
+use function Eshopiste\Helpers\get_post_meta_sum;
+
 /**
  * Edit robots.txt file
  */
@@ -148,3 +150,11 @@ add_filter( 'wp_new_user_notification_email', function( $email, $user ) {
 
   return $email;
 }, 10, 2);
+
+/**
+ * Post Count API Plugin: Add a total turnover
+ */
+add_filter( 'post-count-api-items', function ( $items ) {
+  $items['eshopisteSales'] = intval( get_post_meta_sum( 'eshop', 'turnover' ) );
+  return $items;
+} );

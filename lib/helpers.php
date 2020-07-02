@@ -103,10 +103,10 @@ function handle_contact_form_submit() {
 
   $options = get_fields('options');
   $email_from = $options['email_from'];
-  $seller_email_body = $options['seller_email_body'];
-  $seller_email_subject = $options['seller_email_subject'];
-  $buyer_email_body = $options['buyer_email_body'];
-  $buyer_email_subject = $options['buyer_email_subject'];
+  $seller_email_body = $options['wholesaler_email_body'];
+  $seller_email_subject = $options['wholesaler_email_subject'];
+  $buyer_email_body = $options['retailer_email_body'];
+  $buyer_email_subject = $options['retailer_email_subject'];
 
   $to_replace = [
     '%contact_name%' => $name,

@@ -36,7 +36,7 @@
 	  {{ function('wp_head') }}
 
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>                    
 
 	  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	  <!--[if lt IE 9]>
@@ -92,8 +92,6 @@
 				Žádný obsah
 			{% endblock %}
 		</main>
-
-		{% include 'partial/cta.twig' %}
 
 		{% include 'partial/footer.twig' %}
 
