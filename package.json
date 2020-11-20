@@ -17,7 +17,7 @@
     "npm": "^5.4.2"
   },
   "dependencies": {
-    "bootstrap": "4.0.0",
+    "bootstrap": "4.3.1",
     "chart.js": "^2.7.1",
     "cleave.js": "^1.1.1",
     "favicons-webpack-plugin": "^0.0.7",
