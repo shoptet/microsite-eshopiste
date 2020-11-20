@@ -5,6 +5,8 @@ namespace Eshopiste\Setup;
 use Urlbox\Screenshots\Urlbox;
 use function Eshopiste\Helpers\handle_contact_form_submit;
 
+\Shoptet\ShoptetExternal::init();
+\Shoptet\ShoptetUserRoles::init();
 
 /**
  * Register template menus
