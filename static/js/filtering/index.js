@@ -1,3 +1,5 @@
+import Cleave from 'cleave.js';
+
 const $archiveForm = $('#archiveForm');
 
 // Hide filter submit button if javascript is loaded
