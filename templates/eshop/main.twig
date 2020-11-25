@@ -85,6 +85,16 @@
         </a>
       </li>
     {% endif %}
+    {% if post.get_field('instagram') %}
+      <li class="list-inline-item">
+        <a
+          href="{{ post.get_field('instagram') }}"
+          target="_blank"
+        >
+          <span class="iconholder mr-1 text-instagram"><i class="fab fa-instagram" aria-hidden="true"></i></span>Instagram
+        </a>
+      </li>
+    {% endif %}
     {% if post.get_field('twitter') %}
       <li class="list-inline-item">
         <a
