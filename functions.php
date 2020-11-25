@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $includes = [
 	'lib/acf.php',
+	'lib/acf_eshop.php',
 	'lib/cpt.php',
 	'lib/site.php',
 	'lib/setup.php',

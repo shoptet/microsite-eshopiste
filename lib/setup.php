@@ -97,6 +97,15 @@ add_action( 'save_post', function ( $post_id ){
 		return;
 	}
 
+	$options_default = [
+		'url' => $eshop_url,
+		'format' => 'jpg',
+	];
+
+	if ( $hide_selector = get_field( 'urlbox_hide_selector', $post_id ) ) {
+		$options_default['hide_selector'] = $hide_selector;
+	}
+
 	$urlbox = Urlbox::fromCredentials( URLBOX_API_KEY, URLBOX_API_SECRET );
 	$thumbnail_sizes = [
 		'large' => [
@@ -117,8 +126,7 @@ add_action( 'save_post', function ( $post_id ){
 	];
 
 	foreach ($thumbnail_sizes as $size => $options) {
-		$options['url'] = $eshop_url;
-		$options['format'] = 'jpg';
+		$options = array_merge( $options_default, $options );
 		$thumbnail_sizes[$size]['url'] = $urlbox->generateUrl( $options );
 		$options['thumb_width'] *= 2;
 		$thumbnail_sizes[$size]['retina_width'] = $options['thumb_width'];
