@@ -18,6 +18,27 @@ Disallow: /wp-register.php
 });
 
 /**
+ * Add query arguments to post count api
+ */
+add_filter( 'shoptet_post_count_query_args', function($query_args) {
+	return [
+		'eshopisteInvestorsCount' => [
+			'post_type' => 'eshop_bid',
+			'post_status' => 'publish',
+		],
+		'eshopisteProjectsCount' => [
+			'post_type' => 'eshop',
+			'post_status' => [ 'publish', 'draft' ],
+		],
+	];
+} );
+
+add_filter( 'shoptet_post_count_result', function ( $items ) {
+  $items['eshopisteSales'] = intval( get_post_meta_sum( 'eshop', 'turnover' ) );
+  return $items;
+} );
+
+/**
  * Hide redundant categories metabox in eshop edit page
  */
 add_filter('add_meta_boxes', function() {
@@ -151,10 +172,3 @@ add_filter( 'wp_new_user_notification_email', function( $email, $user ) {
   return $email;
 }, 10, 2);
 
-/**
- * Post Count API Plugin: Add a total turnover
- */
-add_filter( 'post-count-api-items', function ( $items ) {
-  $items['eshopisteSales'] = intval( get_post_meta_sum( 'eshop', 'turnover' ) );
-  return $items;
-} );

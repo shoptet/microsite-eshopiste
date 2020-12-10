@@ -9,6 +9,7 @@ use function Eshopiste\Helpers\handle_contact_form_submit;
 \Shoptet\ShoptetUserRoles::init();
 \Shoptet\ShoptetStats::init();
 \Shoptet\ShoptetSecurity::init();
+\Shoptet\ShoptetPostCount::init();
 
 /**
  * Register template menus
