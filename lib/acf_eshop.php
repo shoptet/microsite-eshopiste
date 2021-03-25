@@ -27,6 +27,25 @@ add_action( 'acf/init', function () {
           'append' => '',
           'maxlength' => '',
         ),
+        array(
+          'key' => 'field_605c5c1818d73',
+          'label' => 'Zobrazit placeholder',
+          'name' => 'show_placeholder',
+          'type' => 'true_false',
+          'instructions' => 'Zobrazit placeholder místo screenshotu e-shopu. Vhodné např. pokud se screenshot nevygeneruje nebo na doméně není možné udělat reprezentativní screenshot. Placeholder se může zobrazit automaticky, pokud nelze vytvořit screenshot.',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'message' => '',
+          'default_value' => 0,
+          'ui' => 0,
+          'ui_on_text' => '',
+          'ui_off_text' => '',
+        ),
       ),
       'location' => array(
         array(

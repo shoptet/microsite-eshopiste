@@ -3,6 +3,7 @@ import '../images/eshopiste-logo.svg';
 import '../images/eshopiste-logo-no-claim.svg';
 import '../images/shoptetrix-meditate.png';
 import '../images/shoptet-logo.svg';
+import '../images/eshopiste-placeholder.jpg';
 
 import '../images/properties/bar-chart.svg';
 import '../images/properties/cake.svg';

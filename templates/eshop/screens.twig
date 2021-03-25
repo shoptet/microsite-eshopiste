@@ -7,45 +7,49 @@
         target="_blank"
       >
         <img
-          src="{{ thumbnails.large.url ?: 'http://via.placeholder.com/1280x800/555/999?text=Náhled+není+k+dispozici' }}"
-          {% if thumbnails.large.retina_url %}
+          {% if post|show_screenshot %}
+            src="{{ thumbnails.large.url }}"
             srcset="{{ thumbnails.large.retina_url }} 2x"
+          {% else %}
+            src="{{ "eshopiste-placeholder.jpg"|static_assets }}"
           {% endif %}
         >
       </a>
     </div>
   </div>
 
-  <div class="eshop-mockup eshop-mockup-medium">
-    <div class="eshop-mockup-inner">
-      <a
-        href="{{ post.get_field('eshop_url') }}"
-        target="_blank"
-      >
-        <img
-          src="{{ thumbnails.medium.url ?: 'http://via.placeholder.com/1024x768/555/999?text=+' }}"
-          {% if thumbnails.medium.retina_url %}
-            srcset="{{ thumbnails.medium.retina_url }} 2x"
-          {% endif %}
+  {% if post|show_screenshot %}
+    <div class="eshop-mockup eshop-mockup-medium">
+      <div class="eshop-mockup-inner">
+        <a
+          href="{{ post.get_field('eshop_url') }}"
+          target="_blank"
         >
-      </a>
+          <img
+            src="{{ thumbnails.medium.url ?: 'http://via.placeholder.com/1024x768/555/999?text=+' }}"
+            {% if thumbnails.medium.retina_url %}
+              srcset="{{ thumbnails.medium.retina_url }} 2x"
+            {% endif %}
+          >
+        </a>
+      </div>
     </div>
-  </div>
 
-  <div class="eshop-mockup eshop-mockup-small">
-    <div class="eshop-mockup-inner">
-      <a
-        href="{{ post.get_field('eshop_url') }}"
-        target="_blank"
-      >
-        <img
-          src="{{ thumbnails.small.url ?: 'http://via.placeholder.com/375x667/555/999?text=+' }}"
-          {% if thumbnails.small.retina_url %}
-            srcset="{{ thumbnails.small.retina_url }} 2x"
-          {% endif %}
+    <div class="eshop-mockup eshop-mockup-small">
+      <div class="eshop-mockup-inner">
+        <a
+          href="{{ post.get_field('eshop_url') }}"
+          target="_blank"
         >
-      </a>
+          <img
+            src="{{ thumbnails.small.url ?: 'http://via.placeholder.com/375x667/555/999?text=+' }}"
+            {% if thumbnails.small.retina_url %}
+              srcset="{{ thumbnails.small.retina_url }} 2x"
+            {% endif %}
+          >
+        </a>
+      </div>
     </div>
-  </div>
+  {% endif %}
 
 </div>
