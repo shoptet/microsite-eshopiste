@@ -393,6 +393,7 @@ add_action( 'hide_expirated_eshops', function() {
 	$expirated_eshops = $expirated_eshops_query->posts;
 
 	foreach($expirated_eshops as $eshop) {
+		\Shoptet\ShoptetLogger::capture_exception(new \Exception( "E-shop (ID: $eshop->ID) expired" ));
 		wp_update_post([ 'ID' => $eshop->ID, 'post_status' => 'draft' ]);
 	}
 
