@@ -3,6 +3,7 @@
 namespace Eshopiste\Filters;
 
 use function Eshopiste\Helpers\get_post_meta_sum;
+use function Eshopiste\Helpers\get_password_reset_url;
 
 /**
  * Edit robots.txt file
@@ -147,8 +148,7 @@ add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
  * Edit new user notification e-mail
  */
 add_filter( 'wp_new_user_notification_email', function( $email, $user ) {
-  preg_match('/<http(.*?)>/', $email['message'], $match); // Get password url from message
-  $set_password_url = substr($match['0'], 1, -1); // Remove '<' and '>' from match string
+  $set_password_url = get_password_reset_url($user);
 
   $options = get_fields('options');
 
@@ -158,7 +158,7 @@ add_filter( 'wp_new_user_notification_email', function( $email, $user ) {
 
 	$to_replace = [
 		'%username%' => $user->user_login,
-		'%set_password_url%' => $set_password_url,
+		'%set_password_url%' => "<a href=\"$set_password_url\">$set_password_url</a>",
   ];
   $email_body = strtr($email_body, $to_replace);
 

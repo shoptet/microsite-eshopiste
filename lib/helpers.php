@@ -151,3 +151,15 @@ function truncate( $string, $limit, $separator = '...' ) {
   $s = substr($string, 0, $newlimit + 1);
   return substr($s, 0, strrpos($s, ' ')) . $separator;
 }
+
+/**
+ * Get password reset url
+ */
+function get_password_reset_url( $user ) {
+  $key = get_password_reset_key( $user );
+  if ( is_wp_error( $key ) ) {
+      return $key;
+  }
+  $encoded_login = rawurlencode( $user->user_login );
+  return site_url( "wp-login.php?action=rp&key=$key&login=$encoded_login", 'login' );
+}
