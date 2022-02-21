@@ -37,11 +37,16 @@
 
     <div class="eshop-thumbnail-screen mt-2 mb-3">
       <img
-        {% if post|show_screenshot %}
+        {% if post.get_field('show_placeholder') %}
+          {% if post.get_field('custom_placeholder') %}
+            src="{{ post.get_field('custom_placeholder')['url']|letterbox(470, 267, '#ffffff') }}"
+            srcset="{{ post.get_field('custom_placeholder')['url']|letterbox(940, 535, '#ffffff') }} 2x"
+          {% else %}
+            src="{{ "eshopiste-placeholder.jpg"|static_assets }}"
+          {% endif %}
+        {% else %}
           src="{{ post.get_field('screen_thumbnail').large.url }}"
           srcset="{{ post.get_field('screen_thumbnail').large.retina_url }} 2x"
-        {% else %}
-          src="{{ "eshopiste-placeholder.jpg"|static_assets }}"
         {% endif %}
         alt="{{ post.title }}"
         itemprop="image"

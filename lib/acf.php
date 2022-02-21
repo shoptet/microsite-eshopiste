@@ -68,7 +68,7 @@ add_action( 'acf/init', function () {
           'label' => 'Zobrazit placeholder',
           'name' => 'show_placeholder',
           'type' => 'true_false',
-          'instructions' => 'Zobrazit placeholder místo screenshotu e-shopu. Vhodné např. pokud se screenshot nevygeneruje nebo na doméně není možné udělat reprezentativní screenshot. Placeholder se může zobrazit automaticky, pokud nelze vytvořit screenshot.',
+          'instructions' => 'Zobrazit placeholder s logem Eshopiště místo screenshotu e-shopu. Vhodné např. pokud se screenshot nevygeneruje nebo na doméně není možné udělat reprezentativní screenshot.',
           'required' => 0,
           'conditional_logic' => 0,
           'wrapper' => array(
@@ -81,6 +81,38 @@ add_action( 'acf/init', function () {
           'ui' => 0,
           'ui_on_text' => '',
           'ui_off_text' => '',
+        ),
+        array(
+          'key' => 'field_62136ae6dd3f2',
+          'label' => 'Vlastní placeholder',
+          'name' => 'custom_placeholder',
+          'type' => 'image',
+          'instructions' => 'Nahrát vlastní placeholder e-shopu, např. logo nebo vlastní screenshot. Ideální velikost 940x535.',
+          'required' => 0,
+          'conditional_logic' => array(
+            array(
+              array(
+                'field' => 'field_605c5c1818d73',
+                'operator' => '==',
+                'value' => '1',
+              ),
+            ),
+          ),
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'return_format' => 'array',
+          'preview_size' => 'medium',
+          'library' => 'all',
+          'min_width' => '',
+          'min_height' => '',
+          'min_size' => '',
+          'max_width' => '',
+          'max_height' => '',
+          'max_size' => '',
+          'mime_types' => '',
         ),
       ),
       'location' => array(

@@ -92,7 +92,6 @@ class EshopisteSite extends TimberSite {
 		$twig->addFilter('display_url', new Twig_SimpleFilter('display_url', [$this, 'display_url']));
 		$twig->addFilter('static_assets', new Twig_SimpleFilter('static_assets', array($this, 'static_assets')));
 		$twig->addFilter('is_new', new Twig_SimpleFilter('is_new', array($this, 'is_post_new')));
-		$twig->addFilter('show_screenshot', new Twig_SimpleFilter('show_screenshot', array($this, 'show_post_screenshot')));
 		$twig->addFilter('category_link', new Twig_SimpleFilter('category_link', array($this, 'category_link')));
 		$twig->addFilter('separate_thousands', new Twig_SimpleFilter('separate_thousands', [$this, 'separate_thousands']));
 		return $twig;
@@ -143,13 +142,6 @@ class EshopisteSite extends TimberSite {
 		$interval = $today->diff($post_date);
 
 		return $interval->days <= $is_new_interval;
-	}
-
-	function show_post_screenshot( $post ) {
-		$screen_thumbnail = get_field('screen_thumbnail', $post->ID);
-		$show_placeholder = get_field('show_placeholder', $post->ID);
-		$has_screenshot = (is_array($screen_thumbnail) && !empty($screen_thumbnail['large'] && !empty($screen_thumbnail['large']['url'])));
-		return ($has_screenshot && !$show_placeholder);
 	}
 
 	function category_link( $term ) {
