@@ -10,6 +10,7 @@ $includes = [
 	'lib/setup.php',
 	'lib/filters.php',
   'lib/helpers.php',
+  'lib/admin/admin-meta-search.php',
 ];
 foreach ($includes as $file) {
   if (!$filepath = locate_template($file)) {
