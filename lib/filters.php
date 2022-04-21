@@ -31,6 +31,10 @@ add_filter( 'shoptet_post_count_query_args', function($query_args) {
 			'post_type' => 'eshop',
 			'post_status' => [ 'publish', 'draft' ],
 		],
+    'eshopistePublishProjectsCount' => [
+			'post_type' => 'eshop',
+			'post_status' => 'publish',
+		],
 	];
 } );
 
