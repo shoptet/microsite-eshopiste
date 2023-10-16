@@ -25,9 +25,10 @@
   display: block;
 
   img {
-    height: rem-calc(38px);
+    max-width: 14rem;
 
     @include media-breakpoint-up(sm) {
+      max-width: 18rem;
       height: rem-calc(45px);
     }
   }

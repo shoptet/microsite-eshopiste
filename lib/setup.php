@@ -102,10 +102,12 @@ add_action( 'save_post', function ( $post_id ){
 	$options_default = [
 		'url' => $eshop_url,
 		'format' => 'jpg',
+		'hide_cookie_banners' => true,
 	];
 
 	if ( $hide_selector = get_field( 'urlbox_hide_selector', $post_id ) ) {
 		$options_default['hide_selector'] = $hide_selector;
+		$options_default['css'] = $hide_selector . '{visibility: hidden !important}';
 	}
 
 	$urlbox = Urlbox::fromCredentials( URLBOX_API_KEY, URLBOX_API_SECRET );

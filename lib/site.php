@@ -4,6 +4,7 @@ use function Eshopiste\Helpers\get_eshop_category_link;
 use function Eshopiste\CPT\get_cpt_eshop_args;
 use function Eshopiste\CPT\get_cpt_bid_args;
 use function Eshopiste\CPT\get_cpt_eshop_taxonomy_args;
+use function Eshopiste\Helpers\get_custom_logo_url;
 
 if ( ! class_exists( 'Timber' ) ) {
 	add_action( 'admin_notices', function() {
@@ -19,6 +20,7 @@ class EshopisteSite extends TimberSite {
 	function __construct() {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
+		add_theme_support( 'custom-logo' );
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
@@ -84,6 +86,7 @@ class EshopisteSite extends TimberSite {
 		$context['new_eshop_url'] = admin_url( 'post-new.php?post_type=eshop' );
 		$context['all_eshops'] = new Timber\PostQuery( [ 'post_type' => 'eshop', 'posts_per_page' => -1 ] );
     $context['footer'] = Shoptet\ShoptetExternal::get_footer();
+    $context['logo_url'] = get_custom_logo_url();
 		return $context;
 	}
 

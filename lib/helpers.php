@@ -163,3 +163,11 @@ function get_password_reset_url( $user ) {
   $encoded_login = rawurlencode( $user->user_login );
   return site_url( "wp-login.php?action=rp&key=$key&login=$encoded_login", 'login' );
 }
+
+function get_custom_logo_url (): string
+{
+  if ( ! has_custom_logo() ) return '';
+  $custom_logo_id = get_theme_mod( 'custom_logo' );
+  $logo_url = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+  return $logo_url[0];
+}
