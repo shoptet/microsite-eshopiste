@@ -45,6 +45,25 @@ add_action( 'acf/init', function () {
       'title' => 'Pokročilé nastavení (admin only)',
       'fields' => array(
         array(
+          'key' => 'field_5a8dcfcaccf40',
+          'label' => 'Interní poznámka',
+          'name' => 'internal_note',
+          'type' => 'textarea',
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'default_value' => '',
+          'placeholder' => '',
+          'maxlength' => '',
+          'rows' => '',
+          'new_lines' => '',
+        ),
+        array(
           'key' => 'field_5fbe3b2726ed2',
           'label' => 'Skrýt v náhledu e-shopu',
           'name' => 'urlbox_hide_selector',

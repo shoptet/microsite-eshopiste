@@ -394,9 +394,27 @@ add_action( 'hide_expirated_eshops', function() {
 	]);
 	$expirated_eshops = $expirated_eshops_query->posts;
 
+	$email_from = $options['email_from'];
+	$email_recipients = $options['pending_email_recipients'];
+	$email_recipients_emails = [];
+	foreach ($email_recipients as $user) {
+		if ( !isset($user['user_email']) ) continue;
+		$email_recipients_emails[] = $user['user_email'];
+	}
+
 	foreach($expirated_eshops as $eshop) {
 		\Shoptet\ShoptetLogger::capture_exception(new \Exception( "E-shop (ID: $eshop->ID) expired" ));
 		wp_update_post([ 'ID' => $eshop->ID, 'post_status' => 'draft' ]);
+
+		wp_mail(
+			$email_recipients_emails,
+			'Expired e-shop: ' . $eshop->post_title,
+			'Just expired: ' . $eshop->post_title,
+			[
+				'From: ' . $email_from,
+				'Content-Type: text/html; charset=UTF-8',
+			]
+		);
 	}
 
 	// update count of posts in all categories
