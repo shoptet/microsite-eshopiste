@@ -394,27 +394,9 @@ add_action( 'hide_expirated_eshops', function() {
 	]);
 	$expirated_eshops = $expirated_eshops_query->posts;
 
-	$email_from = $options['email_from'];
-	$email_recipients = $options['pending_email_recipients'];
-	$email_recipients_emails = [];
-	foreach ($email_recipients as $user) {
-		if ( !isset($user['user_email']) ) continue;
-		$email_recipients_emails[] = $user['user_email'];
-	}
-
 	foreach($expirated_eshops as $eshop) {
 		\Shoptet\ShoptetLogger::capture_exception(new \Exception( "E-shop (ID: $eshop->ID) expired" ));
 		wp_update_post([ 'ID' => $eshop->ID, 'post_status' => 'draft' ]);
-
-		wp_mail(
-			$email_recipients_emails,
-			'Expired e-shop: ' . $eshop->post_title,
-			'Just expired: ' . $eshop->post_title,
-			[
-				'From: ' . $email_from,
-				'Content-Type: text/html; charset=UTF-8',
-			]
-		);
 	}
 
 	// update count of posts in all categories
@@ -428,13 +410,24 @@ add_action( 'hide_expirated_eshops', function() {
 //do_action( 'hide_expirated_eshops' );
 
 add_action('transition_post_status', function($new_status, $old_status, $post) {
-  if ($post->post_type !== 'eshop') {
-    return;
-  }
-  $log_message = sprintf("[%s] Status changed from %s to %s\n", current_time('mysql'), $old_status, $new_status);
-  $current_log = get_post_meta($post->ID, 'log', true);
-  $current_log .= $log_message;
-  update_post_meta($post->ID, 'log', $current_log);
+	if ($post->post_type !== 'eshop') {
+		return;
+	}
+
+	if (is_user_logged_in()) {
+		$current_user = wp_get_current_user();
+		$user_email = $current_user->user_email; // Email uživatele
+		$user_roles = is_array($current_user->roles) ? implode(', ', $current_user->roles) : 'No roles'; // Role uživatele jako string
+		$user_info = "by user $user_email with role(s) $user_roles";
+	} else {
+		$user_info = "by automated process";
+	}
+
+	$log_message = sprintf("[%s] Status changed from %s to %s %s\n", current_time('mysql'), $old_status, $new_status, $user_info);
+
+	$current_log = get_post_meta($post->ID, 'log', true);
+	$current_log .= $log_message;
+	update_post_meta($post->ID, 'log', $current_log);
 }, 10, 3);
 
 add_action('admin_footer', function() {
