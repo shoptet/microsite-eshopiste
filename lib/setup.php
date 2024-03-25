@@ -426,3 +426,24 @@ add_action( 'hide_expirated_eshops', function() {
 	wp_update_term_count_now( $all_terms, 'eshop_category' );
 });
 //do_action( 'hide_expirated_eshops' );
+
+add_action('transition_post_status', function($new_status, $old_status, $post) {
+  if ($post->post_type !== 'eshop') {
+    return;
+  }
+  $log_message = sprintf("[%s] Status changed from %s to %s\n", current_time('mysql'), $old_status, $new_status);
+  $current_log = get_post_meta($post->ID, 'log', true);
+  $current_log .= $log_message;
+  update_post_meta($post->ID, 'log', $current_log);
+}, 10, 3);
+
+add_action('admin_footer', function() {
+	global $pagenow, $post;
+	if (($pagenow == 'post.php' || $pagenow == 'post-new.php') && get_post_type($post) == 'eshop') {
+		echo "<script type='text/javascript'>
+			jQuery(document).ready(function($) {
+				$('#acf-field_5a8dcacaccf40').attr('disabled', 'disabled');
+			});
+		</script>";
+	}
+});
